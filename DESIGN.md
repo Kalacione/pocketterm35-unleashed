@@ -76,7 +76,9 @@ components:
 
 # PocketTerm Matrix
 
-Format : [DESIGN.md](https://github.com/google-labs-code/design.md) (Google Labs / Stitch, version alpha, Apache-2.0). Les tokens YAML en tête font foi, le texte explique comment les appliquer. Aperçu visuel et maquettes : [`docs/design/charte.html`](docs/design/charte.html) et les SVG de [`docs/design/`](docs/design/). Fonctionnement et périmètre : [`docs/specs.md`](docs/specs.md).
+Format : [DESIGN.md](https://github.com/google-labs-code/design.md) (Google Labs / Stitch, version alpha, Apache-2.0). Les tokens YAML en tête font foi, le texte explique comment les appliquer.
+
+Pourquoi ce format : un seul fichier lisible par un humain et par un agent, avec les valeurs et le « pourquoi », pour 3 cibles écrites à la main (`theme.toml`, `gtk.css`, `foot.ini`). Écartés : [DTCG](https://www.designtokens.org/) (JSON stable depuis 2025.10, mais sans le texte qui explique) et [Style Dictionary](https://styledictionary.com/) (chaîne de build Node, YAGNI pour 3 fichiers). Le CLI de DESIGN.md sait exporter en DTCG si un jour on en a besoin. Aperçu visuel et maquettes : [`docs/design/charte.html`](docs/design/charte.html) et les SVG de [`docs/design/`](docs/design/). Fonctionnement et périmètre : [`docs/specs.md`](docs/specs.md).
 
 ## Overview
 
