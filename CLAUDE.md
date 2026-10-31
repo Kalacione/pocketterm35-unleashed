@@ -57,6 +57,10 @@ pas concaténés). Ce dépôt ne contient que nos surcharges :
 
 Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 
+Upstream est épinglé dans `PT35_VERSION` (`.deb` archivé en release, voir le
+README). Changer de version est un choix volontaire, testé sur le Pi. Ne jamais
+conseiller la commande d'install d'upstream : elle prend la dernière version.
+
 ## Tests
 
 Djé teste sur l'appareil lui-même, sans accès distant pour l'agent. Chaque
