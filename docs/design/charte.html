@@ -1,325 +1,368 @@
 <title>Charte PocketTerm Matrix</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-/* Layout : une colonne de lecture, maquettes 640x480 en pleine largeur, comme des captures d'écran du PocketTerm. Thème sombre unique, par choix. */
+/* Layout : une colonne de lecture, maquettes 640x480 pleine largeur comme des captures de l'appareil. Thème sombre unique, par choix. */
 :root {
-  --void: #050805;      /* fond */
-  --ghost: #0d2a16;     /* surface sélectionnée, panneaux */
-  --dim: #1d7a3a;       /* secondaire, bordures */
-  --ph: #33ff66;        /* phosphore, texte principal */
-  --bright: #c8ffd6;    /* texte sur sélection, emphase */
-  --amber: #ffb000;     /* avertissement */
-  --alert: #ff3b4e;     /* erreur, action destructive */
-  --f-display: 'VT323', 'Terminus', ui-monospace, monospace;
-  --f-body: 'IBM Plex Mono', ui-monospace, 'DejaVu Sans Mono', monospace;
+  --bg: #0b0f0d;        /* fond : gris-vert très sombre, pas noir pur */
+  --surface: #121a16;   /* panneaux */
+  --line: #24382e;      /* bordures de panneaux, grilles */
+  --muted: #5e8f78;     /* texte secondaire */
+  --ph: #63e6a4;        /* phosphore doux : texte principal, accent */
+  --bright: #d4ffe9;    /* titres, texte sur surface */
+  --on-ph: #06110b;     /* texte sur phosphore */
+  --teal: #4fd1d9;      /* seconde série de graphique */
+  --amber: #ffa94d;     /* danger : orange phosphore, en fond plein */
+  --alert: #ff6e6e;     /* erreur, supprimer : rouge phosphore, en fond plein */
+  --sel: #e6fff2;       /* sélection : blanc léger */
+  --f-display: 'VT323', ui-monospace, monospace;
+  --f-body: 'JetBrains Mono', ui-monospace, 'DejaVu Sans Mono', monospace;
   color-scheme: dark;
 }
-html { background: var(--void); }
-body { background: var(--void); color: var(--ph); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--ph); font-family: var(--f-body); font-size: 14px; line-height: 1.65; }
 .wrap { max-width: 860px; margin: 0 auto; padding-block: 40px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 48px; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 400; margin: 0; text-wrap: balance; letter-spacing: .02em; }
-h1 { font-size: clamp(40px, 8vw, 64px); line-height: 1; color: var(--bright); }
-h2 { font-size: 32px; line-height: 1.1; }
-h2::before { content: '> '; color: var(--dim); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(44px, 8vw, 68px); line-height: 1; color: var(--bright); text-shadow: 0 0 12px rgba(99,230,164,.35); }
+h2 { font-size: 30px; line-height: 1.1; display: flex; align-items: center; gap: 10px; }
+h2 .tag { font-family: var(--f-body); font-size: 12px; letter-spacing: .08em; background: var(--ph); color: var(--on-ph); padding: 2px 8px; text-transform: uppercase; }
 h3 { font-size: 22px; color: var(--bright); }
-p { margin: 0; max-width: 65ch; }
+p { margin: 0; max-width: 68ch; }
 a { color: var(--bright); }
-a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-.meta { font-size: 13px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.meta { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
 section { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 ul.rules { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-ul.rules li { padding-left: 24px; position: relative; max-width: 65ch; }
-ul.rules li::before { content: '■'; position: absolute; left: 0; color: var(--dim); font-size: 11px; top: 4px; }
+ul.rules li { padding-left: 22px; position: relative; max-width: 68ch; }
+ul.rules li::before { content: '▸'; position: absolute; left: 0; color: var(--muted); }
 b { color: var(--bright); font-weight: 600; }
-code { font-family: var(--f-body); color: var(--bright); }
+code { font-family: var(--f-body); color: var(--bright); font-size: 13px; }
+.panel { border: 1px solid var(--line); background: var(--surface); padding: 14px 16px; }
 
-.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-.sw { border: 2px solid var(--dim); display: flex; flex-direction: column; }
-.sw .chip { height: 64px; border-bottom: 2px solid var(--dim); }
-.sw .info { padding: 8px 10px; display: grid; gap: 2px; font-size: 13px; }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.sw { border: 1px solid var(--line); display: flex; flex-direction: column; background: var(--surface); }
+.sw .chip { height: 56px; border-bottom: 1px solid var(--line); }
+.sw .info { padding: 8px 10px; display: grid; gap: 2px; font-size: 12px; }
 .sw .info .name { font-family: var(--f-display); font-size: 22px; color: var(--bright); line-height: 1; }
 .sw .info .hex { font-variant-numeric: tabular-nums; }
-.sw .info .role { color: var(--dim); }
+.sw .info .role { color: var(--muted); }
 
 .scroll { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 14px; }
-th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--ghost); vertical-align: top; }
-th { font-weight: 400; color: var(--dim); text-transform: uppercase; font-size: 12px; letter-spacing: .08em; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 400; color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: .1em; }
 td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
-.sample { font-family: var(--f-display); color: var(--ph); line-height: 1; white-space: nowrap; }
+.sample-d { font-family: var(--f-display); color: var(--bright); line-height: 1; white-space: nowrap; }
+.sample-b { font-family: var(--f-body); color: var(--ph); white-space: nowrap; }
 
-.variants { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.var { border: 2px solid var(--dim); padding: 12px; display: grid; gap: 8px; }
-.var .bar { display: flex; height: 24px; }
+.variants { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.var { border: 1px solid var(--line); padding: 12px; display: grid; gap: 8px; background: var(--surface); }
+.var .bar { display: flex; height: 22px; }
 .var .bar span { flex: 1; }
 
-.mocks { display: grid; gap: 32px; }
+.mocks { display: grid; gap: 36px; }
 figure { margin: 0; display: grid; gap: 10px; }
-figure svg { width: 100%; max-width: 640px; height: auto; display: block; border: 2px solid var(--dim); image-rendering: pixelated; background: var(--void); }
-figcaption { font-size: 14px; max-width: 65ch; }
-figcaption b { font-family: var(--f-display); font-size: 20px; font-weight: 400; margin-right: 6px; }
+figure svg { width: 100%; max-width: 640px; height: auto; display: block; border: 1px solid var(--line); background: var(--bg); }
+figcaption { font-size: 13px; max-width: 68ch; }
+figcaption b { font-family: var(--f-display); font-size: 21px; font-weight: 400; margin-right: 6px; }
+.feas { color: var(--muted); }
 
-pre { margin: 0; padding: 16px; border: 2px solid var(--ghost); overflow-x: auto; font-size: 13px; line-height: 1.5; color: var(--ph); }
-.copy { justify-self: start; font-family: var(--f-display); font-size: 20px; background: var(--void); color: var(--ph); border: 2px solid var(--ph); padding: 4px 14px; cursor: pointer; }
-.copy:hover, .copy:focus-visible { background: var(--ph); color: var(--void); outline: none; }
+pre { margin: 0; padding: 16px; border: 1px solid var(--line); background: var(--surface); overflow-x: auto; font-size: 12px; line-height: 1.5; color: var(--ph); }
+.copy { justify-self: start; font-family: var(--f-body); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; background: var(--surface); color: var(--ph); border: 1px solid var(--ph); padding: 6px 16px; cursor: pointer; }
+.copy:hover { background: var(--ph); color: var(--on-ph); }
 @media (prefers-reduced-motion: no-preference) { .cursor { animation: blink 1s steps(1) infinite; } }
 @keyframes blink { 50% { opacity: 0; } }
 </style>
 
 <div class="wrap">
   <header style="display:grid;gap:12px">
-    <span class="meta">PocketTerm 3.5 Unleashed · charte v0.1 · 31 oct. 2026</span>
-    <h1>Phosphore sur noir<span class="cursor">_</span></h1>
-    <p>Charte cyberdeck rétro-pixel pour l'écran 640 × 480 tactile du PocketTerm35. Elle sert de référence au thème commun (lanceur, menus, Paramètres, terminal, barre). Fonctionnement et périmètre : <a href="https://claude.ai/artifact/XL5LhWd1527tpUvNbVWov3" target="_blank" rel="noopener">Specs &amp; TODO</a>.</p>
+    <span class="meta">PocketTerm 3.5 Unleashed · charte v0.2 · 31 oct. 2026</span>
+    <h1>Phosphore doux<span class="cursor">_</span></h1>
+    <p>Charte cyberdeck rétro pour l'écran couleur 640 × 480 tactile du PocketTerm35. La v0.2 adoucit le vert et s'autorise des panneaux, des graphiques et un léger halo, dans l'esprit d'eDEX-UI et des consoles des années 80. Source : <code>DESIGN.md</code> et <code>docs/design/</code> du dépôt.</p>
   </header>
 
   <section>
-    <h2>Règles</h2>
+    <h2><span class="tag">01</span>Ce qui change depuis la v0.1</h2>
     <ul class="rules">
-      <li><b>Un écran de terminal vert.</b> Fond quasi noir, texte phosphore. Le vert porte l'identité, l'ambre et le rouge ne servent qu'aux états.</li>
-      <li><b>Sélection = inversion vidéo.</b> L'élément actif passe en fond phosphore, texte noir, avec un curseur <code>&gt;</code>. Visible d'un coup d'œil, au doigt comme au D-pad.</li>
-      <li><b>Pixels nets.</b> Pas d'arrondi, pas d'ombre, pas de dégradé, pas de flou. Bordures pleines de 2 px, icônes agrandies au plus proche voisin.</li>
-      <li><b>Une seule police bitmap</b>, Terminus, en 4 tailles. Pas de deuxième famille.</li>
-      <li><b>Grille de 8 px.</b> Toutes les marges et hauteurs sont des multiples de 8.</li>
-      <li><b>Statique.</b> Seul le curseur clignote. Pas d'animation de transition, le Pi 4 garde ses cycles pour les apps.</li>
+      <li><b>Vert phosphore doux</b> : menthe désaturée sur un fond gris-vert, au lieu du vert néon sur noir pur. Toujours ≈ 12:1 de contraste.</li>
+      <li><b>Moins austère</b> : panneaux à étiquette, barres segmentées, petits graphiques en aire, halo léger sur les titres et les gros chiffres.</li>
+      <li><b>Deux polices</b> : VT323 (pixel) pour les titres et les gros chiffres, JetBrains Mono pour tout le texte courant. Le texte se lit, les titres ont du caractère.</li>
+      <li><b>Sélection en blanc léger</b> au lieu du vert plein, et <b>danger / erreur en fond plein</b> orange ou rouge phosphore, pour rester lisible par un daltonien.</li>
+      <li><b>Barre d'actions tactile</b> en bas des écrans d'édition : Copier, Couper, Coller, Annuler, en gros boutons. C'est la réponse « pas de Vim ».</li>
     </ul>
   </section>
 
   <section>
-    <h2>Palette « Matrix »</h2>
+    <h2><span class="tag">02</span>Règles</h2>
+    <ul class="rules">
+      <li><b>Sélection en blanc léger</b> : fond blanc teinté de vert, texte sombre. Visible d'un coup d'œil, au doigt comme au D-pad.</li>
+      <li><b>Panneaux</b> : bordure fine de 1 px, étiquette pleine en haut à gauche (« SYSTÈME », « RÉSEAU »). Angles droits.</li>
+      <li><b>Danger et erreur, lisibles par un daltonien</b> : orange (danger) et rouge (erreur, supprimer) toujours en <b>fond plein</b> avec un texte sombre bien contrasté (≥ 7:1), et toujours accompagnés d'une icône ou d'un libellé. Jamais un simple contour ou un texte coloré : la couleur seule ne porte jamais le sens.</li>
+      <li><b>Teal</b> : seulement pour une seconde série de données dans un graphique.</li>
+      <li><b>Halo</b> : réservé aux titres, aux gros chiffres et aux courbes. Jamais sur le texte courant.</li>
+      <li><b>Mouvement</b> : le curseur clignote, les jauges se mettent à jour. Pas d'animation de transition.</li>
+      <li><b>Grille de 8 px</b> pour tout ce qu'on ajoute. La mise en page du menu reste celle de PocketTerm35-OS.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="tag">03</span>Palette « Phosphore »</h2>
     <div class="swatches" id="swatches"></div>
-    <p class="meta">Contrastes sur le fond : phosphore ≈ 15:1, lumineux ≈ 17:1, secondaire ≈ 3,8:1 (réservé aux libellés de 16 px et plus).</p>
-    <h3>Variantes (Paramètres › Thème)</h3>
+    <p class="meta">Contrastes : phosphore sur fond ≈ 12:1, lumineux ≈ 17:1, secondaire ≈ 5,2:1. Texte sombre sur sélection ≈ 18:1, sur orange ≈ 10:1, sur rouge ≈ 7:1.</p>
+    <h3>Variantes (Paramètres › Apparence)</h3>
     <div class="variants" id="variants"></div>
   </section>
 
   <section>
-    <h2>Typographie</h2>
-    <p>Le menu et la barre de PT35-OS dessinent le texte avec <code>fontdue</code>, qui lit des polices TTF, pas les bitmaps. On prend donc une police pixel en TTF : <b>VT323</b> (licence OFL), la même partout (menu, barre, foot). Si elle bave à 16 px dans le terminal, repli sur Terminus TTF pour foot seulement. À valider à l'œil sur l'appareil.</p>
+    <h2><span class="tag">04</span>Typographie</h2>
+    <p>Les deux polices sont en TTF, que lit le moteur de texte du menu PT35-OS (<code>fontdue</code>). JetBrains Mono est packagée dans Debian (<code>fonts-jetbrains-mono</code>). VT323 (licence OFL) sera livrée par le dépôt dans <code>~/.local/share/fonts</code>.</p>
     <div class="scroll">
       <table>
-        <thead><tr><th>Rôle</th><th>Taille</th><th>Usage</th><th>Aperçu</th></tr></thead>
+        <thead><tr><th>Rôle</th><th>Police</th><th>Taille</th><th>Aperçu</th></tr></thead>
         <tbody>
-          <tr><td>Titre <code>size_title</code></td><td class="num">28 px</td><td>En-tête d'écran, nom d'app</td><td class="sample" style="font-size:28px">&lt; PARAMÈTRES</td></tr>
-          <tr><td>Liste <code>size_menu</code></td><td class="num">24 px</td><td>Lignes de menu, libellés de tuiles</td><td class="sample" style="font-size:22px">Wi-Fi&nbsp;&nbsp;Maison-5G &gt;</td></tr>
-          <tr><td>Terminal</td><td class="num">16 px</td><td>foot : 80 × 28 caractères en 8 × 16</td><td class="sample" style="font-size:18px">admin@nas:~$ df -h</td></tr>
-          <tr><td>Méta <code>size_bar</code>, <code>size_hint</code></td><td class="num">18 px</td><td>Barre d'état, aides de boutons, valeurs</td><td class="sample" style="font-size:16px">[A] OUVRIR  [B] RETOUR</td></tr>
+          <tr><td>Afficheur (horloge, gros chiffres)</td><td>VT323</td><td class="num">48-64 px</td><td class="sample-d" style="font-size:44px">23:22</td></tr>
+          <tr><td>Titre d'écran</td><td>VT323</td><td class="num">28 px</td><td class="sample-d" style="font-size:28px">PARAMÈTRES</td></tr>
+          <tr><td>Liste, tuiles</td><td>JetBrains Mono</td><td class="num">17 px</td><td class="sample-b" style="font-size:17px">Wi-Fi · Maison-5G</td></tr>
+          <tr><td>Étiquettes, méta</td><td>JetBrains Mono</td><td class="num">12 px, capitales</td><td class="sample-b" style="font-size:12px;letter-spacing:.1em">SYSTÈME · CPU 23 %</td></tr>
+          <tr><td>Terminal</td><td>JetBrains Mono</td><td class="num">13 px</td><td class="sample-b" style="font-size:13px">admin@nas:~$ df -h</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section>
-    <h2>Grille et cibles tactiles</h2>
-    <p>On garde les dimensions de PT35-OS, déjà réglées pour cet écran (environ 9 px/mm, une ligne de 50 px fait 5,5 mm). Seules la grille du lanceur et l'arrondi changent. Les clés sont celles de <code>theme.toml</code>.</p>
+    <h2><span class="tag">05</span>Composants</h2>
     <div class="scroll">
       <table>
-        <thead><tr><th>Élément</th><th>Dimension</th><th>Note</th></tr></thead>
+        <thead><tr><th>Composant</th><th>Inspiration</th><th>Où</th></tr></thead>
         <tbody>
-          <tr><td>Barre des tâches <code>bar.height</code></td><td class="num">640 × 34</td><td>Apps ouvertes, mode, volume, réseau, heure. Pas de batterie.</td></tr>
-          <tr><td>En-tête <code>menu.header_height</code></td><td class="num">h 46</td><td>Fil d'Ariane cliquable : PT35 &lt; PARAMÈTRES &lt; …</td></tr>
-          <tr><td>Ligne de liste <code>menu.row_height</code></td><td class="num">h 50</td><td>7 lignes visibles, numérotées 1-9</td></tr>
-          <tr><td>Grille <code>menu.columns</code></td><td class="num">4 colonnes</td><td>Au lieu de 3 : tuiles de 150 px de large, <code>tile_height = 86</code></td></tr>
-          <tr><td>Aide de boutons <code>menu.hint_height</code></td><td class="num">640 × 46</td><td>Pastilles colorées comme les boutons, cliquables</td></tr>
-          <tr><td>Arrondi <code>menu.radius</code></td><td class="num">0</td><td>Pixels nets</td></tr>
-          <tr><td>Icône <code>icons.size_tile</code></td><td class="num">32</td><td>Pixel-art 32 px, 2 couleurs + transparence</td></tr>
-          <tr><td>Bouton secondaire</td><td class="num">min 48 × 40</td><td>Fermer, interrupteur. Jamais plus petit.</td></tr>
+          <tr><td>Panneau à étiquette</td><td>portfolio Montanaro</td><td>widgets d'accueil, sections de Paramètres</td></tr>
+          <tr><td>Ligne sélectionnée en blanc léger</td><td>consoles des années 80, portfolio Montanaro</td><td>toutes les listes</td></tr>
+          <tr><td>Barre segmentée</td><td>tableau de bord satellite</td><td>CPU, RAM, température, signal Wi-Fi, volume</td></tr>
+          <tr><td>Courbe en aire avec halo</td><td>satellite, eDEX-UI</td><td>débit réseau, charge CPU</td></tr>
+          <tr><td>Fenêtre à barre de titre</td><td>consoles des années 80</td><td>dialogues, sélecteur de fichiers</td></tr>
+          <tr><td>Barre d'actions tactile</td><td>consoles (FIND, COPY, PASTE…)</td><td>éditeur, fichiers : gros boutons en bas</td></tr>
+          <tr><td>Bouton danger / erreur plein</td><td>retour de Djé (daltonisme)</td><td>fermer, supprimer, oublier un réseau, erreurs</td></tr>
+          <tr><td>Barre d'état inversée</td><td>minicom</td><td>aide de boutons en bas des écrans système</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <section>
-    <h2>Maquettes</h2>
-    <p>À l'échelle 1:1 de l'écran (640 × 480). Elles fixent l'ambiance (couleurs, police, sélection). La mise en page réelle est celle de <code>pt35-menu</code> : barre des tâches de 34 px et aide de boutons de 46 px. Exemples de données, pas tes vrais réseaux.</p>
+    <h2><span class="tag">06</span>Maquettes</h2>
+    <p>À l'échelle 1:1 de l'écran (640 × 480), données d'exemple. Chaque légende dit ce qui existe déjà et ce qu'il faudra ajouter.</p>
     <div class="mocks" id="mocks"></div>
   </section>
 
   <section>
-    <h2>Tokens à copier</h2>
-    <p>Surcharge à coller dans <code>~/.config/pt35/theme.toml</code> : PT35-OS la fusionne clé par clé avec son thème. Les couleurs de foot sont en commentaire en bas.</p>
+    <h2><span class="tag">07</span>Tokens à copier</h2>
+    <p>Surcharge de <code>~/.config/pt35/theme.toml</code>, fusionnée clé par clé avec le thème de PT35-OS. Les couleurs de <code>foot</code> sont en commentaire en bas.</p>
     <pre id="tokens"></pre>
     <button class="copy" id="copyTokens" type="button">Copier</button>
   </section>
 </div>
 
 <script>
-const C = { void:'#050805', ghost:'#0d2a16', dim:'#1d7a3a', ph:'#33ff66', bright:'#c8ffd6', amber:'#ffb000', alert:'#ff3b4e' };
+const C = { bg:'#0b0f0d', surface:'#121a16', line:'#24382e', muted:'#5e8f78', ph:'#63e6a4', bright:'#d4ffe9', onph:'#06110b', teal:'#4fd1d9', amber:'#ffa94d', alert:'#ff6e6e', sel:'#e6fff2' };
 const ROLES = {
-  void:['Fond','Tout l\'écran, fond de terminal'], ghost:['Surface','Panneaux, tuile survolée'],
-  dim:['Secondaire','Bordures, valeurs, libellés'], ph:['Phosphore','Texte principal, sélection'],
-  bright:['Lumineux','Texte sur sélection, titres'], amber:['Ambre','Avertissement, en cours'], alert:['Alerte','Erreur, action destructive']
+  bg:['Fond','Tout l\'écran'], surface:['Surface','Panneaux, tuiles'], line:['Trait','Bordures, grilles'],
+  muted:['Secondaire','Valeurs, libellés'], ph:['Phosphore','Texte, accent, sélection'], bright:['Lumineux','Titres, gros chiffres'],
+  onph:['Sur phosphore','Texte sélectionné'], teal:['Teal','Seconde série'], amber:['Danger','Orange, fond plein'], alert:['Erreur','Rouge, fond plein'], sel:['Sélection','Blanc léger, texte sombre']
 };
 document.getElementById('swatches').innerHTML = Object.entries(C).map(([k,v]) =>
-  `<div class="sw"><div class="chip" style="background:${v}"></div><div class="info"><span class="name">${ROLES[k][0]}</span><span class="hex">--${k} ${v}</span><span class="role">${ROLES[k][1]}</span></div></div>`).join('');
-
+  `<div class="sw"><div class="chip" style="background:${v}"></div><div class="info"><span class="name">${ROLES[k][0]}</span><span class="hex">${v}</span><span class="role">${ROLES[k][1]}</span></div></div>`).join('');
 const VARIANTS = [
-  ['Matrix (défaut)', ['#050805','#0d2a16','#1d7a3a','#33ff66','#c8ffd6']],
-  ['Ambre', ['#0a0702','#2a1d06','#8a5a00','#ffb000','#ffe2a8']],
-  ['Cyan', ['#03080a','#0a2229','#1b6b7a','#33e6ff','#c8f6ff']]
+  ['Phosphore (défaut)', ['#0b0f0d','#121a16','#24382e','#5e8f78','#63e6a4','#d4ffe9']],
+  ['Ambre', ['#0f0c08','#1a150d','#3a2e1c','#9a7f52','#f2b24e','#ffe9c2']],
+  ['Cyan', ['#0a0e10','#111a1e','#22363e','#5b8996','#5fd8e8','#d6f7ff']]
 ];
 document.getElementById('variants').innerHTML = VARIANTS.map(([n,cs]) =>
-  `<div class="var"><span class="sample" style="font-size:22px;color:${cs[3]}">${n}</span><div class="bar">${cs.map(c=>`<span style="background:${c}"></span>`).join('')}</div></div>`).join('');
+  `<div class="var"><span class="sample-d" style="font-size:22px;color:${cs[4]}">${n}</span><div class="bar">${cs.map(c=>`<span style="background:${c}"></span>`).join('')}</div></div>`).join('');
 
-// ---- Maquettes SVG ----
-const F = "'VT323','Terminus',monospace";
+// ---------- Maquettes ----------
+const FD = "'VT323',monospace", FB = "'JetBrains Mono','DejaVu Sans Mono',monospace";
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const T = (x,y,size,txt,fill=C.ph,anchor='start') => `<text x="${x}" y="${y}" font-family="${F}" font-size="${size}" fill="${fill}" text-anchor="${anchor}">${esc(txt)}</text>`;
-const R = (x,y,w,h,fill='none',stroke='none',sw=0,op=1) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" opacity="${op}"/>`;
+const T = (x,y,s,t,f=C.ph,a='start',font=FB,extra='') => `<text x="${x}" y="${y}" font-family="${font}" font-size="${s}" fill="${f}" text-anchor="${a}" ${extra}>${esc(t)}</text>`;
+const D = (x,y,s,t,f=C.bright,a='start',glow=true) => T(x,y,s,t,f,a,FD,glow?'filter="url(#glow)"':'');
+const R = (x,y,w,h,fill='none',stroke='none',sw=1,op=1) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" opacity="${op}"/>`;
+const L = (x1,y1,x2,y2,c=C.line) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}"/>`;
+const DEFS = `<defs>
+ <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.ph}" stop-opacity=".45"/><stop offset="1" stop-color="${C.ph}" stop-opacity="0"/></linearGradient>
+ <linearGradient id="area2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.teal}" stop-opacity=".3"/><stop offset="1" stop-color="${C.teal}" stop-opacity="0"/></linearGradient>
+ <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" opacity=".25"/></pattern>
+</defs>`;
+const svg = (inner,label) => `<svg viewBox="0 0 640 480" role="img" aria-label="${esc(label)}" xmlns="http://www.w3.org/2000/svg">${DEFS}${R(0,0,640,480,C.bg)}${inner}${R(0,0,640,480,'url(#scan)')}</svg>`;
 
-function rng(seed){ return () => (seed = (seed*16807) % 2147483647) / 2147483647; }
-function rain(seed){
-  const r = rng(seed), chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789:.=*+<>';
-  let out = '';
-  for (let x = 6; x < 640; x += 16) {
-    const head = Math.floor(r()*30), len = 6 + Math.floor(r()*14);
-    for (let i = 0; i < len; i++) {
-      const y = (head - i) * 18; if (y < 30 || y > 478) continue;
-      const op = i === 0 ? .9 : Math.max(.08, .55 - i*.04);
-      out += `<text x="${x}" y="${y}" font-family="${F}" font-size="18" fill="${i===0?C.bright:C.ph}" opacity="${op.toFixed(2)}">${chars[Math.floor(r()*chars.length)]}</text>`;
-    }
-  }
-  return out;
+function panel(x,y,w,h,label){
+  const lw = label.length*7.6+14;
+  return R(x+.5,y+.5,w-1,h-1,C.surface,C.line) + R(x,y,lw,16,C.ph) + T(x+7,y+12,10.5,label.toUpperCase(),C.onph,'start',FB,'letter-spacing="1"');
 }
-function statusBar(){
-  let s = R(0,0,640,24,C.void) + `<line x1="0" y1="23.5" x2="640" y2="23.5" stroke="${C.dim}"/>`;
-  s += T(8,18,20,'PT35',C.bright) + T(56,18,18,'// matrix-01',C.dim);
-  [4,8,12,16].forEach((h,i)=> s += R(392+i*5,20-h,3,h,i<3?C.ph:C.dim));
-  s += T(420,18,18,'10.0.0.42',C.ph) + T(512,18,18,'VOL 45',C.dim) + T(632,18,20,'21:47',C.bright,'end');
+function seg(x,y,w,n,val,col=C.ph){ const g=2, sw=(w-(n-1)*g)/n; let s=''; for(let i=0;i<n;i++) s+=R(x+i*(sw+g),y,sw,10,i<Math.round(val*n)?col:C.line); return s; }
+function area(x,y,w,h,pts,col='url(#area)',stroke=C.ph){
+  const step=w/(pts.length-1), P=pts.map((v,i)=>`${(x+i*step).toFixed(1)},${(y+h-v*h).toFixed(1)}`);
+  return `<polygon points="${x},${y+h} ${P.join(' ')} ${x+w},${y+h}" fill="${col}"/><polyline points="${P.join(' ')}" fill="none" stroke="${stroke}" stroke-width="1.5" filter="url(#glow)"/>`;
+}
+function taskbar(active){
+  let s = R(0,0,640,34,C.bg) + L(0,33.5,640,33.5);
+  s += R(8,7,20,20,'none',C.ph,1.5) + T(18,22,11,'PT',C.ph,'middle',FB,'font-weight="600"');
+  ['>_','F','Ed'].forEach((g,i)=>{ const on=i===active; s += R(40+i*30,7,24,20,on?C.ph:'none',on?C.ph:C.line) + T(52+i*30,21,10,g,on?C.onph:C.muted,'middle'); });
+  s += T(366,21,11,'BTN',C.muted) + T(400,21,11,'VOL 45',C.muted);
+  [4,7,10,13].forEach((h,i)=> s += R(458+i*5,24-h,3,h,i<3?C.ph:C.line));
+  s += T(484,21,11,'10.0.0.42',C.ph) + D(632,24,22,'23:22',C.bright,'end',false);
   return s;
 }
 function hints(list){
-  let s = R(0,456,640,24,C.void) + `<line x1="0" y1="456.5" x2="640" y2="456.5" stroke="${C.dim}"/>`;
-  let x = 10;
-  list.forEach(([k,label]) => { s += T(x,474,18,`[${k}]`,C.bright) + T(x + k.length*8 + 22,474,18,label,C.dim); x += k.length*8 + 30 + label.length*8 + 20; });
+  const cols = {A:C.ph,B:C.alert,X:C.teal,Y:C.amber,START:C.muted,SELECT:C.muted,L:C.muted,R:C.muted};
+  let s = R(0,434,640,46,C.bg) + L(0,434.5,640,434.5); let x=12;
+  list.forEach(([k,l])=>{ const kw=k.length*8+14, w=kw+l.length*7.4+18;
+    s += R(x,445,w,26,C.surface,C.line) + R(x,445,kw,26,cols[k]||C.muted) + T(x+kw/2,462,11,k,C.onph,'middle',FB,'font-weight="600"') + T(x+kw+9,462,11,l,C.bright);
+    x+=w+8; });
   return s;
 }
-function header(title){
-  return R(0,24,640,48,C.void) + T(16,58,30,'<',C.dim) + T(40,58,30,title,C.bright) + `<line x1="0" y1="71.5" x2="640" y2="71.5" stroke="${C.dim}"/>`;
-}
-function svg(inner, label){ return `<svg viewBox="0 0 640 480" role="img" aria-label="${esc(label)}" xmlns="http://www.w3.org/2000/svg">${R(0,0,640,480,C.void)}${inner}</svg>`; }
+function header(path){ return T(16,62,12,'PT35 ‹ '+path.slice(0,-1).join(' ‹ '),C.muted,'start',FB,'letter-spacing="1"') + D(16,86,30,path[path.length-1]) ; }
 
-function launcher(){
-  const apps = [['>_','Terminal'],['@','SSH'],['[ ]','Fichiers'],['♪','Musique'],['▶','Vidéo'],['◉','Assistant'],['⌂','Maison'],['≡','Paramètres']];
-  let s = rain(7) + R(0,24,640,456,C.void,'none',0,.55) + statusBar();
-  s += T(16,62,32,'> MENU PRINCIPAL',C.bright) + T(624,62,18,'8 APPS',C.dim,'end');
-  apps.forEach(([g,n],i) => {
-    const col = i%4, row = Math.floor(i/4), x = col*160, y = 80 + row*144, sel = i===0;
-    s += R(x+8,y+8,144,128, sel?C.ghost:C.void, sel?C.ph:C.dim, 2, sel?1:.85);
-    s += R(x+48,y+20,64,64,'none',sel?C.bright:C.ph,4);
-    s += T(x+80,y+64,g.length>2?28:34,g,sel?C.bright:C.ph,'middle');
-    s += T(x+80,y+118,22,(sel?'> ':'')+n,sel?C.bright:C.ph,'middle');
-  });
-  s += hints([['A','OUVRIR'],['D-PAD','CHOISIR'],['START','FERMER']]);
-  return svg(s,'Menu principal');
+function home(){
+  let s = taskbar(-1);
+  s += panel(12,46,232,118,'Système');
+  s += D(26,104,56,'23:22') + T(26,124,11,'SAM. 31 OCT. 2026',C.muted,'start',FB,'letter-spacing="1"');
+  s += T(160,82,10,'CPU',C.muted) + seg(160,88,72,6,.35) + T(160,114,10,'RAM',C.muted) + seg(160,120,72,6,.6) + T(160,146,10,'TEMP 54°',C.muted) + seg(160,151,72,6,.5);
+  s += panel(12,172,232,110,'Réseau');
+  s += T(26,206,11,'Maison-5G · 10.0.0.42',C.ph) + area(26,214,204,46,[.3,.4,.35,.6,.5,.7,.55,.8,.6,.5,.65,.7,.45,.6]) + T(26,274,10,'↓ 2.4 Mo/s',C.ph) + T(230,274,10,'↑ 0.3 Mo/s',C.teal,'end');
+  s += panel(12,290,232,132,'Lecture');
+  s += R(26,314,56,56,'url(#area)',C.ph) + T(54,348,22,'♪',C.bright,'middle');
+  s += T(94,326,10,'SLEEP TOKEN',C.muted,'start',FB,'letter-spacing="1"') + D(94,352,24,'Chokehold') + R(94,362,136,3,C.line) + R(94,362,52,3,C.ph) + T(94,380,10,'01:53',C.muted) + T(230,380,10,'05:04',C.muted,'end');
+  s += T(56,408,14,'⏮',C.ph,'middle') + R(102,394,34,20,C.ph) + T(119,408,12,'❚❚',C.onph,'middle') + T(178,408,14,'⏭',C.ph,'middle');
+  s += panel(256,46,372,376,'Apps');
+  const apps=[['>_','Terminal'],['⇄','SSH'],['▤','Fichiers'],['✎','Éditeur'],['♪','Musique'],['▶','Vidéo'],['W','Wikipédia'],['◉','Assistant'],['⚙','Paramètres']];
+  apps.forEach(([g,n],i)=>{ const c=i%3,r=Math.floor(i/3),x=268+c*120,y=72+r*116,sel=i===0;
+    s += R(x,y,108,104,sel?C.sel:C.bg,sel?C.sel:C.line);
+    s += sel ? T(x+54,y+56,30,g,C.onph,'middle',FD) : `<text x="${x+54}" y="${y+56}" font-family="${FD}" font-size="30" fill="${C.ph}" text-anchor="middle" filter="url(#glow)">${esc(g)}</text>`;
+    s += T(x+54,y+88,12,n,sel?C.onph:C.bright,'middle'); });
+  s += hints([['A','Ouvrir'],['X','Chercher'],['Y','Épingler'],['START','Fermer']]);
+  return svg(s,'Accueil avec widgets et lanceur');
 }
 function switcher(){
-  let s = statusBar();
-  ['admin@nas:~$ tail -f /var/log/syslog','Oct 31 21:46 nas systemd[1]: Started backup.','Oct 31 21:47 nas CRON[812]: (root) CMD (rsync)'].forEach((l,i)=> s += T(8,48+i*20,18,l,C.ph));
-  s += R(0,24,640,456,C.void,'none',0,.9);
-  s += T(64,76,30,'APPS OUVERTES (3)',C.bright);
-  const apps = [['Terminal','ssh nas'],['Paramètres','Wi-Fi'],['Fichiers','~/Musique']];
-  apps.forEach(([n,d],i) => {
-    const y = 96 + i*64, sel = i===0;
-    s += R(64,y,512,56, sel?C.ph:C.void, sel?C.ph:C.dim, 2);
-    s += T(80,y+36,24,(sel?'> ':'')+n, sel?C.void:C.ph) + T(300,y+36,20,d, sel?C.ghost:C.dim);
-    s += R(512,y+8,56,40, sel?C.void:C.void, sel?C.void:C.alert, 2) + T(540,y+36,24,'X',C.alert,'middle');
+  let s = taskbar(0);
+  s += D(16,74,30,'Apps ouvertes') + T(624,70,11,'3 FENÊTRES',C.muted,'end',FB,'letter-spacing="1"');
+  const cards=[['Terminal','ssh nas',0],['Fichiers','sftp://nas',1],['Éditeur','notes.md',2]];
+  cards.forEach(([n,d,k],i)=>{ const x=16+i*208, y=96, sel=i===0;
+    s += R(x+.5,y+.5,191,300,C.surface,sel?C.sel:C.line,sel?2:1);
+    s += R(x+8,y+8,176,22,sel?C.sel:C.bg) + T(x+16,y+23,11,n.toUpperCase(),sel?C.onph:C.bright,'start',FB,'letter-spacing="1"') + R(x+156,y+8,28,22,C.alert) + T(x+170,y+24,13,'×',C.onph,'middle',FB,'font-weight="600"');
+    // aperçu
+    s += R(x+8,y+36,176,206,C.bg,C.line);
+    if(k===0){ ['$ ssh nas','admin@nas:~$ df -h','/dev/sda1 3.6T 59%','admin@nas:~$ _'].forEach((l,j)=> s+=T(x+14,y+56+j*16,9,l,C.ph)); }
+    if(k===1){ for(let j=0;j<6;j++){ s+=R(x+14+(j%3)*56,y+48+Math.floor(j/3)*62,44,34,'none',C.muted) + T(x+36+(j%3)*56,y+98+Math.floor(j/3)*62,8,['docs','music','src','photos','backup','tmp'][j],C.muted,'middle'); } }
+    if(k===2){ ['# Courses','- câble USB-C','- micro-casque USB','- carte SD 64 Go'].forEach((l,j)=> s+=T(x+14,y+58+j*18,10,l,j?C.ph:C.bright)); }
+    s += T(x+12,y+266,11,d,C.muted) + (sel?T(x+12,y+286,11,'▸ ACTIVE',C.ph,'start',FB,'letter-spacing="1"'):'');
   });
-  s += T(64,316,18,'L / R : app précédente / suivante sans ouvrir cette liste',C.dim);
-  s += hints([['A','BASCULER'],['X','FERMER'],['SELECT','RETOUR']]);
-  return svg(s,'Sélecteur d\'apps ouvertes');
+  s += hints([['A','Basculer'],['L','Fermer'],['X','Tout fermer'],['SELECT','Retour']]);
+  return svg(s,'Sélecteur d\'apps ouvertes avec aperçus');
 }
 function settings(){
-  let s = statusBar() + header('PARAMÈTRES');
-  const rows = [['Wi-Fi','Maison-5G'],['Réseau filaire','DHCP'],['Écran','70 %'],['Son','45 %'],['Fond d\'écran','matrix-01'],['Thème','Matrix'],['Langue et clavier','fr_FR · azerty']];
-  rows.forEach(([l,v],i) => {
-    const y = 72 + i*56, sel = i===1;
-    if (sel) s += R(0,y,632,56,C.ph);
-    s += T(16,y+36,24,(sel?'> ':'')+l, sel?C.void:C.ph) + T(592,y+36,20,v, sel?C.ghost:C.dim,'end') + T(616,y+36,24,'>', sel?C.void:C.dim,'end');
-    if (!sel) s += `<line x1="16" y1="${y+55.5}" x2="624" y2="${y+55.5}" stroke="${C.ghost}"/>`;
+  let s = taskbar(-1) + header(['PARAMÈTRES']);
+  const rows=[['Réseau','Maison-5G','◉'],['Bluetooth','Désactivé','ᛒ'],['Apparence','Phosphore','◐'],['Écran','70 %','☼'],['Son','45 %','♪'],['Date et heure','Europe/Paris','◷']];
+  s += L(0,98.5,640,98.5);
+  rows.forEach(([l,v,g],i)=>{ const y=99+i*50, sel=i===2;
+    if(sel) s+=R(0,y,630,50,C.sel);
+    s += R(16,y+13,24,24,'none',sel?C.onph:C.line) + T(28,y+30,13,g,sel?C.onph:C.ph,'middle');
+    s += T(54,y+31,16,l,sel?C.onph:C.bright) + T(580,y+31,13,v,sel?C.onph:C.muted,'end') + T(608,y+31,16,'›',sel?C.onph:C.muted,'end');
+    if(!sel) s+=L(16,y+49.5,624,y+49.5);
   });
-  s += R(634,72,4,384,C.ghost) + R(634,72,4,240,C.dim);
+  s += R(632,99,4,330,C.line) + R(632,99,4,220,C.muted);
+  s += hints([['A','Ouvrir'],['B','Retour'],['X','Chercher']]);
   return svg(s,'Paramètres, liste principale');
 }
 function wifi(){
-  let s = statusBar() + header('WI-FI');
-  s += T(16,108,24,'Wi-Fi',C.ph) + R(552,84,72,40,C.ph) + T(588,112,24,'ON',C.void,'middle');
-  s += `<line x1="0" y1="135.5" x2="640" y2="135.5" stroke="${C.dim}"/>` + T(16,160,18,'RÉSEAUX VISIBLES',C.dim);
-  const nets = [['Maison-5G',4,true,'CONNECTÉ'],['Maison-2G',3,true,''],['Livebox-31F0',2,true,''],['Atelier',1,false,'']];
-  nets.forEach(([n,sig,lock,st],i) => {
-    const y = 168 + i*56, cur = i===0;
-    s += T(16,y+36,24,n, cur?C.bright:C.ph);
-    if (st) s += T(200,y+36,18,st,C.ph);
-    if (lock) s += R(538,y+26,12,10,C.dim) + `<rect x="540" y="${y+19}" width="8" height="8" fill="none" stroke="${C.dim}" stroke-width="2"/>`;
-    [6,10,14,18].forEach((h,k) => s += R(572+k*7,y+38-h,4,h,k<sig?C.ph:C.ghost));
-    s += T(624,y+36,24,'>',C.dim,'end');
-    s += `<line x1="16" y1="${y+55.5}" x2="624" y2="${y+55.5}" stroke="${C.ghost}"/>`;
+  let s = taskbar(-1) + header(['PARAMÈTRES','RÉSEAU']);
+  s += panel(12,104,616,52,'Wi-Fi') + T(28,140,15,'Activé',C.bright) + R(560,118,52,26,C.ph) + R(586,121,23,20,C.onph) ;
+  s += panel(12,166,616,262,'Réseaux visibles');
+  const nets=[['Maison-5G','CONNECTÉ · 10.0.0.42',.95,1],['Maison-2G','WPA2',.75,1],['Atelier','OUVERT',.3,0]];
+  nets.forEach(([n,d,sig,lock],i)=>{ const y=188+i*56, cur=i===0;
+    s += T(28,y+24,16,n,cur?C.ph:C.bright) + T(28,y+42,10,d,cur?C.ph:C.muted,'start',FB,'letter-spacing="1"');
+    s += seg(470,y+18,88,5,sig,cur?C.ph:C.muted);
+    if(lock) s += T(452,y+28,12,'⚿',C.muted,'end');
+    s += T(608,y+28,16,'›',C.muted,'end');
+    if(i<2) s+=L(28,y+53.5,612,y+53.5);
   });
-  s += T(16,440,22,'+ Autre réseau…',C.dim);
+  s += L(28,365.5,612,365.5) + T(28,394,11,'Maison-5G sélectionné',C.muted) + R(436,374,176,40,C.alert) + T(524,399,12,'⚠ OUBLIER LE RÉSEAU',C.onph,'middle',FB,'font-weight="600"');
+  s += hints([['A','Connecter'],['B','Retour'],['Y','Oublier']]);
   return svg(s,'Paramètres, sous-vue Wi-Fi');
 }
-function terminal(){
-  let s = statusBar();
-  const lines = [
-    ['pocket@pt35:~$ ssh nas',C.ph],['Linux nas 6.12.0-arm64 #1 SMP aarch64',C.dim],['Last login: Sat Oct 31 21:40 from 10.0.0.42',C.dim],['',C.ph],
-    ['admin@nas:~$ df -h /srv',C.ph],['Filesystem      Size  Used Avail Use% Mounted on',C.bright],['/dev/sda1       3.6T  2.1T  1.5T  59% /srv',C.ph],['',C.ph],
-    ['admin@nas:~$ systemctl is-active backup',C.ph],['active',C.ph],['',C.ph],['admin@nas:~$ ',C.ph]
-  ];
-  lines.forEach(([l,c],i) => s += T(8,50+i*20,19,l,c));
-  s += R(122,50+11*20-15,9,18,C.ph);
-  return svg(s,'Terminal plein écran en session SSH');
+function editor(){
+  let s = taskbar(2);
+  s += R(0,34,640,30,C.surface) + L(0,63.5,640,63.5) + T(16,54,12,'notes.md',C.bright) + T(110,54,11,'· sftp://nas/home/admin',C.muted) + R(540,42,92,18,C.amber) + T(586,55,10,'● MODIFIÉ',C.onph,'middle',FB,'font-weight="600" letter-spacing="1"');
+  const lines=['# Liste PocketTerm','','- câble USB-C coudé','- micro-casque USB (16 kHz mono)','- carte SD 64 Go de secours','','## À tester','- Fichiers GNOME sur sftp://nas','- Wike hors ligne ?'];
+  lines.forEach((l,i)=>{ const y=88+i*22; s += T(34,y,10,String(i+1),C.line,'end') + T(46,y,13,l,l.startsWith('#')?C.bright:C.ph); });
+  // sélection
+  s += R(44,117,156,20,C.sel) + T(46,132,13,'- câble USB-C coudé',C.onph) + R(43,112,2,26,C.ph) + R(199,116,2,26,C.ph);
+  s += R(40,108,8,8,C.ph) + R(196,140,8,8,C.ph);
+  // barre d'actions
+  s += R(0,366,640,68,C.bg) + L(0,366.5,640,366.5);
+  const acts=[['Copier',C.ph],['Couper',C.ph],['Coller',C.ph],['Annuler',C.ph],['Chercher',C.teal],['Enregistrer',C.ph]];
+  acts.forEach(([a,c],i)=>{ const x=10+i*104; s += R(x,378,96,44,C.surface,c) + T(x+48,405,12,a.toUpperCase(),c,'middle',FB,'letter-spacing="1"'); });
+  s += hints([['A','Valider'],['B','Fermer'],['Y','Menu'],['X','Clavier']]);
+  return svg(s,'Éditeur avec barre d\'actions tactile');
 }
-const MOCKS = [
-  [launcher,'Menu principal','Bouton Start. Grille 4 × 3 sur le fond d\'écran assombri à 55 %, tuile active inversée en surface + bordure phosphore.'],
-  [switcher,'Apps ouvertes','Bouton Select. Liste par-dessus l\'app courante assombrie à 90 %. X ferme l\'app de la ligne, en rouge car destructif.'],
-  [settings,'Paramètres','Ligne active en inversion vidéo, valeur actuelle à droite en secondaire, chevron vers la sous-vue. Ascenseur de 4 px à droite.'],
-  [wifi,'Paramètres › Wi-Fi','Même gabarit de ligne. Signal en 4 barres, cadenas pour les réseaux protégés, mot de passe saisi avec le clavier physique ou wvkbd.'],
-  [terminal,'Terminal SSH','foot plein écran sous la barre, VT323 16 px, 80 × 28 caractères. Aucun chrome : l\'app a tout l\'écran.']
+function terminal(){
+  let s = taskbar(0);
+  const L2=[['pocket@pt35:~$ ssh nas',C.ph],['Linux nas 6.12.0-arm64 #1 SMP aarch64',C.muted],['Last login: Sat Oct 31 23:10 from 10.0.0.42',C.muted],['',C.ph],['admin@nas:~$ df -h /srv',C.ph],['Filesystem      Size  Used Avail Use% Mounted on',C.bright],['/dev/sda1       3.6T  2.1T  1.5T  59% /srv',C.ph],['',C.ph],['admin@nas:~$ systemctl is-active backup',C.ph],['active',C.ph],['',C.ph],['admin@nas:~$ ',C.ph]];
+  L2.forEach(([l,c],i)=> s += T(10,58+i*19,13,l,c));
+  s += R(114,58+11*19-13,8,16,C.ph,'none',0,1);
+  s += R(0,454,640,26,C.ph) + T(10,471,11,'SSH nas · 80×24 · UTF-8',C.onph,'start',FB,'font-weight="600"') + T(630,471,11,'Y : menu · R : souris',C.onph,'end');
+  return svg(s,'Terminal en session SSH');
+}
+const MOCKS=[
+  [home,'Accueil','Start. Widgets Système, Réseau et Lecture à gauche, lanceur en grille à droite.','Existe : le lanceur en grille. À ajouter : les widgets, avec une brique existante à chercher (eww, par exemple) ou une tuile « live » de pt35-menu.'],
+  [switcher,'Apps ouvertes','Select. Cartes avec aperçu de chaque fenêtre, croix rouge pour fermer.','Existe : PT35-OS a déjà la bascule avec aperçus (window_previews). Thème seulement.'],
+  [settings,'Paramètres','En-tête en fil d\'Ariane, ligne active inversée, valeur à droite.','Existe : écran Paramètres de pt35-menu. Thème seulement.'],
+  [wifi,'Paramètres › Réseau','Panneaux à étiquette, signal en barres segmentées.','Existe : écran Wi-Fi de pt35-menu. Thème seulement.'],
+  [editor,'Éditeur','Sélection au doigt avec poignées, barre d\'actions tactile en bas : aucun raccourci à retenir.','À trouver : la barre d\'actions. Piste : une disposition wvkbd dédiée ou un petit script qui envoie Ctrl+C / Ctrl+V avec wtype (déjà installé).'],
+  [terminal,'Terminal SSH','foot plein écran, barre d\'état inversée façon minicom.','Existe : foot. Thème foot seulement.']
 ];
-document.getElementById('mocks').innerHTML = MOCKS.map(([fn,t,c],i) =>
-  `<figure>${fn()}<figcaption><b>${String(i+1).padStart(2,'0')} ${t}</b>${c}</figcaption></figure>`).join('');
+document.getElementById('mocks').innerHTML = MOCKS.map(([fn,t,c,f],i)=>
+  `<figure>${fn()}<figcaption><b>${String(i+1).padStart(2,'0')} ${t}</b>${c} <span class="feas">${f}</span></figcaption></figure>`).join('');
 
-// ---- Tokens ----
-const tokens = `# PocketTerm Matrix : surcharge de theme.toml
+const tokens = `# PocketTerm Phosphore : surcharge de theme.toml
 [color]
-background      = "${C.void}"
-background_alt  = "${C.ghost}"
+background      = "${C.bg}"
+background_alt  = "${C.surface}"
 foreground      = "${C.ph}"
-muted           = "${C.dim}"
+muted           = "${C.muted}"
 accent          = "${C.ph}"
-accent_fg       = "${C.void}"
+accent_fg       = "${C.onph}"
 warning         = "${C.amber}"
 critical        = "${C.alert}"
 ok              = "${C.ph}"
-border          = "${C.dim}"
+border          = "${C.line}"
 button_a        = "${C.ph}"
 button_b        = "${C.alert}"
-button_x        = "#33e6ff"
+button_x        = "${C.teal}"
 button_y        = "${C.amber}"
-button_neutral  = "${C.ghost}"
+button_neutral  = "${C.line}"
 
 [font]
-family           = "VT323"
-family_bold      = "VT323"
-family_mono      = "VT323"
-family_mono_bold = "VT323"
-size_bar   = 18.0
-size_menu  = 24.0
-size_title = 28.0
-size_hint  = 18.0
+family           = "JetBrains Mono"
+family_bold      = "JetBrains Mono Bold"
+family_mono      = "JetBrains Mono"
+family_mono_bold = "JetBrains Mono Bold"
+size_bar   = 14.0
+size_menu  = 19.0
+size_title = 22.0
+size_hint  = 14.0
 
 [menu]
 radius      = 0
-columns     = 4
+# sélection en blanc léger : accent_fg sur accent = sélection
+# (si pt35-menu utilise accent pour la sélection, accent = "${C.sel}")
 animations  = false
 
-# foot.ini, section [colors]
-# background=${C.void.slice(1)}
-# foreground=${C.ph.slice(1)}
-# selection-background=${C.ph.slice(1)}
-# selection-foreground=${C.void.slice(1)}`;
+# foot.ini
+# [main]   font=JetBrains Mono:size=10
+# [colors] background=${C.bg.slice(1)}  foreground=${C.ph.slice(1)}
+#          selection-background=${C.ph.slice(1)}  selection-foreground=${C.onph.slice(1)}`;
 document.getElementById('tokens').textContent = tokens;
 document.getElementById('copyTokens').addEventListener('click', async e => {
   const b = e.currentTarget;

@@ -14,7 +14,7 @@ Source de vérité des specs du projet. Charte graphique : [`DESIGN.md`](../DESI
 
 | Version | Contenu | Critère de fin |
 | --- | --- | --- |
-| v1 Socle + admin | PT35-OS installé, thème Matrix, fond d'écran image, écrans Paramètres manquants, menu Admin réseau, SSH, fichiers locaux et SSH, éditeur, musique et vidéo | Régler l'appareil et administrer le réseau sans taper de commande de config |
+| v1 Socle + admin | PT35-OS installé, thème Phosphore, fond d'écran image, écrans Paramètres manquants, menu Admin réseau, SSH, fichiers locaux et SSH, éditeur, musique et vidéo | Régler l'appareil et administrer le réseau sans taper de commande de config |
 | v2 Usage | Wikipédia, assistant texte (Claude + Jean-Michel), rétro-gaming minimal | Une semaine d'usage quotidien sans manque bloquant |
 | v3 Bonus | Assistant vocal, domotique | À cadrer après v2 |
 | Un jour peut-être | Radio SDR | — |
@@ -59,7 +59,7 @@ Paramètres existe déjà dans PT35-OS, en liste avec sous-vues. On complète ce
 | Wi-Fi | oui (scan, connexion) | — | — |
 | Bluetooth | oui | — | — |
 | Son, luminosité | oui (réglages rapides) | — | — |
-| Apparence (palette, police, taille) | oui | palette Matrix | ligne Fond d'écran |
+| Apparence (palette, police, taille) | oui | palette Phosphore | ligne Fond d'écran |
 | Système (CPU, RAM, disque, température, IP) | oui | — | — |
 | Réseau filaire / IP fixe, nom d'hôte | non | `nmtui` | écran natif si besoin |
 | Date, heure, fuseau horaire | non | `dpkg-reconfigure tzdata` + interrupteur NTP (`timedatectl`) | écran natif avec liste filtrable |
@@ -82,7 +82,7 @@ Pour chaque besoin : ce qui est déjà dans PT35-OS, à tester en premier, puis 
 | Éditeur de texte | `mousepad` (Y ouvre sa barre de menus) | [Éditeur de texte GNOME](https://linuxphoneapps.org/apps/org.gnome.texteditor/), mobile fit 5/5 : sélection au doigt, copier / coller par menu, boutons dans la barre. Il ouvre aussi les fichiers distants depuis Fichiers | v1 |
 | Musique (mp3) | VLC | si VLC est pénible au doigt : Amberol (lecteur adaptatif GTK4) | v1 (à tester) |
 | Vidéo | `mpv` | si besoin : Clapper (lecteur adaptatif GTK4) | v1 (à tester) |
-| Wikipédia | Navigateur | [Wike](https://linuxphoneapps.org/apps/com.github.hugolabe.wike), mobile fit 5/5 : lecteur Wikipédia avec images, sommaire, favoris, 300 langues. Le côté « terminal » vient du thème Matrix | v2 |
+| Wikipédia | Navigateur | [Wike](https://linuxphoneapps.org/apps/com.github.hugolabe.wike), mobile fit 5/5 : lecteur Wikipédia avec images, sommaire, favoris, 300 langues. Le côté « terminal » vient du thème Phosphore | v2 |
 | Assistant texte (Claude + Jean-Michel) | DarkWire (agent local en terminal) | Newelle : assistant GTK4 qui gère l'API Claude, les modèles locaux via Ollama, la voix (transcription et synthèse) et peut lancer des commandes. À vérifier : rendu à 640 × 480, et si Jean-Michel parle le protocole Ollama | v2 |
 | Assistant vocal + domotique | — | **Home Assistant** sur une machine du réseau. Il apporte Assist (la chaîne voix), l'intégration Anthropic (Claude), l'intégration Ollama (Jean-Michel), Tuya en officiel et Alexa via un module communautaire. Sur le PocketTerm, on installe juste [linux-voice-assistant](https://github.com/OHF-Voice/linux-voice-assistant) (satellite vocal ARM64 avec mot de réveil local) et on affiche le tableau de bord HA | v3 |
 | Rétro-gaming minimal | — | RetroArch. Start et Select restent au système : dans le jeu, Start = X et Select = Y. Il manque un mode où les boutons arrivent bruts au jeu : demander d'abord au mainteneur de PT35-OS, PR seulement s'il n'y a rien | v2 |
@@ -104,7 +104,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : tester au doigt ce qui est déjà là (menu, bascule, Paramètres, mousepad, VLC, `mpv`) et noter ce qui gêne
 - [ ] Appareil : `apt install nautilus gvfs-backends gnome-text-editor`, ouvrir `sftp://<serveur>` et tester copier / coller
 - [ ] Appareil : brancher le micro-casque, `arecord -l`
-- [ ] Agent : thème Matrix (`theme.toml` pour le menu + `gtk.css` pour les apps GTK4)
+- [ ] Agent : thème Phosphore (`theme.toml` pour le menu + `gtk.css` pour les apps GTK4)
 - [ ] Agent : `menu.toml` avec le sous-menu Admin, une entrée par serveur SSH, et les entrées Paramètres manquantes (`nmtui`, fuseau, langue)
 - [ ] Agent : fonds d'écran 640 × 480 et icônes pixel-art
 - [ ] Agent : fond d'écran image, ouvrir d'abord une issue chez PT35-OS

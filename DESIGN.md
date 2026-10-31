@@ -1,30 +1,36 @@
 ---
 version: alpha
-name: PocketTerm Matrix
-description: Charte cyberdeck rétro-pixel, phosphore sur noir, pour l'écran 640x480 tactile du PocketTerm 3.5.
+name: PocketTerm Phosphore
+description: Charte cyberdeck rétro, vert phosphore doux sur fond gris-vert, pour l'écran couleur 640x480 tactile du PocketTerm 3.5.
 colors:
-  primary: "#33ff66"
-  on-primary: "#050805"
-  background: "#050805"
-  surface: "#0d2a16"
-  muted: "#1d7a3a"
-  bright: "#c8ffd6"
-  warning: "#ffb000"
-  critical: "#ff3b4e"
-  button-x: "#33e6ff"
+  primary: "#63e6a4"
+  on-primary: "#06110b"
+  background: "#0b0f0d"
+  surface: "#121a16"
+  line: "#24382e"
+  muted: "#5e8f78"
+  bright: "#d4ffe9"
+  selection: "#e6fff2"
+  teal: "#4fd1d9"
+  danger: "#ffa94d"
+  error: "#ff6e6e"
 typography:
+  display:
+    fontFamily: VT323
+    fontSize: 56px
   title:
     fontFamily: VT323
     fontSize: 28px
-  menu:
-    fontFamily: VT323
-    fontSize: 24px
-  meta:
-    fontFamily: VT323
-    fontSize: 18px
+  body:
+    fontFamily: JetBrains Mono
+    fontSize: 17px
+  label:
+    fontFamily: JetBrains Mono
+    fontSize: 12px
+    letterSpacing: 0.1em
   terminal:
-    fontFamily: VT323
-    fontSize: 16px
+    fontFamily: JetBrains Mono
+    fontSize: 13px
 rounded:
   none: 0px
 spacing:
@@ -33,117 +39,122 @@ spacing:
   header: 46px
   row: 50px
   hint: 46px
-  tile: 86px
   target-min: 48px
 components:
-  taskbar:
-    backgroundColor: "{colors.background}"
+  panel:
+    backgroundColor: "{colors.surface}"
     textColor: "{colors.primary}"
-    typography: "{typography.meta}"
-    height: "{spacing.bar}"
-  list-row:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.primary}"
-    typography: "{typography.menu}"
-    height: "{spacing.row}"
     rounded: "{rounded.none}"
-  list-row-selected:
+  panel-label:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
-    typography: "{typography.menu}"
-    height: "{spacing.row}"
-  tile:
+    typography: "{typography.label}"
+  list-row:
     backgroundColor: "{colors.background}"
-    textColor: "{colors.primary}"
-    typography: "{typography.menu}"
-    height: "{spacing.tile}"
-    rounded: "{rounded.none}"
-  tile-selected:
-    backgroundColor: "{colors.surface}"
     textColor: "{colors.bright}"
-    height: "{spacing.tile}"
-  button-destructive:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.critical}"
+    typography: "{typography.body}"
+    height: "{spacing.row}"
+  list-row-selected:
+    backgroundColor: "{colors.selection}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.body}"
+    height: "{spacing.row}"
+  tile-selected:
+    backgroundColor: "{colors.selection}"
+    textColor: "{colors.on-primary}"
+  button-danger:
+    backgroundColor: "{colors.danger}"
+    textColor: "{colors.on-primary}"
     height: "{spacing.target-min}"
-    rounded: "{rounded.none}"
+  button-error:
+    backgroundColor: "{colors.error}"
+    textColor: "{colors.on-primary}"
+    height: "{spacing.target-min}"
+  action-bar-button:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.primary}"
+    typography: "{typography.label}"
+    height: "{spacing.target-min}"
   hint-bar:
     backgroundColor: "{colors.background}"
     textColor: "{colors.bright}"
-    typography: "{typography.meta}"
+    typography: "{typography.label}"
     height: "{spacing.hint}"
 ---
 
-# PocketTerm Matrix
+# PocketTerm Phosphore
 
 Format : [DESIGN.md](https://github.com/google-labs-code/design.md) (Google Labs / Stitch, version alpha, Apache-2.0). Les tokens YAML en tête font foi, le texte explique comment les appliquer.
 
-Pourquoi ce format : un seul fichier lisible par un humain et par un agent, avec les valeurs et le « pourquoi », pour 3 cibles écrites à la main (`theme.toml`, `gtk.css`, `foot.ini`). Écartés : [DTCG](https://www.designtokens.org/) (JSON stable depuis 2025.10, mais sans le texte qui explique) et [Style Dictionary](https://styledictionary.com/) (chaîne de build Node, YAGNI pour 3 fichiers). Le CLI de DESIGN.md sait exporter en DTCG si un jour on en a besoin. Aperçu visuel et maquettes : [`docs/design/charte.html`](docs/design/charte.html) et les SVG de [`docs/design/`](docs/design/). Fonctionnement et périmètre : [`docs/specs.md`](docs/specs.md).
+Pourquoi ce format : un seul fichier lisible par un humain et par un agent, avec les valeurs et le « pourquoi », pour 3 cibles écrites à la main (`theme.toml`, `gtk.css`, `foot.ini`). Écartés : [DTCG](https://www.designtokens.org/) (JSON stable depuis 2025.10, mais sans le texte qui explique) et [Style Dictionary](https://styledictionary.com/) (chaîne de build Node, YAGNI pour 3 fichiers). Le CLI de DESIGN.md sait exporter en DTCG si un jour on en a besoin.
+
+Aperçu visuel, maquettes et `theme.toml` prêt à copier : [`docs/design/charte.html`](docs/design/charte.html) et les SVG de [`docs/design/`](docs/design/). Fonctionnement et périmètre : [`docs/specs.md`](docs/specs.md).
 
 ## Overview
 
-Un écran de terminal vert, façon cyberdeck rétro-pixel et ambiance Matrix, sur un écran 640 × 480 tactile d'environ 9 px/mm. La charte habille [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS) sans changer sa mise en page : elle se traduit en surcharge de `~/.config/pt35/theme.toml` pour le menu et la barre, en `gtk.css` pour les apps GTK4, et en couleurs `foot`.
+Cyberdeck rétro sur un écran **couleur** 640 × 480 tactile (environ 9 px/mm), pas un terminal monochrome : on s'autorise des panneaux, des barres segmentées, des courbes et un léger halo, dans l'esprit d'eDEX-UI et des consoles des années 80. La charte habille [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS) sans changer sa mise en page : surcharge de `~/.config/pt35/theme.toml` pour le menu et la barre, `gtk.css` pour les apps GTK4, couleurs `foot` pour le terminal.
+
+v0.2 (31 oct. 2026) : vert adouci, sélection en blanc léger, danger et erreur en fond plein, deux polices, composants graphiques.
 
 ## Colors
 
-- **primary** (phosphore) : texte principal, sélection, accent. Contraste ≈ 15:1 sur le fond.
-- **background** : tout l'écran, fond de terminal. Quasi noir avec une pointe de vert.
-- **surface** : panneaux, tuile sélectionnée.
-- **muted** : bordures, valeurs secondaires, libellés de 16 px et plus seulement (≈ 3,8:1).
-- **bright** : texte sur surface, titres, emphase (≈ 17:1).
-- **warning** (ambre) et **critical** (rouge) : états seulement, jamais décoratifs. Le rouge marque une action destructive (fermer, supprimer).
-- **button-x** : pastille du bouton X dans l'aide de boutons, pour coller aux couleurs physiques.
+- **primary** (phosphore doux) : texte, accent, étiquettes de panneau. Menthe désaturée, ≈ 12:1 sur le fond.
+- **background** : gris-vert très sombre, pas un noir pur.
+- **surface** et **line** : panneaux et leurs bordures de 1 px, grilles de graphiques.
+- **muted** : valeurs et libellés secondaires (≈ 5,2:1).
+- **bright** : titres, gros chiffres, texte des lignes (≈ 17:1).
+- **selection** (blanc léger) : fond de l'élément sélectionné, texte on-primary (≈ 18:1).
+- **teal** : uniquement une seconde série de données dans un graphique.
+- **danger** (orange phosphore) et **error** (rouge phosphore) : voir la règle d'accessibilité ci-dessous.
 
-Variantes de palette proposées dans Apparence : Ambre (`#ffb000` sur `#0a0702`) et Cyan (`#33e6ff` sur `#03080a`), même rôles.
+**Accessibilité couleur (daltonisme).** Danger et erreur sont toujours en **fond plein** avec un texte on-primary (≈ 10:1 sur orange, ≈ 7:1 sur rouge), et toujours avec une icône ou un libellé (« ⚠ », « × », « SUPPRIMER »). Jamais un simple contour ni un texte coloré : la couleur seule ne porte jamais le sens.
 
-Correspondance `theme.toml` : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = primary, `accent_fg` = on-primary, `warning`, `critical`, `ok` = primary, `border` = muted, `button_a` = primary, `button_b` = critical, `button_x`, `button_y` = warning, `button_neutral` = surface.
+Variantes dans Apparence : Ambre (`#f2b24e` sur `#0f0c08`) et Cyan (`#5fd8e8` sur `#0a0e10`), mêmes rôles.
+
+Correspondance `theme.toml` : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = primary, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. À vérifier sur l'appareil : quelle couleur `pt35-menu` utilise pour la ligne sélectionnée. Si c'est `accent`, la sélection blanc léger demande `accent = selection`, ou une petite PR pour une clé dédiée.
 
 ## Typography
 
-Une seule famille, pixel, en TTF : VT323 (OFL). Le menu et la barre de PT35-OS dessinent le texte avec `fontdue`, qui ne lit pas les polices bitmap (PCF, OTB). Si VT323 bave à 16 px dans `foot`, repli sur Terminus TTF pour le terminal seulement. À valider à l'œil sur l'appareil.
+Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
-| token | taille | clé `theme.toml` | usage |
+- **VT323** (pixel, OFL) : afficheur et titres (horloge, gros chiffres, titres d'écran). Livrée par le dépôt dans `~/.local/share/fonts`. `theme.toml` n'a qu'une famille pour tout le menu : VT323 sert donc là où on dessine nous-mêmes (widgets, fonds d'écran, icônes).
+- **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant, menu, terminal.
+
+| token | police | taille | usage |
 |---|---|---|---|
-| title | 28 px | `size_title` | en-tête d'écran |
-| menu | 24 px | `size_menu` | lignes de liste, libellés de tuiles |
-| meta | 18 px | `size_bar`, `size_hint` | barre des tâches, aide de boutons |
-| terminal | 16 px | `foot.ini` | terminal |
+| display | VT323 | 48-64 px | horloge, gros chiffres |
+| title | VT323 | 28 px | titre d'écran |
+| body | JetBrains Mono | 17 px | lignes de liste, tuiles |
+| label | JetBrains Mono | 12 px, capitales espacées | étiquettes de panneau, méta |
+| terminal | JetBrains Mono | 13 px | foot |
 
 ## Layout
 
-On garde la mise en page de PT35-OS, déjà réglée pour cet écran. Seule la grille du lanceur change : 4 colonnes au lieu de 3 (`menu.columns = 4`). Grille de 8 px pour tout ce qu'on ajoute.
-
-| élément | dimension | clé `theme.toml` |
-|---|---|---|
-| barre des tâches | 640 × 34 | `bar.height` |
-| en-tête | 46 | `menu.header_height` |
-| ligne de liste | 50, 7 lignes visibles | `menu.row_height` |
-| tuile du lanceur | 86 de haut, 4 colonnes | `menu.tile_height`, `menu.columns` |
-| aide de boutons | 640 × 46 | `menu.hint_height` |
-| cible tactile minimale | 48 × 40 | — |
+Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
-Aucune. Pas d'ombre, pas de flou, pas de dégradé. La profondeur passe par l'assombrissement de ce qui est derrière : fond d'écran à 55 % sous le lanceur, app courante à 90 % sous la bascule d'apps.
+Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux et d'un léger halo (flou de 2 px) réservé aux titres, gros chiffres et courbes. Les scanlines n'existent que dans les fonds d'écran et les maquettes, pas dans l'interface.
 
 ## Shapes
 
-Angles droits partout (`menu.radius = 0`). Bordures pleines de 2 px. Icônes pixel-art 32 px, deux couleurs plus transparence, agrandies au plus proche voisin.
+Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes pixel-art 32 px.
 
 ## Components
 
-- **list-row / list-row-selected** : la sélection est une inversion vidéo (fond phosphore, texte noir) avec un curseur `>`. Valeur actuelle à droite en muted, chevron vers la sous-vue.
-- **tile / tile-selected** : tuile active en surface avec bordure phosphore.
-- **button-destructive** : bordure et texte critical, jamais plus petit que la cible minimale.
-- **hint-bar** : pastilles colorées comme les boutons physiques, cliquables.
-- **taskbar** : celle de PT35-OS. Pas d'indicateur de batterie, le matériel ne l'expose pas.
+- **panel / panel-label** : panneau en surface, étiquette pleine en haut à gauche (« SYSTÈME », « RÉSEAU »).
+- **list-row-selected / tile-selected** : fond blanc léger, texte sombre.
+- **button-danger / button-error** : fond plein orange ou rouge, texte sombre, icône obligatoire.
+- **action-bar-button** : gros boutons en bas des écrans d'édition (Copier, Couper, Coller, Annuler, Chercher, Enregistrer). C'est la réponse au « pas de Vim ».
+- **barre segmentée** : CPU, RAM, température, signal, volume.
+- **courbe en aire** : débit réseau, charge, avec dégradé et halo.
+- **hint-bar** : pastilles pleines aux couleurs des boutons physiques (A primary, B error, X teal, Y danger), cliquables.
 
 ## Do's and Don'ts
 
-- Do : sélection visible d'un coup d'œil, au doigt comme au D-pad.
+- Do : sélection en blanc léger, visible d'un coup d'œil au doigt comme au D-pad.
+- Do : danger et erreur en fond plein, avec icône ou libellé.
 - Do : tout faire au doigt, au D-pad, avec ABXY, L/R et par des menus.
-- Do : le curseur est la seule chose qui clignote (`menu.animations = false`).
-- Don't : pas d'arrondi, d'ombre, de dégradé ni de fond animé (le Pi 4 garde ses cycles pour les apps).
-- Don't : pas de deuxième police.
-- Don't : pas d'ambre ni de rouge décoratifs.
+- Don't : pas de contour seul ni de texte rouge ou orange pour porter un sens.
+- Don't : pas de halo sur le texte courant, pas d'animation de transition, pas de fond animé.
 - Don't : pas de jauge de batterie qui afficherait `--`.
