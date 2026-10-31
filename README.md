@@ -91,6 +91,9 @@ Pour annuler un seul changement : `git log`, puis `git revert <commit>` et
 | `home/.config/pt35/` | surcharges menu, apps, thème, et hooks |
 | `home/.config/sway/config` | inclut la config upstream, puis nos surcharges |
 | `home/.local/bin/` | nos petits scripts |
+| `docs/specs.md` | specs, priorités et TODO (source de vérité) |
+| `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
+| `docs/design/` | aperçu de la charte (`charte.html`) et maquettes SVG 640x480 |
 | `docs/briques.md` | briques retenues ou écartées, et pourquoi |
 | `CLAUDE.md` | méthode et règles pour les agents |
 
