@@ -11,11 +11,12 @@ tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
 
 curl -fsSL -o "$tmp/pt35-desktop_arm64.deb" "$up/pt35-desktop_arm64.deb"
 curl -fsSL -o "$tmp/SHA256SUMS" "$up/SHA256SUMS"
+curl -fsSL -o "$tmp/LICENSE-PocketTerm35-OS" "https://raw.githubusercontent.com/therezor/PocketTerm35-OS/v$v/LICENSE"
 (cd "$tmp" && grep 'pt35-desktop_arm64.deb' SHA256SUMS | sha256sum -c -)
 
-gh release create "pt35-$v" "$tmp/pt35-desktop_arm64.deb" "$tmp/SHA256SUMS" \
+gh release create "pt35-$v" "$tmp/pt35-desktop_arm64.deb" "$tmp/SHA256SUMS" "$tmp/LICENSE-PocketTerm35-OS" \
   --repo Kalacione/pocketterm35-unleashed --title "PocketTerm35-OS $v (archive)" \
-  --notes "Copie de https://github.com/therezor/PocketTerm35-OS/releases/tag/v$v (MIT)."
+  --notes "Copie de https://github.com/therezor/PocketTerm35-OS/releases/tag/v$v par therezor, licence MIT (Copyright (c) REZOR), jointe."
 
 echo "$v" > PT35_VERSION
 echo "Épinglé sur $v. Teste sur le Pi, puis commit PT35_VERSION."

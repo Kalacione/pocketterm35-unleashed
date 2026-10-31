@@ -116,6 +116,19 @@ Pour annuler un seul changement : `git log`, puis `git revert <commit>` et
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/pin-pt35.sh` | archive et épingle une version d'upstream |
 
+## Remerciements
+
+Tout repose sur [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS)
+de [therezor](https://github.com/therezor) : le bureau, le launcher, la config
+fusionnée, les hooks et le firmware clavier patché. Ce dépôt n'en est qu'une
+surcouche. Merci à therezor. Ce qui peut servir à tous repart chez upstream
+sous forme de PR.
+
 ## Licence
 
-MIT, comme upstream.
+Notre code est sous licence MIT ([LICENSE](LICENSE)).
+
+PocketTerm35-OS est sous licence MIT, Copyright (c) 2026 REZOR
+([licence upstream](https://github.com/therezor/PocketTerm35-OS/blob/main/LICENSE)).
+Les `.deb` archivés dans nos releases sont ses binaires, non modifiés, publiés
+avec sa licence.
