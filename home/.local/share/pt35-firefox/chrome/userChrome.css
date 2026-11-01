@@ -1,12 +1,12 @@
 /* PocketTerm Phosphore (DESIGN.md) pour Firefox.
- * Les tailles sont en px CSS, multipliés par 1,5 à l'écran (user.js) :
- * 28 px ici = 42 px sur la dalle, au-dessus de la cible tactile de 40.
+ * Échelle 1 (user.js) : 1 px ici = 1 px sur la dalle. Cible tactile 40 px.
  * Firefox charge ce fichier en feuille utilisateur : sans !important, ses
  * propres règles passent devant. */
 
 /* Texte de l'interface : JetBrains Mono, comme le menu et la barre. */
 #navigator-toolbox, menupopup, panel {
   font-family: "JetBrains Mono", monospace !important;
+  font-size: 15px !important;
 }
 
 /* Barre d'adresse, comme le fil d'Ariane du menu (piste C3) : bande surface,
@@ -24,8 +24,8 @@
 }
 #nav-bar {
   --toolbarbutton-outer-padding: 0px !important;
-  --toolbarbutton-inner-padding: 6px !important;
-  min-height: 28px !important;
+  --toolbarbutton-inner-padding: 12px !important;
+  min-height: 40px !important;
   padding-block: 0 !important;
 }
 
@@ -53,9 +53,9 @@ toolbarbutton:is(:hover, [open], [checked]) > :is(.toolbarbutton-icon, .toolbarb
 }
 #urlbar-input {
   font-family: "VT323", monospace !important;
-  font-size: 20px !important;
+  font-size: 30px !important;
   color: #63e6a4 !important;
-  text-shadow: 0 0 2px #63e6a4 !important;
+  text-shadow: 0 0 3px #63e6a4 !important;
 }
 #urlbar-input::selection {
   background: #e6fff2 !important;
@@ -66,6 +66,9 @@ toolbarbutton:is(:hover, [open], [checked]) > :is(.toolbarbutton-icon, .toolbarb
 /* Onglets : la barre n'apparaît qu'à partir de deux onglets. */
 #TabsToolbar:not(:has(.tabbrowser-tab:not([selected]))) {
   visibility: collapse !important;
+}
+#TabsToolbar {
+  --tab-min-height: 40px !important;
 }
 .tab-background {
   border-radius: 0 !important;
@@ -87,7 +90,7 @@ menupopup, panel {
   --panel-border-radius: 0px !important;
 }
 menupopup > :is(menu, menuitem) {
-  min-height: 28px !important;
+  min-height: 40px !important;
   color: #63e6a4 !important;
 }
 :is(menu, menuitem)[_moz-menuactive] {
