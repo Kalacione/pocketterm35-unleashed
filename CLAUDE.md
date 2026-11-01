@@ -61,22 +61,30 @@ Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 
 ## Version d'upstream
 
-- Upstream est épinglé dans `PT35_VERSION`. Ne jamais conseiller la commande
+- La version installée sur le Pi est épinglée dans `PT35_VERSION` : un commit de
+  la surcouche = une version du `.deb` testée avec. `install.sh --pt35` installe
+  celle-là ; revenir en arrière = `git revert`. Ne jamais conseiller la commande
   d'install d'upstream : elle prend la dernière version.
-- Changer de version est un choix volontaire : sur un PC avec `gh` connecté,
-  `tools/pin-pt35.sh <version>` archive le `.deb` (et la licence) en release et
-  met à jour `PT35_VERSION`. On teste sur le Pi, puis on commit.
 - Fork : [Kalacione/PocketTerm35-OS](https://github.com/Kalacione/PocketTerm35-OS),
-  seulement pour ce qu'aucune config ne permet (aujourd'hui : le fond d'écran).
-  Une version patchée s'appelle `<version upstream>+u<n>` (ex. `0.4.2+u1`),
-  montée dans le `Cargo.toml` du fork avec son entrée dans le CHANGELOG, dans la
-  PR du patch. Une fois la PR mergée, `tools/release-fork.sh` (PC avec `gh`)
-  pose le tag `v<version>` sur le main du fork : sa CI (`release.yml`, sur push
-  de tag) construit le `.deb` ARM et crée la release, qui sert d'archive. Le
-  script écrit la version dans `PT35_VERSION`. Jamais de tag à la main ni de
-  `gh release create` : la CI s'en charge.
-  Pas de compilation sur le Pi. Un patch qui sert à tous part ensuite en PR chez
+  seulement pour ce qu'aucune config ne permet. Une version patchée s'appelle
+  `<version upstream>+u<n>` (ex. `0.4.2+u1`), montée dans le `Cargo.toml` du fork
+  avec son entrée dans le CHANGELOG, dans la PR du patch. Une nouvelle version
+  d'upstream passe aussi par le fork (rebase, puis `+u1`).
+- Flux d'une version, dans cet ordre :
+  1. merger la PR du fork ;
+  2. lancer `tools/ship.sh` (PC avec `gh`, depuis n'importe où) : il vérifie le
+     CHANGELOG et la CI du main du fork, pose le tag, attend la release faite
+     par la CI (`release.yml`), puis commite `PT35_VERSION` sur le main de la
+     surcouche. Relançable s'il s'arrête en route ;
+  3. merger la PR de la surcouche qui va avec ;
+  4. sur le Pi : `git pull && ./install.sh --pt35 && ./install.sh`.
+- `PT35_VERSION` ne change que par `tools/ship.sh` : jamais à la main, jamais
+  dans une PR (c'est ce qui créait des conflits et des modifs locales). Jamais
+  de tag à la main ni de `gh release create`.
+- Pas de compilation sur le Pi. Un patch qui sert à tous part ensuite en PR chez
   therezor.
+- Dans les messages, toujours nommer une PR avec son dépôt : « fork #7 »,
+  « unleashed #9 », jamais « PR #7 » seul.
 
 ## Documentation
 
