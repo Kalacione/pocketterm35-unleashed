@@ -1,0 +1,14 @@
+# Seules nos touches ; yazi garde les siennes derrière (prepend).
+# Boutons : A = Entrée, B = Échap, X = Tab (pt35d). Le clavier fait le reste.
+[mgr]
+prepend_keymap = [
+	{ on = "<Enter>", run = "plugin pt35-nav enter", desc = "Enter the folder or open the file" },
+	{ on = "<Esc>",   run = "plugin pt35-nav back",  desc = "Cancel, or back to the parent folder" },
+	{ on = "<Tab>",   run = "plugin pt35-go",        desc = "Places: home and SSH hosts" },
+	{ on = "<C-c>",   run = "yank",                  desc = "Copy" },
+	{ on = "<C-x>",   run = "yank --cut",            desc = "Cut" },
+	{ on = "<C-v>",   run = "paste",                 desc = "Paste" },
+	{ on = "<C-t>",   run = "tab_create --current",  desc = "New tab here" },
+	{ on = "<C-w>",   run = "close",                 desc = "Close the tab, or quit if it's last" },
+	{ on = "<Delete>", run = "remove",               desc = "Trash, after a confirmation" },
+]
