@@ -85,3 +85,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | `[app.editor] scale = 1.0` | écarté | grossit aussi menus déroulants et dialogues, qui débordent des 480 px |
 | Pluie dans `pt35-menu` (`[effects] rain`, fork u20) | retenu | le menu peint déjà le fond (u1) et redessine 4 fois par seconde : ~70 lignes, aucun processus en plus, s'arrête avec le menu. ~1 ms de plus par image, 4 images/s, moins que le balayage |
 | swww, mpvpaper, glpaper (fond animé sway) | écarté | le menu couvre tout l'écran d'un fond opaque : il faudrait le rendre transparent (patch) et garder un processus qui tourne aussi sous les apps |
+| `[color] clock` pour l'heure et la date du widget (fork u22) | retenu | aucune clé existante : l'horloge suivait `foreground`, qui colore tout le texte. Bright `#d4ffe9` de la maquette plutôt que la sélection `#e6fff2`, un cran moins blanc |
