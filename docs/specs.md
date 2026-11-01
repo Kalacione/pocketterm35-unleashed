@@ -91,7 +91,7 @@ Pour chaque besoin : ce qui est déjà dans PT35-OS, à tester en premier, puis 
 
 | Besoin | Déjà dans PT35-OS | Alternative tactile retenue | Priorité |
 | --- | --- | --- | --- |
-| Terminal | `foot` | — | v1 |
+| Terminal | `foot` + `tmux` (barre du bas Phosphore) | — | v1 |
 | SSH | Terminal | une entrée de menu par serveur dans `menu.toml` (`exec = "foot ssh nas"`) : config, pas de script | v1 |
 | Admin réseau | Moniteur (`htop`), Disque (`ncdu`) | sous-menu « Admin » qui lance des outils standard : `mtr`, `nmap`, `iperf3`, `termshark` | v1 |
 | Fichiers locaux + SSH | `yazi` (clavier) | [Fichiers GNOME (Nautilus)](https://linuxphoneapps.org/apps/org.gnome.nautilus/), mobile fit 5/5, GTK4. Un serveur SSH s'ouvre comme un dossier (`sftp://nas`, via `gvfs-backends`) et reste en favori. Copier / coller au doigt entre local et distant, et entre deux serveurs | v1 |
@@ -133,6 +133,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : thème Phosphore pour le menu et la barre (`theme.toml`)
 - [ ] Appareil : appliquer le thème Phosphore, vérifier la sélection blanc léger et l'écran d'erreur
 - [x] Agent : thème Phosphore pour les apps GTK4 (`gtk.css`) et `foot`
+- [x] Agent : barre du bas du Terminal (tmux), police du terminal à 14 px
+- [ ] Appareil : vérifier la barre du bas, la molette en mode souris et la copie au glisser
 - [ ] Agent : `menu.toml` avec le sous-menu Admin, une entrée par serveur SSH, et les entrées Paramètres manquantes (`nmtui`, fuseau, langue)
 - [x] Agent : fond d'écran 640 × 480 (`home/.config/pt35/wallpaper.svg`)
 - [x] Agent : icônes Tabler recolorées, thème `Phosphore` (PR #4)

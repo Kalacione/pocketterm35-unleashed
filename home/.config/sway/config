@@ -5,3 +5,7 @@ include /usr/share/pt35-desktop/sway/config
 # Scanlines par-dessus les apps : surface transparente qui laisse passer les
 # clics ([effects] scanlines de theme.toml). Relancée comme la barre.
 exec --no-startup-id sh -c 'while swaymsg -t get_version >/dev/null 2>&1; do pt35-bar --scanlines; sleep 2; done'
+
+# Super+Entrée ouvre le même Terminal que la tuile, avec la barre tmux.
+bindsym Mod1+Return exec foot tmux new-session pt35-hello
+bindsym Mod4+Return exec foot tmux new-session pt35-hello

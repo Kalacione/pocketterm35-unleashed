@@ -11,3 +11,7 @@ match = { app_id = "pt35-music", class = "pt35-music" }
 # Profil mpv pt35-video : sa médiathèque est ~/Videos (voir mpv.conf).
 [app.video]
 exec = "mpv --player-operation-mode=pseudo-gui --idle=yes --profile=pt35-video"
+
+# Le Terminal dans tmux, pour sa barre du bas (~/.config/tmux/tmux.conf).
+[app.terminal]
+exec = "foot tmux new-session pt35-hello"

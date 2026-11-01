@@ -31,7 +31,7 @@ typography:
     letterSpacing: 0.1em
   terminal:
     fontFamily: JetBrains Mono
-    fontSize: 13px
+    fontSize: 14px
 rounded:
   none: 0px
 spacing:
@@ -135,7 +135,7 @@ Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 | title | VT323 | 28 px | titre d'écran |
 | body | JetBrains Mono | 17 px | lignes de liste, tuiles |
 | label | JetBrains Mono | 12 px, capitales espacées | étiquettes de panneau, méta |
-| terminal | JetBrains Mono | 13 px | foot |
+| terminal | JetBrains Mono | 14 px | foot (`size=10.5`), barre du bas tmux |
 
 ## Layout
 
