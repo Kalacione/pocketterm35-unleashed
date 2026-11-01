@@ -7,6 +7,9 @@ include /usr/share/pt35-desktop/sway/config
 exec --no-startup-id sh -c 'while swaymsg -t get_version >/dev/null 2>&1; do pt35-bar --scanlines; sleep 2; done'
 
 # Super+Entrée ouvre le même Terminal que la tuile, avec la barre tmux.
+# unbindsym d'abord : redéfinir une touche d'upstream affiche un avertissement.
+unbindsym Mod1+Return
+unbindsym Mod4+Return
 bindsym Mod1+Return exec foot tmux new-session pt35-hello
 bindsym Mod4+Return exec foot tmux new-session pt35-hello
 
