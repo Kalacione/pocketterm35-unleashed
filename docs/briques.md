@@ -30,3 +30,5 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | halo et scanlines en SVG (`feGaussianBlur`, resvg le gère) | écarté | à refaire dans chaque fichier ; fait une fois au rendu dans notre fork (`0.4.2+u2`) |
 | `screen_shader` CRT de Hyprland | écarté | il faudrait quitter sway, sur lequel PT35-OS repose ; une surface layer-shell transparente fait le même effet |
 | `tools/release-fork.sh` (tag via `gh api`) | retenu | la version vit déjà dans le `Cargo.toml` du fork (le `.deb` la porte) : le script la lit et pose le tag, la CI fait la release. Ni clone local, ni incrément de tag séparé qui contredirait le `.deb` |
+| icône principale : Tabler `aperture`, `headset`, `radioactive` | écarté | floues à 16 px dans la barre, et la barre dessine le crâne en pixels : il aurait fallu y lire un SVG ; `radioactive` est un signal de danger |
+| icône principale : obturateur 8 lames en pixel art (fork `0.4.2+u7`) | retenu | clin d'œil à Portal, net à 16 px car ses fentes suivent la grille ; remplace le dessin du crâne tel quel. Pistes : `design/icone-main-pistes-v2.png` du dossier partagé |

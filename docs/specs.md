@@ -44,7 +44,7 @@ Pas de gestes de bord en v1 : la barre des tâches et les boutons couvrent tout.
 
 ## Lanceur et fond d'écran
 
-Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final, u5 finitions (épinglée dans `PT35_VERSION`), u6 balayage CRT, légende encadrée, tuiles translucides (PR #6 du fork, PR surcouche #7, pas encore publiée).
+Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final, u5 finitions, u6 balayage CRT, légende encadrée, tuiles translucides (jamais publiée seule), u7 = u6 + icône principale en obturateur 8 lames à la place du crâne (épinglée dans `PT35_VERSION`).
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
@@ -139,8 +139,9 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : accueil final (épingles 3 × 3, widget column, All apps), fork `0.4.2+u4`
 - [x] Agent : épingler `0.4.2+u4` et tout activer dans la surcouche, épingles par défaut dans `install.sh`
 - [x] Agent : finitions u5 (scanlines 1/4 à 25 %, horloges VT323, barre 40 px, réglages rapides)
-- [ ] Agent : u6 (balayage CRT, légende encadrée, tuiles translucides, curseur Tiles), PR #6 du fork et PR surcouche #7
-- [ ] Appareil : installer u6, vérifier le balayage (menu seul, jamais sur une app) et le curseur Tiles
+- [x] Agent : u6 (balayage CRT, légende encadrée, tuiles translucides, curseur Tiles), PR #6 du fork et PR surcouche #7
+- [x] Agent : u7 (icône obturateur), PR #7 du fork et PR surcouche #9
+- [ ] Appareil : installer u7, vérifier le balayage (menu seul, jamais sur une app), le curseur Tiles et l'obturateur (barre, tuile du lanceur, `fastfetch`)
 - [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
