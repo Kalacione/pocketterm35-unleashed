@@ -111,13 +111,13 @@ v0.2 (31 oct. 2026) : vert adouci, sélection en blanc léger, danger et erreur 
 
 Variantes dans Apparence : Ambre (`#f2b24e` sur `#0f0c08`) et Cyan (`#5fd8e8` sur `#0a0e10`), mêmes rôles.
 
-Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/theme.toml)) : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = selection, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. `pt35-menu` peint la ligne sélectionnée en `accent` : d'où `accent` = selection. Il s'en sert aussi pour le titre « PT35 », son soulignement et les curseurs, qui passent donc en blanc léger. Lanceur en grille (fork `0.4.2+u2`, [PR #2](https://github.com/Kalacione/PocketTerm35-OS/pull/2), pas encore fusionnée) : la tuile sélectionnée est pleine en `accent` (blanc léger), icône en `accent_fg`. Réglages : `[menu] launcher_columns = 4`, `[icons] size_launcher = 64`, `[icons] glow = 4` (halo des icônes, en px). En `0.4.2+u1` et chez upstream, la tuile sélectionnée n'a qu'un halo de 2 px et des coins en `accent`.
+Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/theme.toml)) : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = selection, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. `pt35-menu` peint la ligne sélectionnée en `accent` : d'où `accent` = selection. Il s'en sert aussi pour le titre « PT35 », son soulignement et les curseurs, qui passent donc en blanc léger. Lanceur en grille (fork `0.4.2+u2`, [PR #2](https://github.com/Kalacione/PocketTerm35-OS/pull/2), pas encore fusionnée) : la tuile sélectionnée est pleine en `accent` (blanc léger), icône en `accent_fg`. Réglages : `[menu] launcher_columns = 4`, `[icons] size_launcher = 64`, `[icons] glow = 4` (halo des icônes, en px), `[effects] scanlines` (voir Elevation & Depth). Tout est à 0 ou off par défaut : on l'active dans `theme.toml` une fois u2 publié. En `0.4.2+u1` et chez upstream, la tuile sélectionnée n'a qu'un halo de 2 px et des coins en `accent`.
 
 ## Typography
 
 Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
-- **VT323** (pixel, OFL) : afficheur et titres (horloge, gros chiffres, titres d'écran). Livrée par le dépôt dans `~/.local/share/fonts`. `theme.toml` n'a qu'une famille pour tout le menu : VT323 sert donc là où on dessine nous-mêmes (widgets, fonds d'écran, icônes).
+- **VT323** (pixel, OFL) : afficheur et titres (horloge, gros chiffres, titres d'écran). Livrée par le dépôt dans `~/.local/share/fonts`. `theme.toml` n'a qu'une famille pour tout le menu : VT323 sert donc là où on dessine nous-mêmes (widgets, fonds d'écran).
 - **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant, menu, barre et terminal. `install.sh` la lie dans `/usr/share/fonts/TTF`, seul dossier où PT35-OS peut la trouver (voir [`docs/briques.md`](docs/briques.md)).
 
 | token | police | taille | usage |
@@ -134,11 +134,11 @@ Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, li
 
 ## Elevation & Depth
 
-Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux et d'un léger halo (flou de 2 px) réservé aux titres, gros chiffres et courbes. Les scanlines n'existent que dans les fonds d'écran et les maquettes, pas dans l'interface.
+Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux et d'un léger halo (flou de 2 px) réservé aux titres, gros chiffres et courbes. **Scanlines CRT** discrètes : une ligne sur deux assombrie d'environ 15 %, sur la barre, le menu et par-dessus les apps. Le menu les dessine (`[effects] scanlines`), et `pt35-bar --scanlines` pose une surface transparente sous la barre, qui couvre les apps et laisse passer les clics (fork `0.4.2+u2`). Jamais plus marquées : le texte doit rester net.
 
 ## Shapes
 
-Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes pixel-art 32 px.
+Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes [Tabler](https://tabler.io/icons) (MIT) au trait, en SVG net, recolorées en primary par `tools/icons.sh` dans le thème d'icônes `Phosphore`, qui hérite de Papirus pour les apps non couvertes. Pas de variante claire. Dans la grille du lanceur, le menu dessine sous chaque icône un halo flou de 4 px (`[icons] glow`).
 
 ## Components
 
