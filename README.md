@@ -204,7 +204,7 @@ Le projet est testé avec une seule version de PocketTerm35-OS, écrite dans
 la dernière version : `./install.sh` s'arrête alors et propose
 `./install.sh --pt35`. `./install.sh --force` passe outre.
 
-Une version en `+u<n>` (par exemple `0.4.2+u18`) est PocketTerm35-OS avec nos
+Une version en `+u<n>` (par exemple `0.4.2+u1`) est PocketTerm35-OS avec nos
 patchs. Le [CHANGELOG du fork](https://github.com/Kalacione/PocketTerm35-OS/blob/main/CHANGELOG.md)
 les décrit un par un. Pour revenir à la version d'avant : `git revert` du
 dernier commit de `PT35_VERSION`, puis la mise à jour ci-dessus.
