@@ -7,6 +7,7 @@ colors:
   on-primary: "#06110b"
   background: "#0b0f0d"
   surface: "#121a16"
+  tile: "#1c2a23"
   line: "#24382e"
   muted: "#5e8f78"
   bright: "#d4ffe9"
@@ -146,7 +147,7 @@ Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux 
 
 **Balayage CRT** (u6) : une bande lumineuse douce (8 %) descend tout l'écran en 1,6 s, toutes les 8 à 13 s au hasard (`[effects] sweep = 8`, `sweep_jitter = 5`, `sweep_strength = 8`). Seulement quand le menu est ouvert, jamais sur une app (pas sur une vidéo). Barre et menu se calent sur l'horloge système : une seule bande continue.
 
-**Translucidité** (u6) : tuiles et widgets de l'accueil laissent voir le fond d'écran (`[menu] tile_opacity`, 85 % chez nous). Réglable de 20 à 100 % par le curseur « Tiles » des Réglages rapides ; la valeur vit dans `appearance.toml`, pas dans `theme.toml`.
+**Translucidité** (u6) : tuiles et widgets de l'accueil laissent voir le fond d'écran (`[menu] tile_opacity`, 55 % chez nous). Réglable de 20 à 100 % par le curseur « Tiles » des Réglages rapides ; la valeur vit dans `appearance.toml`, pas dans `theme.toml`. Leur face est `tile` (`#1c2a23`, fork u10), plus claire que `surface` : sur ce fond presque noir, une tuile en `surface` ne changeait pas à l'œil entre 20 et 100 %. Éclaircir `surface` partout aurait fait tomber le texte `muted` des listes sous 4,5:1.
 
 ## Shapes
 
