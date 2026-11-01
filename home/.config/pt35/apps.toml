@@ -19,3 +19,10 @@ exec = "foot tmux new-session pt35-hello"
 # Files reste yazi : vfs.toml (hôtes SSH) refait depuis ~/.ssh/config à chaque ouverture.
 [app.files]
 exec = "foot -a pt35-files sh -c '\"$HOME/.local/bin/pt35-yazi-vfs\"; exec yazi'"
+
+# Navigateur : Firefox, dans un profil à nous (user.js, userChrome.css) :
+# pages mobiles, interface agrandie et aux couleurs Phosphore. Chromium reste
+# dans All apps. L'icône garde son nom : le globe du thème Phosphore.
+[app.browser]
+exec  = "firefox --profile \"$HOME/.local/share/pt35-firefox\""
+match = { app_id = "firefox" }

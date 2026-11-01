@@ -1,0 +1,99 @@
+/* PocketTerm Phosphore (DESIGN.md) pour Firefox.
+ * Les tailles sont en px CSS, multipliés par 1,5 à l'écran (user.js) :
+ * 28 px ici = 42 px sur la dalle, au-dessus de la cible tactile de 40.
+ * Firefox charge ce fichier en feuille utilisateur : sans !important, ses
+ * propres règles passent devant. */
+
+/* Texte de l'interface : JetBrains Mono, comme le menu et la barre. */
+#navigator-toolbox, menupopup, panel {
+  font-family: "JetBrains Mono", monospace !important;
+}
+
+/* Barre d'adresse, comme le fil d'Ariane du menu (piste C3) : bande surface,
+ * filet phosphore de 1 px, pas d'ombre ni de dégradé. */
+#navigator-toolbox {
+  background: #121a16 !important;
+  color: #63e6a4 !important;
+  border-bottom: 1px solid #63e6a4 !important;
+}
+#nav-bar, #TabsToolbar, #toolbar-menubar {
+  background: transparent !important;
+  color: #63e6a4 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+#nav-bar {
+  --toolbarbutton-outer-padding: 0px !important;
+  --toolbarbutton-inner-padding: 6px !important;
+  min-height: 28px !important;
+  padding-block: 0 !important;
+}
+
+/* Boutons au trait, en phosphore ; actif en blanc léger, texte sombre. */
+toolbarbutton .toolbarbutton-icon,
+toolbarbutton .toolbarbutton-badge-stack {
+  fill: #63e6a4 !important;
+  border-radius: 0 !important;
+}
+toolbarbutton:is(:hover, [open], [checked]) > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
+  background: #e6fff2 !important;
+  fill: #06110b !important;
+}
+
+/* Champ d'adresse : fond de page, angles droits, l'URL en VT323 avec halo,
+ * comme le titre du fil d'Ariane. Focus : cadre de 2 px blanc léger. */
+#urlbar-background {
+  background: #0b0f0d !important;
+  border: 1px solid #24382e !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#urlbar[focused] > #urlbar-background {
+  border: 2px solid #e6fff2 !important;
+}
+#urlbar-input {
+  font-family: "VT323", monospace !important;
+  font-size: 20px !important;
+  color: #63e6a4 !important;
+  text-shadow: 0 0 2px #63e6a4 !important;
+}
+#urlbar-input::selection {
+  background: #e6fff2 !important;
+  color: #06110b !important;
+  text-shadow: none !important;
+}
+
+/* Onglets : la barre n'apparaît qu'à partir de deux onglets. */
+#TabsToolbar:not(:has(.tabbrowser-tab:not([selected]))) {
+  visibility: collapse !important;
+}
+.tab-background {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.tabbrowser-tab[selected] .tab-background {
+  background: #e6fff2 !important;
+}
+.tabbrowser-tab[selected] .tab-label {
+  color: #06110b !important;
+}
+
+/* Menus (clic droit, menu ☰, menu de l'app sur Y) : surface, lignes plus
+ * hautes pour le doigt, ligne active en blanc léger. */
+menupopup, panel {
+  --panel-background: #121a16 !important;
+  --panel-color: #63e6a4 !important;
+  --panel-border-color: #24382e !important;
+  --panel-border-radius: 0px !important;
+}
+menupopup > :is(menu, menuitem) {
+  min-height: 28px !important;
+  color: #63e6a4 !important;
+}
+:is(menu, menuitem)[_moz-menuactive] {
+  background: #e6fff2 !important;
+  color: #06110b !important;
+}
+:is(menu, menuitem)[disabled] {
+  color: #5e8f78 !important;
+}

@@ -28,6 +28,8 @@ Le désinstaller rend le bureau d'origine.
   de `~/.ssh/config` : copier / coller entre local et SSH, ou entre deux serveurs.
 - **Éditeur** avec un bandeau de gros boutons (Copier, Coller, Enregistrer...)
   utilisables au doigt.
+- **Navigateur** Firefox qui affiche la version mobile des sites, avec une
+  interface agrandie aux couleurs du thème. Chromium reste disponible.
 - **Écran de démarrage** Plymouth assorti.
 
 ## Captures
@@ -198,7 +200,7 @@ installé reste celui de `PT35_VERSION`.
 | `home/` | fichiers reliés dans `~` par `install.sh` |
 | `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps, Super+Entrée ouvre le Terminal avec tmux |
 | `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
-| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, Terminal dans tmux, Fichiers charge les hôtes SSH |
+| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, Terminal dans tmux, Fichiers charge les hôtes SSH, Navigateur passe sur Firefox |
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/tmux/tmux.conf` | barre du bas du Terminal, souris et copie |
@@ -207,6 +209,7 @@ installé reste celui de `PT35_VERSION`.
 | `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, ou un hôte SSH dans un nouvel onglet), Y liste les onglets (Y encore = nouvel onglet), Ctrl+C / X / V, onglets Ctrl+T / W |
 | `home/.local/bin/pt35-yazi-vfs` | traduit `~/.ssh/config` pour le SFTP de yazi, à chaque ouverture de Fichiers |
 | `home/.local/bin/pt35-actions` | bandeau d'actions sous l'éditeur |
+| `home/.local/share/pt35-firefox/` | profil Firefox du Navigateur : user-agent mobile, échelle 1,5 (`user.js`), barre et menus aux couleurs du thème (`chrome/userChrome.css`) |
 | `home/.local/share/fonts/` | police pixel VT323 des horloges |
 | `home/.local/share/icons/Phosphore/` | icônes des apps, tirées de Tabler Icons, Papirus pour le reste |
 | `plymouth/pocketterm/` | thème Plymouth de l'écran de démarrage |

@@ -159,6 +159,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
 - [x] Agent : écran de démarrage PocketTerm OS (thème Plymouth, images générées par `tools/splash.py`)
 - [ ] Appareil : `./install.sh`, redémarrer, vérifier l'écran de démarrage et la barre
+- [x] Agent : Navigateur sur Firefox, profil `pt35-firefox` : pages mobiles, échelle 1,5, barre et menus Phosphore
+- [ ] Appareil : `./install.sh`, ouvrir Navigateur, vérifier la version mobile de Wikipédia, la taille, la barre d'adresse en VT323 et les menus
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **Prochains chantiers** (demandés par Djé, pas commencés)
