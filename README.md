@@ -174,8 +174,7 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
-| `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |
-| `tools/release-fork.sh` | publie la version courante du fork de PocketTerm35-OS (tag, build et release par sa CI) |
+| `tools/ship.sh` | publie la version courante du fork de PocketTerm35-OS (tag, build et release par sa CI) et l'épingle dans `PT35_VERSION` |
 | `docs/specs.md` | specs, priorités et TODO |
 | `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
 | `docs/design/` | aperçu de la charte (`charte.html`), maquettes SVG 640x480 |

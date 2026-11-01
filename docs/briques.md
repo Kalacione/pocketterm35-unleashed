@@ -29,7 +29,9 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | [Lucide](https://github.com/lucide-icons/lucide) (ISC) | écarté | même style et a toutes nos icônes, mais deux fois moins fourni que Tabler |
 | halo et scanlines en SVG (`feGaussianBlur`, resvg le gère) | écarté | à refaire dans chaque fichier ; fait une fois au rendu dans notre fork (`0.4.2+u2`) |
 | `screen_shader` CRT de Hyprland | écarté | il faudrait quitter sway, sur lequel PT35-OS repose ; une surface layer-shell transparente fait le même effet |
-| `tools/release-fork.sh` (tag via `gh api`) | retenu | la version vit déjà dans le `Cargo.toml` du fork (le `.deb` la porte) : le script la lit et pose le tag, la CI fait la release. Ni clone local, ni incrément de tag séparé qui contredirait le `.deb` |
+| `tools/release-fork.sh` (tag via `gh api`) | remplacé par `ship.sh` | la version vit déjà dans le `Cargo.toml` du fork (le `.deb` la porte) : le script la lit et pose le tag, la CI fait la release. Ni clone local, ni incrément de tag séparé qui contredirait le `.deb` |
+| `tools/ship.sh` (remplace `release-fork.sh` et `pin-pt35.sh`) | retenu | une commande : tag, attente de la release CI, commit de `PT35_VERSION` par l'API. Aucun fichier local modifié, donc plus de conflit ni de modif oubliée sur le PC |
+| installer la dernière release du fork sans `PT35_VERSION` | écarté | un `git revert` ne permettrait plus de revenir à la version d'avant, et le Pi prendrait une release avant que la surcouche soit prête |
 | [uosc](https://github.com/tomasklaen/uosc) (LGPL-2.1) | retenu | interface de mpv faite pour le doigt (grosse barre de temps, menus), couleurs réglables dans `uosc.conf` : notre skin sans code. Pas dans Debian : `install.sh` prend l'archive de la release, version et sha256 épinglés |
 | skin VLC (skins2, `.vlt`) | écarté | format ancien, X11 seulement, retiré de VLC 4 ; l'interface Qt reste trop dense pour 640x480 |
 | réécrire un lecteur dans `pt35-menu` | écarté | mpv + uosc fait déjà lecture, playlist, pistes et sous-titres |
