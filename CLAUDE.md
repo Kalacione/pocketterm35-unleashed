@@ -32,7 +32,8 @@ perspective (coût, alternative existante, impact sur le reste).
 Référence détaillée : `CLAUDE.md` et `docs/hardware-facts.md` d'upstream. Ne pas
 recopier ici, résumer seulement :
 
-- Pi 4 (upstream supporte aussi Pi 5), écran HDMI 640x480, tactile GT911.
+- Pi 5, 8 Go de RAM (upstream supporte aussi le Pi 4B), écran HDMI 640x480,
+  tactile GT911.
 - Clavier RP2040. Firmware patché pt35 : ABXY L R = F13-F18, Select = F21,
   Start = F22. Firmware stock : lettres `a b x y l r`, d'où le flash requis.
 - Pas de jauge batterie côté Linux (`/sys/class/power_supply` absent) : jamais
