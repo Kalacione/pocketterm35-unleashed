@@ -74,6 +74,8 @@ les lit sans distinguer les couleurs. Les icônes des apps viennent de
   du terminal.
 - Un **écran de démarrage** assorti.
 
+Pour habiller une autre app de la même façon : [`docs/habiller-une-app.md`](docs/habiller-une-app.md).
+
 ## Captures
 
 Rendues à 640x480 depuis le code de la version testée, hors appareil. Les
@@ -246,6 +248,7 @@ installé reste celui de `PT35_VERSION`.
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
+| `docs/habiller-une-app.md` | guide : donner le thème à une autre app et la rendre utilisable au doigt |
 | `docs/captures/` | captures de ce README |
 | `docs/design/` | aperçu de la charte (`charte.html`), maquettes et rendus de travail |
 | `docs/specs.md` | specs, priorités et TODO |
