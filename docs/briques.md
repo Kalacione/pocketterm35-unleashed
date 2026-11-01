@@ -41,3 +41,5 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | VLC pour Musique | remplacé | Musique passe sur mpv + uosc : une seule interface à habiller pour la musique et la vidéo |
 | icône principale : Tabler `aperture`, `headset`, `radioactive` | écarté | floues à 16 px dans la barre, et la barre dessine le crâne en pixels : il aurait fallu y lire un SVG ; `radioactive` est un signal de danger |
 | icône principale : obturateur 8 lames en pixel art (fork `0.4.2+u7`) | retenu | clin d'œil à Portal, net à 16 px car ses fentes suivent la grille ; remplace le dessin du crâne tel quel. Pistes : `design/icone-main-pistes-v2.png` du dossier partagé |
+| interrupteurs `0` / `1` (premier jet u9) | remplacé | ON / OFF en toutes lettres sur fond plein vert ou rouge : l'état se lit sans distinguer les couleurs |
+| numéros de ligne dans les listes | écarté | bruit à 640x480, le fil d'Ariane donne déjà la position ; `install.sh` pose `show_numbers = false` |
