@@ -1,30 +1,63 @@
 # PocketTerm 3.5 Unleashed
 
-Une couche de réglages et de petits scripts pour le
-WaveShare PocketTerm 3.5, posée par-dessus
+Un thème et quelques réglages pour le
+[WaveShare PocketTerm 3.5](https://www.waveshare.com/), posés par-dessus
 [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS).
 
-PocketTerm35-OS fournit le bureau (sway, launcher, barre, gestion des boutons).
-Ce projet ne le remplace pas : il ajoute ses propres réglages dans `~/.config`,
-que PocketTerm35-OS fusionne avec ses défauts. Retirer le projet rend le bureau
-d'origine intact.
+![Accueil : horloge, widget réseau et grille d'apps épinglées](docs/captures/accueil.png)
 
-**État :** en démarrage. Le dépôt pose la structure, l'installation et la
-charte graphique. Les réglages arrivent au fil des [specs](docs/specs.md).
+PocketTerm35-OS fournit le bureau : sway, le lanceur, la barre, la gestion des
+boutons. Ce projet ne le remplace pas. Il ajoute ses fichiers dans `~/.config`,
+que PocketTerm35-OS fusionne avec ses défauts, et installe une version de
+PocketTerm35-OS patchée par [notre fork](https://github.com/Kalacione/PocketTerm35-OS).
+Le désinstaller rend le bureau d'origine.
+
+## Ce que ça change
+
+- **Thème Phosphore** : vert doux sur fond sombre, police pixel VT323 pour les
+  horloges, JetBrains Mono pour le texte, lignes de balayage façon écran CRT.
+  Les états importants (ON, OFF, DOWN, FULL) sont toujours écrits en toutes
+  lettres sur fond plein, jamais portés par la couleur seule.
+- **Écran d'accueil** : horloge, CPU et RAM, une pile de widgets (réseau,
+  lecture en cours, stockage, hôtes SSH) et une grille d'apps épinglées, qu'on
+  réordonne aux boutons.
+- **Icônes** des apps redessinées à partir de [Tabler Icons](https://tabler.io/icons).
+- **Terminal** dans tmux, avec une barre du bas aux couleurs du thème.
+- **Musique et Vidéo** sur mpv avec l'interface tactile [uosc](https://github.com/tomasklaen/uosc).
+- **Éditeur** avec un bandeau de gros boutons (Copier, Coller, Enregistrer...)
+  utilisables au doigt.
+- **Écran de démarrage** Plymouth assorti.
+
+## Captures
+
+Rendus à 640x480 du code de la version épinglée, hors appareil : les icônes
+système et les valeurs affichées peuvent différer un peu sur le PocketTerm.
+
+| | |
+|---|---|
+| ![Accueil avec le widget Hosts](docs/captures/accueil-hosts.png) | ![Bascule entre fenêtres](docs/captures/fenetres.png) |
+| Accueil, widget Hosts : état des hôtes de `~/.ssh/config` | Bascule entre fenêtres (Select) |
+| ![Toutes les apps](docs/captures/toutes-les-apps.png) | ![Réglages rapides](docs/captures/reglages-rapides.png) |
+| Toutes les apps | Réglages rapides |
+| ![Terminal dans tmux](docs/captures/terminal.png) | ![Éditeur et son bandeau d'actions](docs/captures/editeur.png) |
+| Terminal dans tmux | Éditeur et son bandeau d'actions |
+| ![Écran de démarrage](docs/captures/demarrage.png) | |
+| Écran de démarrage | |
+
+La charte graphique est décrite dans [`DESIGN.md`](DESIGN.md), avec des
+maquettes dans [`docs/design/`](docs/design/).
 
 ## Prérequis
 
 | quoi | détail |
 |---|---|
-| matériel | PocketTerm 3.5 avec Pi 5 (testé, 8 Go) ou Pi 4B |
+| matériel | WaveShare PocketTerm 3.5 avec Raspberry Pi 5 (testé, 8 Go) ou Pi 4B |
 | système | Raspberry Pi OS **Trixie 64 bits**, Lite conseillé (Bookworm n'est pas supporté par PocketTerm35-OS) |
 | réseau | Wi-Fi ou Ethernet |
 
 ## Installation
 
-Tout se fait sur le PocketTerm, dans un terminal ou en SSH. Si
-PocketTerm35-OS est déjà installé dans la version de
-[`PT35_VERSION`](PT35_VERSION), passer directement à l'étape 5.
+Tout se fait sur le PocketTerm, dans un terminal ou en SSH.
 
 ### A. Socle : PocketTerm35-OS
 
@@ -33,7 +66,6 @@ PocketTerm35-OS est déjà installé dans la version de
 ```sh
 grep VERSION_CODENAME /etc/os-release   # trixie
 getconf LONG_BIT                        # 64
-dpkg -s pt35-desktop | grep Version     # absent, ou la version de PT35_VERSION
 ```
 
 Si ce n'est pas Trixie 64 bits, flasher Raspberry Pi OS Lite (Trixie, 64 bits)
@@ -54,6 +86,10 @@ grep -n 'waveshare' /boot/firmware/config.txt          # chaque ligne commence p
 
 **3. Installer PocketTerm35-OS et flasher le clavier**
 
+L'installeur de PocketTerm35-OS prépare le système (session, écran, tactile,
+firmware du clavier). L'étape 6 remplace ensuite son paquet par la version
+testée avec ce projet.
+
 ```sh
 curl -fsSL https://raw.githubusercontent.com/therezor/PocketTerm35-OS/main/install.sh | sudo bash
 sudo pt35-kbd flash
@@ -64,7 +100,7 @@ sudo pt35-kbd flash
 - Il propose un agent IA local (darkwire). Optionnel : `n` pour s'en passer.
 - Il ajoute son bloc à `config.txt` et en garde une copie dans
   `config.txt.pt35.bak`.
-- Sans le firmware flashé, ABXY L R envoient des lettres.
+- Sans le firmware flashé, les boutons A B X Y L R envoient des lettres.
 
 **4. Redémarrer**
 
@@ -72,9 +108,8 @@ sudo pt35-kbd flash
 sudo reboot
 ```
 
-Le PocketTerm démarre sur le bureau PocketTerm35-OS.
-
-Si l'écran ou le tactile ne répond plus, restaurer l'ancienne config en SSH :
+Le PocketTerm démarre sur le bureau PocketTerm35-OS. Si l'écran ou le tactile
+ne répond plus, restaurer l'ancienne config en SSH :
 
 ```sh
 sudo cp /boot/firmware/config.txt.waveshare.bak /boot/firmware/config.txt && sudo reboot
@@ -82,74 +117,67 @@ sudo cp /boot/firmware/config.txt.waveshare.bak /boot/firmware/config.txt && sud
 
 ### B. Ce projet
 
-**5. Outils**
+**5. Récupérer le dépôt**
 
 ```sh
 sudo apt update && sudo apt install -y git stow
-```
-
-**6. Dépôt**
-
-```sh
 git clone https://github.com/Kalacione/pocketterm35-unleashed.git ~/pocketterm35-unleashed
 cd ~/pocketterm35-unleashed
 ```
 
-**7. Installation**
+**6. Installer la version testée de PocketTerm35-OS, puis nos réglages**
 
 ```sh
-./install.sh
+./install.sh --pt35   # le paquet de la version écrite dans PT35_VERSION
+./install.sh          # nos réglages
+sudo reboot
 ```
 
-Le script relie les fichiers de `home/` dans `~` (avec GNU stow). Un fichier
-existant au même endroit est renommé en `.bak` et restauré à la désinstallation.
-Si la version de PocketTerm35-OS ne correspond pas à `PT35_VERSION`, le script
-s'arrête et indique quoi faire (voir plus bas). Avec `sudo`, il lie aussi la
-police JetBrains Mono dans `/usr/share/fonts/TTF` et nos icônes dans
-`/usr/share/icons/Phosphore` : PocketTerm35-OS ne les cherche que là. Si
-Plymouth est installé (Raspberry Pi OS Desktop), il remplace l'écran de
-démarrage par le nôtre et reconstruit l'initramfs, ce qui prend une minute.
+`./install.sh` relie les fichiers de `home/` dans `~` avec GNU stow. Un
+fichier existant au même endroit est renommé en `.bak` et restauré à la
+désinstallation. Il installe aussi les paquets Debian nécessaires (mpv, tmux,
+playerctl...), uosc (version et empreinte vérifiées), la police JetBrains Mono
+et les icônes dans `/usr/share` où PocketTerm35-OS les cherche, et l'écran de
+démarrage si Plymouth est présent (une minute pour reconstruire l'initramfs).
 
-**8. Rechargement**
-
-```sh
-pt35ctl reload   # thème, menu et apps
-```
-
-`Super`+`Shift`+`c` recharge sway.
-
-**9. Vérification**
+**7. Vérifier**
 
 ```sh
 ls -l ~/.config/sway/config   # lien vers ~/pocketterm35-unleashed/home/...
 ```
 
-Logs : `/run/user/1000/pt35/sway.log`.
+Logs : `/run/user/1000/pt35/sway.log`. `pt35ctl reload` recharge thème, menu
+et apps, `Super`+`Shift`+`c` recharge sway.
 
 ## Mise à jour
 
 ```sh
-cd ~/pocketterm35-unleashed && git pull && ./install.sh
+cd ~/pocketterm35-unleashed && git pull && ./install.sh --pt35 && ./install.sh
 ```
 
-## Version de PocketTerm35-OS
+Puis redémarrer si `PT35_VERSION` a changé.
 
-Le projet est testé sur une seule version de PocketTerm35-OS, celle de
-`PT35_VERSION`. La commande d'installation de PocketTerm35-OS prend toujours la
-dernière version, ce qui peut casser ces réglages. Pour revenir à la version
-testée :
+## Versions
 
-```sh
-./install.sh --pt35   # puis redémarrer
-```
+Le projet est testé sur une seule version de PocketTerm35-OS, écrite dans
+[`PT35_VERSION`](PT35_VERSION). La commande d'installation de PocketTerm35-OS
+prend toujours la dernière version, qui peut ne pas convenir à ces réglages :
+`./install.sh` s'arrête alors et propose `./install.sh --pt35`.
+`./install.sh --force` passe outre.
 
-`./install.sh --force` installe quand même sur une autre version.
+Une version en `+u<n>` (par exemple `0.4.2+u16`) est PocketTerm35-OS avec nos
+patchs, sur [notre fork](https://github.com/Kalacione/PocketTerm35-OS). Son
+[CHANGELOG](https://github.com/Kalacione/PocketTerm35-OS/blob/main/CHANGELOG.md)
+détaille chaque patch. Une version est publiée ainsi :
 
-Une version en `+u<n>` (par exemple `0.4.2+u1`) est PocketTerm35-OS avec
-nos patchs, construit sur
-[notre fork](https://github.com/Kalacione/PocketTerm35-OS) (détail dans son
-CHANGELOG) : fond d'écran, accueil en grille avec widgets, effets CRT,
-icône obturateur, widget Lecture et listes de réglages encadrées.
+1. le patch est fusionné sur le fork, avec sa version dans `Cargo.toml` et son
+   entrée dans le CHANGELOG ;
+2. `tools/ship.sh` pose le tag sur le fork, attend le `.deb` construit par sa
+   CI, puis écrit la version dans `PT35_VERSION` sur ce dépôt ;
+3. sur l'appareil, la mise à jour ci-dessus installe ce `.deb`.
+
+Revenir à la version d'avant : annuler le commit de `PT35_VERSION`
+(`git revert`), puis relancer la mise à jour.
 
 ## Désinstallation
 
@@ -157,7 +185,9 @@ icône obturateur, widget Lecture et listes de réglages encadrées.
 cd ~/pocketterm35-unleashed && ./install.sh --uninstall
 ```
 
-Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de Raspberry Pi OS remis. Recharger comme à l'étape 8.
+Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de
+Raspberry Pi OS remis. Puis `pt35ctl reload`. Le paquet de PocketTerm35-OS
+installé reste celui de `PT35_VERSION`.
 
 ## Contenu
 
@@ -166,40 +196,50 @@ Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de Rasp
 | `home/` | fichiers reliés dans `~` par `install.sh` |
 | `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps, Super+Entrée ouvre le Terminal avec tmux |
 | `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
-| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (notre fork, dès `0.4.2+u1`) |
+| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, Terminal dans tmux |
+| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
-| `home/.config/tmux/tmux.conf` | barre du bas du Terminal aux couleurs Phosphore, souris et copie |
+| `home/.config/tmux/tmux.conf` | barre du bas du Terminal, souris et copie |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
-| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, un profil mpv par app, Terminal dans tmux |
-| `home/.config/mpv/` | mpv avec l'interface tactile [uosc](https://github.com/tomasklaen/uosc) (LGPL-2.1, téléchargée par `install.sh`) aux couleurs Phosphore, boutons A, X, Y ; sans fichier, un accueil pour parcourir sa médiathèque ou ouvrir une URL (`scripts/pt35-home.lua`) |
-| `home/.local/share/fonts/` | police pixel [VT323](https://fonts.google.com/specimen/VT323) (OFL) des horloges, lue par notre fork dès `0.4.2+u5` |
-| `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
-| `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
+| `home/.config/mpv/` | mpv et uosc aux couleurs du thème, boutons A, X, Y ; sans fichier, un accueil pour parcourir sa médiathèque ou ouvrir une URL (`scripts/pt35-home.lua`) |
+| `home/.local/bin/pt35-actions` | bandeau d'actions sous l'éditeur |
+| `home/.local/share/fonts/` | police pixel VT323 des horloges |
+| `home/.local/share/icons/Phosphore/` | icônes des apps, tirées de Tabler Icons, Papirus pour le reste |
 | `plymouth/pocketterm/` | thème Plymouth de l'écran de démarrage |
-| `tools/splash.py` | dessine ses images depuis `DESIGN.md`, l'obturateur, VT323 et `PT35_VERSION` ; lancé par `install.sh` |
+| `tools/splash.py` | dessine les images de démarrage depuis `DESIGN.md` ; lancé par `install.sh` |
+| `tools/icons.sh` | regénère les icônes depuis Tabler, couleur en option |
+| `tools/ship.sh` | publie une version du fork et l'épingle dans `PT35_VERSION` |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
-| `tools/ship.sh` | publie la version courante du fork de PocketTerm35-OS (tag, build et release par sa CI) et l'épingle dans `PT35_VERSION` |
-| `docs/specs.md` | specs, priorités et TODO |
 | `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
-| `docs/design/` | aperçu de la charte (`charte.html`), maquettes SVG 640x480 |
+| `docs/captures/` | captures de ce README |
+| `docs/design/` | aperçu de la charte (`charte.html`), maquettes et rendus de travail |
+| `docs/specs.md` | specs, priorités et TODO |
 | `docs/briques.md` | logiciels retenus ou écartés, et pourquoi |
 | `CLAUDE.md` | règles du projet, pour les contributeurs humains et IA |
 
 ## Remerciements
 
-Ce projet repose sur [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS)
-de [therezor](https://github.com/therezor) : bureau, launcher, configuration
-fusionnée, hooks et firmware clavier. Merci à therezor.
+- [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS) de
+  [therezor](https://github.com/therezor) : bureau, lanceur, configuration
+  fusionnée, hooks et firmware du clavier. Tout ce projet repose dessus.
+- [WaveShare](https://www.waveshare.com/) pour le PocketTerm 3.5.
+- [Tabler Icons](https://tabler.io/icons), [VT323](https://fonts.google.com/specimen/VT323),
+  [JetBrains Mono](https://www.jetbrains.com/lp/mono/),
+  [uosc](https://github.com/tomasklaen/uosc),
+  [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme).
 
 ## Licence
 
 MIT ([LICENSE](LICENSE)).
 
-PocketTerm35-OS est sous licence MIT, Copyright (c) 2026 REZOR
-([licence](https://github.com/therezor/PocketTerm35-OS/blob/main/LICENSE)).
-Les `.deb` archivés dans les releases de ce dépôt sont ses binaires, non
-modifiés, accompagnés de sa licence.
+Composants tiers :
 
-La police VT323 est sous SIL Open Font License 1.1, Copyright 2011 The VT323
-Project Authors ([licence](home/.local/share/fonts/VT323-OFL.txt)).
+| composant | licence | dans ce dépôt |
+|---|---|---|
+| PocketTerm35-OS, Copyright (c) 2026 REZOR | MIT ([licence](https://github.com/therezor/PocketTerm35-OS/blob/main/LICENSE)) | non ; les `.deb` des releases de ce dépôt sont ses binaires non modifiés, avec sa licence |
+| Tabler Icons, Copyright (c) 2020-2024 Paweł Kuna | MIT ([licence](home/.local/share/icons/Phosphore/LICENSE)) | oui, recolorées |
+| VT323, Copyright 2011 The VT323 Project Authors | SIL OFL 1.1 ([licence](home/.local/share/fonts/VT323-OFL.txt)) | oui |
+| JetBrains Mono | SIL OFL 1.1 | non, paquet Debian |
+| uosc | LGPL-2.1 | non, téléchargé par `install.sh` |
+| Papirus | GPL-3.0 | non, installé par PocketTerm35-OS |

@@ -57,6 +57,7 @@ n'est créé qu'au premier fichier qui en a besoin) :
 | `home/.local/bin/` | nos petits scripts |
 | `plymouth/<thème>/` | thème Plymouth, images générées par `tools/splash.py` à l'install |
 | `docs/briques.md` | briques retenues ou écartées, et pourquoi |
+| `docs/captures/` | captures du README, rendues depuis le code de la version épinglée |
 
 Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 
