@@ -39,3 +39,5 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | IPC de mpv (`--input-ipc-server`), interfaces rc / http de VLC | écarté | une API par lecteur, à coder deux fois |
 | client D-Bus en Rust (`zbus`) | écarté | nouvelle dépendance et plus de code pour ce que `playerctl` fait déjà |
 | VLC pour Musique | remplacé | Musique passe sur mpv + uosc : une seule interface à habiller pour la musique et la vidéo |
+| icône principale : Tabler `aperture`, `headset`, `radioactive` | écarté | floues à 16 px dans la barre, et la barre dessine le crâne en pixels : il aurait fallu y lire un SVG ; `radioactive` est un signal de danger |
+| icône principale : obturateur 8 lames en pixel art (fork `0.4.2+u7`) | retenu | clin d'œil à Portal, net à 16 px car ses fentes suivent la grille ; remplace le dessin du crâne tel quel. Pistes : `design/icone-main-pistes-v2.png` du dossier partagé |
