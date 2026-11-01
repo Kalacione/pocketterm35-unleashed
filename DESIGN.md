@@ -130,7 +130,7 @@ Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 ## Layout
 
-Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale. Aperçu de la première version : [`docs/design/accueil-u2.png`](docs/design/accueil-u2.png). Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
+Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale. Aperçu : [`docs/design/accueil-u4.png`](docs/design/accueil-u4.png). Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
