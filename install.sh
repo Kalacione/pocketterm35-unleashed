@@ -87,4 +87,16 @@ if [ ! -s "$PINS" ]; then
     app:darkwire screen:quick page:power > "$PINS"
   echo "épingles par défaut : $PINS"
 fi
+# Tuiles translucides à 85 %, réglables ensuite dans les Réglages rapides :
+# appearance.toml, que le curseur réécrit (theme.toml passerait devant lui).
+LOOK="${XDG_CONFIG_HOME:-$HOME/.config}/pt35/appearance.toml"
+if ! grep -qs '^tile_opacity' "$LOOK"; then
+  mkdir -p "$(dirname "$LOOK")"
+  if grep -qs '^\[menu\]' "$LOOK"; then
+    sed -i '/^\[menu\]/a tile_opacity = 85' "$LOOK"
+  else
+    printf '\n[menu]\ntile_opacity = 85\n' >> "$LOOK"
+  fi
+  echo "tuiles à 85 % : $LOOK"
+fi
 echo "ok"
