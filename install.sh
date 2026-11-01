@@ -22,7 +22,9 @@ PLY=/usr/sbin/plymouth-set-default-theme
 # mpv-mpris et playerctl : le widget Lecture lit les lecteurs par MPRIS.
 # python3-pil : tools/splash.py dessine l'écran de démarrage.
 # tmux : la barre du bas du Terminal.
-DEPS="stow fonts-jetbrains-mono fontconfig mpv mpv-mpris playerctl curl unzip python3-pil tmux"
+# python3-gi et les gir1.2-* : pt35-actions, le bandeau d'actions de l'éditeur.
+DEPS="stow fonts-jetbrains-mono fontconfig mpv mpv-mpris playerctl curl unzip python3-pil tmux
+  python3-gi gir1.2-gtk-3.0 gir1.2-gtklayershell-0.1"
 # Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
 https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
