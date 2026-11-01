@@ -111,7 +111,7 @@ Paquets Debian Trixie de Nautilus, Éditeur de texte, Wike et Amberol : pas enco
 
 ## Tactile : défilement et gestes
 
-Analyse du 1er novembre 2026, à trancher par Djé avant tout code.
+Analyse du 1er novembre 2026. Djé a retenu les étapes 1 et 2 : fork u18 ([fork #18](https://github.com/Kalacione/PocketTerm35-OS/pull/18)).
 
 **Constat.**
 
@@ -135,7 +135,7 @@ Analyse du 1er novembre 2026, à trancher par Djé avant tout code.
 4. Défilement au pixel (~300 lignes, les six dessins plus une découpe dans `Canvas`) : la liste colle au doigt comme sur un téléphone. Le plus lourd à reporter à chaque version d'upstream : seulement si 1 et 3 ne suffisent pas à l'usage.
 5. Plus tard, si un usage le demande : balayage horizontal sur la pile de widgets et les pages d'épingles ; gestes à plusieurs doigts (voir lisgd dans `briques.md`).
 
-**Recommandation** : 1 et 2 dans une même version du fork, puis 3. 4 seulement après essai sur l'appareil.
+Suite : 3 après essai de u18 sur l'appareil, 4 seulement si 1 et 3 ne suffisent pas.
 
 ## Limites connues d'upstream (PT35-OS 0.4.2)
 
@@ -143,7 +143,7 @@ Constatées sur l'appareil ou dans le code. Chacune se corrige dans le fork de P
 
 | Limite | Effet | Contournement en attendant |
 | --- | --- | --- |
-| Pas de défilement au doigt dans le menu | Un toucher est un simple clic à l'endroit où il commence : glisser lance l'élément touché au lieu de faire défiler | D-pad, ou la barre de défilement (cliquer la piste, tirer le curseur). Plan : voir Tactile |
+| Pas de défilement au doigt dans le menu | Un toucher est un simple clic à l'endroit où il commence : glisser lance l'élément touché au lieu de faire défiler | Corrigé par u18 (fork #18) : voir Tactile |
 | Pas de fond d'écran image | Couleur unie seulement, et le menu opaque couvre le bureau | Aucun |
 | Une seule famille de police pour tout le menu | Pas de VT323 pour les titres | Fork u5 : VT323 pour les horloges (`[font] family_display`) ; les titres d'écran restent en JetBrains Mono |
 
@@ -188,8 +188,9 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : écran de démarrage PocketTerm OS (thème Plymouth, images générées par `tools/splash.py`)
 - [ ] Appareil : `./install.sh`, redémarrer, vérifier l'écran de démarrage et la barre
 - [x] Appareil : Terminal, `seq 500` puis glisser vite vers le bas (l'historique remonte, `q` pour sortir) ; appui long puis glisser (sélection) ; Files, glisser dans la liste ; mousepad, glisser dans un long texte. Noter ce qui gêne
-- [ ] Djé : trancher les étapes du menu (voir Tactile)
-- [ ] Agent : étapes 1 et 2 du tactile dans le fork, puis PR upstream
+- [x] Djé : trancher les étapes du menu (1 et 2, voir Tactile)
+- [x] Agent : étapes 1 et 2 du tactile, fork u18 ([fork #18](https://github.com/Kalacione/PocketTerm35-OS/pull/18))
+- [ ] Appareil : après `tools/ship.sh` pour u18, vérifier au doigt : glisser dans All apps et Paramètres fait défiler sans rien ouvrir ; toucher bref ouvre au relâcher ; appui long sur une app ouvre Open / Pin ; balayage sur la bascule ; barre de défilement ; tuiles de l'accueil, widgets et barre du haut au toucher
 
 **Prochains chantiers** (demandés par Djé, pas commencés)
 

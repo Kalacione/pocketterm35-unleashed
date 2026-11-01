@@ -78,4 +78,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | gestes libinput / `bindgesture` de sway | écarté | pavés tactiles seulement, rien pour un écran tactile |
 | [Touchégg](https://github.com/JoseExposito/touchegg) | écarté | X11, ou GNOME / KDE par extension : rien pour sway |
 | [lisgd](https://git.sr.ht/~mil/lisgd) (sxmo) | en réserve | gestes multi-doigts → commande (ex. 3 doigts = Start), lit evdev sans config sway ; mais l'app sous les doigts reçoit le même geste, donc il agit deux fois. Seulement si un geste système est demandé |
-| défilement tactile dans `pt35-ui` (fork) | à trancher | rien d'existant pour une surface layer-shell en Rust ; on copie le modèle de foot (seuil, puis glisser = défiler), voir `specs.md`, Tactile |
+| défilement tactile dans `pt35-ui` (fork u18) | retenu | rien d'existant pour une surface layer-shell en Rust ; on copie le modèle de foot : rien au toucher, 12 px puis glisser = défiler par lignes, 500 ms = appui long (clic droit), second doigt ignoré. Voir `specs.md`, Tactile |
