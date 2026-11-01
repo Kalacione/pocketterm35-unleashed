@@ -58,7 +58,8 @@ Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps éping
   - All apps (liste) : Y sur l'accueil l'ouvre ; X ou une lettre l'ouvre en recherche ; en mode souris, clic droit sur une tuile. Dans la liste : A ouvre, B revient à l'accueil, X cherche, Y épingle ou désépingle. Paramètres (`screen:quick`) et Énergie (`page:power`) sont en fin de liste et s'épinglent comme une app.
   - Épingles par défaut, posées par `install.sh` si aucune n'existe : terminal, fichiers, éditeur, navigateur, musique, vidéo, DarkWire, Paramètres, Énergie.
   - u5 : plus de bandeau « PT35 // LAUNCHER », barre à 40 px ; horloges du widget et de la barre en VT323 (`[font] family_display`, `[bar] clock_size = 28`), halo sur l'horloge du widget (`[effects] glow = 3`).
-  - Pas fait : courbe de débit (il faudrait un historique tenu par `pt35d`) et widget Lecture (MPRIS).
+  - Pas fait : courbe de débit (il faudrait un historique tenu par `pt35d`).
+  - Widget Lecture (prévu, fork après u6) : panneau `MEDIA` à la place de NETWORK tant qu'un lecteur MPRIS joue ou est en pause, sinon NETWORK revient. Titre, artiste, barre de segments de la position, `1:23 / 4:56`, et l'état écrit en toutes lettres avec son icône (`▶ PLAYING`, `❚❚ PAUSED`, comme le reste du menu en anglais), jamais par la couleur seule. Un toucher sur le panneau fait lecture / pause. Lu par `playerctl` hors du fil Wayland, comme le SSID. Paquets `playerctl` et `mpv-mpris`, posés par `install.sh` avec le widget. Coût : `widgets.rs` et `draw_widgets` (environ 150 lignes), à reporter à chaque mise à jour d'upstream.
 
 ## App Paramètres
 
@@ -91,7 +92,7 @@ Pour chaque besoin : ce qui est déjà dans PT35-OS, à tester en premier, puis 
 | Fichiers locaux + SSH | `yazi` (clavier) | [Fichiers GNOME (Nautilus)](https://linuxphoneapps.org/apps/org.gnome.nautilus/), mobile fit 5/5, GTK4. Un serveur SSH s'ouvre comme un dossier (`sftp://nas`, via `gvfs-backends`) et reste en favori. Copier / coller au doigt entre local et distant, et entre deux serveurs | v1 |
 | Éditeur de texte | `mousepad` (Y ouvre sa barre de menus) | [Éditeur de texte GNOME](https://linuxphoneapps.org/apps/org.gnome.texteditor/), mobile fit 5/5 : sélection au doigt, copier / coller par menu, boutons dans la barre. Il ouvre aussi les fichiers distants depuis Fichiers | v1 |
 | Musique (mp3) | VLC | si VLC est pénible au doigt : Amberol (lecteur adaptatif GTK4) | v1 (à tester) |
-| Vidéo | `mpv` | si besoin : Clapper (lecteur adaptatif GTK4). Le Pi 5 décode le HEVC en matériel et le H.264 1080p en logiciel : pas de limite pratique pour un écran 640 × 480 | v1 (à tester) |
+| Vidéo | `mpv` avec [uosc](https://github.com/tomasklaen/uosc) aux couleurs Phosphore (`home/.config/mpv/`) : toucher la vidéo = pause, A pause, X affiche les contrôles, Y et B (clic droit) ouvrent le menu | si besoin : Clapper (lecteur adaptatif GTK4). Le Pi 5 décode le HEVC en matériel et le H.264 1080p en logiciel : pas de limite pratique pour un écran 640 × 480 | v1 (à tester) |
 | Wikipédia | Navigateur | [Wike](https://linuxphoneapps.org/apps/com.github.hugolabe.wike), mobile fit 5/5 : lecteur Wikipédia avec images, sommaire, favoris, 300 langues. Le côté « terminal » vient du thème Phosphore | v2 |
 | Assistant texte (Claude + Jean-Michel) | DarkWire (agent sur un petit modèle local, pensé pour le Pi 5 : secours hors réseau) | Newelle : assistant GTK4 qui gère l'API Claude, les modèles locaux via Ollama, la voix (transcription et synthèse) et peut lancer des commandes. À vérifier : rendu à 640 × 480, et si Jean-Michel parle le protocole Ollama | v2 |
 | Assistant vocal + domotique | — | **Home Assistant** sur une machine du réseau. Il apporte Assist (la chaîne voix), l'intégration Anthropic (Claude), l'intégration Ollama (Jean-Michel), Tuya en officiel et Alexa via un module communautaire. Sur le PocketTerm, on installe juste [linux-voice-assistant](https://github.com/OHF-Voice/linux-voice-assistant) (satellite vocal ARM64 avec mot de réveil local) et on affiche le tableau de bord HA | v3 |
@@ -139,6 +140,9 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : épingler `0.4.2+u4` et tout activer dans la surcouche, épingles par défaut dans `install.sh`
 - [ ] Agent : finitions u5 (scanlines 1/4 à 25 %, horloges VT323, barre 40 px, réglages rapides), PR #5 du fork et PR surcouche #6
 - [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
+- [x] Agent : mpv + uosc aux couleurs Phosphore (`home/.config/mpv/`, uosc épinglé dans `install.sh`)
+- [ ] Appareil : `./install.sh`, ouvrir Vidéo, tester uosc au doigt et aux boutons
+- [ ] Agent : widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork après u6
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **v2 Usage**

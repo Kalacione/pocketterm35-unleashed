@@ -30,3 +30,9 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | halo et scanlines en SVG (`feGaussianBlur`, resvg le gère) | écarté | à refaire dans chaque fichier ; fait une fois au rendu dans notre fork (`0.4.2+u2`) |
 | `screen_shader` CRT de Hyprland | écarté | il faudrait quitter sway, sur lequel PT35-OS repose ; une surface layer-shell transparente fait le même effet |
 | `tools/release-fork.sh` (tag via `gh api`) | retenu | la version vit déjà dans le `Cargo.toml` du fork (le `.deb` la porte) : le script la lit et pose le tag, la CI fait la release. Ni clone local, ni incrément de tag séparé qui contredirait le `.deb` |
+| [uosc](https://github.com/tomasklaen/uosc) (LGPL-2.1) | retenu | interface de mpv faite pour le doigt (grosse barre de temps, menus), couleurs réglables dans `uosc.conf` : notre skin sans code. Pas dans Debian : `install.sh` prend l'archive de la release, version et sha256 épinglés |
+| skin VLC (skins2, `.vlt`) | écarté | format ancien, X11 seulement, retiré de VLC 4 ; l'interface Qt reste trop dense pour 640x480 |
+| réécrire un lecteur dans `pt35-menu` | écarté | mpv + uosc fait déjà lecture, playlist, pistes et sous-titres |
+| MPRIS + [playerctl](https://github.com/altdesktop/playerctl) (Debian) | retenu pour le widget Lecture | un seul protocole pour VLC (natif) et mpv (paquet `mpv-mpris`), et pour tout lecteur futur ; `playerctl` en CLI, comme `nmcli` pour le widget réseau : aucune dépendance Rust en plus |
+| IPC de mpv (`--input-ipc-server`), interfaces rc / http de VLC | écarté | une API par lecteur, à coder deux fois |
+| client D-Bus en Rust (`zbus`) | écarté | nouvelle dépendance et plus de code pour ce que `playerctl` fait déjà |
