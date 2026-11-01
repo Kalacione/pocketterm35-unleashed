@@ -21,8 +21,8 @@ pin=$(raw "$self" PT35_VERSION main)
 [ "$pin" != "$v" ] || die "Déjà épinglé sur $v. Pour publier, monte la version dans le Cargo.toml du fork."
 echo "fork main ${sha:0:7} : $v (épinglé : $pin)"
 
-tag=$(gh api "repos/$fork/git/ref/tags/v$v" --jq .object.sha 2>/dev/null || true)
-if [ -z "$tag" ]; then
+# Sur une erreur 404, gh api écrit quand même le JSON de l'erreur : on teste son code de sortie.
+if ! gh api "repos/$fork/git/ref/tags/v$v" >/dev/null 2>&1; then
   raw "$fork" CHANGELOG.md "$sha" | grep -q "^## $v " || die "Pas de section « ## $v » dans le CHANGELOG du fork."
   ci=$(gh run list -R "$fork" -w ci.yml -c "$sha" -L 1 --json conclusion --jq '.[0].conclusion // "absente"')
   [ "$ci" = success ] || die "CI du fork sur ${sha:0:7} : $ci. Attends qu'elle passe (https://github.com/$fork/actions)."
