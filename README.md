@@ -56,9 +56,11 @@ fenêtre).
 ### Un thème : Phosphore
 
 Vert doux sur fond sombre, police pixel VT323 pour les horloges, JetBrains
-Mono pour le texte, lignes de balayage façon écran cathodique. Les états
-(ON, OFF, UP, DOWN, FULL) sont écrits en toutes lettres sur fond plein : on
-les lit sans distinguer les couleurs. Les icônes des apps viennent de
+Mono pour le texte, lignes de balayage façon écran cathodique. Derrière
+l'accueil, une pluie de caractères façon *Matrix*, dont la vitesse se règle
+dans Réglages rapides (0 l'arrête). Les états (ON, OFF, UP, DOWN, FULL)
+sont écrits en toutes lettres sur fond plein : on les lit sans distinguer les
+couleurs. Les icônes des apps viennent de
 [Tabler Icons](https://tabler.io/icons). La charte est dans
 [`DESIGN.md`](DESIGN.md).
 
@@ -72,6 +74,9 @@ les lit sans distinguer les couleurs. Les icônes des apps viennent de
 - **Éditeur** avec un bandeau de gros boutons (Copy, Paste, Save...) en bas
   de l'écran, une barre de menus aux couleurs du thème et le texte à la taille
   du terminal.
+- **Navigateur** : Firefox dans un profil à part, qui affiche la version mobile
+  des sites, avec une interface agrandie aux couleurs du thème. Il ouvre aussi
+  les liens des autres apps. Chromium reste dans Toutes les apps.
 - Un **écran de démarrage** assorti.
 
 Pour habiller une autre app de la même façon : [`docs/habiller-une-app.md`](docs/habiller-une-app.md).
@@ -229,7 +234,7 @@ installé reste celui de `PT35_VERSION`.
 | `home/` | fichiers reliés dans `~` par `install.sh` |
 | `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps, Super+Entrée ouvre le Terminal avec tmux |
 | `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
-| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, Terminal dans tmux, Fichiers charge les hôtes SSH |
+| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, Terminal dans tmux, Fichiers charge les hôtes SSH, Navigateur passe sur Firefox |
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/tmux/tmux.conf` | barre du bas du Terminal, souris et copie |
@@ -239,6 +244,8 @@ installé reste celui de `PT35_VERSION`.
 | `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, ou un hôte SSH dans un nouvel onglet), Y liste les onglets (Y encore = nouvel onglet), Ctrl+C / X / V, onglets Ctrl+T / W |
 | `home/.local/bin/pt35-yazi-vfs` | traduit `~/.ssh/config` pour le SFTP de yazi, à chaque ouverture de Fichiers |
 | `home/.local/bin/pt35-actions` | bandeau d'actions sous l'éditeur |
+| `home/.local/share/applications/pt35-browser.desktop` | navigateur par défaut pour les liens (`xdg-open`), le même Firefox que la tuile ; posé une fois par `install.sh` |
+| `home/.local/share/pt35-firefox/` | profil Firefox du Navigateur : user-agent mobile, échelle 1,5 (`user.js`), barre et menus aux couleurs du thème (`chrome/userChrome.css`) |
 | `home/.local/share/fonts/` | police pixel VT323 des horloges |
 | `home/.local/share/icons/Phosphore/` | icônes des apps, tirées de Tabler Icons, Papirus pour le reste |
 | `plymouth/pocketterm/` | thème Plymouth de l'écran de démarrage |

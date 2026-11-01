@@ -87,6 +87,8 @@ Pour revenir en arrière, supprimer le fichier ou l'entrée ajoutée, puis
 
 ## Exemples dans ce dépôt
 
+- Navigateur (Firefox) : `home/.local/share/pt35-firefox/` (`user.js`,
+  `chrome/userChrome.css`) et son entrée dans `home/.config/pt35/apps.toml`.
 - Éditeur (Mousepad, GTK 3) : `home/.config/gtk-3.0/gtk.css`, la police dans
   `install.sh`, le bandeau dans `pt35-actions`.
 - Fichiers (yazi, terminal) : `home/.config/yazi/theme.toml`.

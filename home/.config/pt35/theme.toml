@@ -11,6 +11,7 @@ muted           = "#5e8f78"
 # pt35-menu peint la ligne sélectionnée en `accent` : blanc léger, texte sombre.
 accent          = "#e6fff2"
 accent_fg       = "#06110b"
+clock           = "#d4ffe9"   # bright : heure et date du widget SYSTEM, avec halo (fork u22)
 warning         = "#ffa94d"   # danger, toujours en fond plein
 critical        = "#ff6e6e"   # erreur, toujours en fond plein
 ok              = "#63e6a4"
@@ -67,3 +68,8 @@ glow            = 3           # halo de l'horloge de l'accueil, en px
 sweep           = 8
 sweep_jitter    = 5
 sweep_strength  = 8           # %
+# Pluie d'hexa derrière l'accueil (fork u20), tête à 40 % du phosphore :
+# visible dans les marges, à peine sous les tuiles (85 %). 0 la coupe.
+# rain_speed n'est pas ici : ce fichier passerait devant le curseur Pluie
+# des Réglages rapides (0 à 4 lignes/s, 2 par défaut).
+rain            = 40          # %
