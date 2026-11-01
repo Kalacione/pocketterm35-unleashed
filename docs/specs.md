@@ -109,13 +109,41 @@ Paquets Debian Trixie de Nautilus, Éditeur de texte, Wike et Amberol : pas enco
 
 **Micro** : la fiche produit annonce une « prise casque 3,5 mm » et deux haut-parleurs, sans micro ([The Pi Hut](https://thepihut.com/products/pocketterm35-handheld-linux-terminal-for-raspberry-pi)). Test : brancher le micro-casque, puis `arecord -l`. Si rien n'apparaît, un micro-casque USB, au format 16 kHz mono comme l'exige linux-voice-assistant.
 
+## Tactile : défilement et gestes
+
+Analyse du 1er novembre 2026. Djé a retenu les étapes 1 et 2 : fork u18 ([fork #18](https://github.com/Kalacione/PocketTerm35-OS/pull/18)).
+
+**Constat.**
+
+- Matériel : le GT911 est multitouch (5 doigts, pilote `goodix`). sway passe les doigts tels quels aux apps par `wl_touch`. libinput ne reconnaît aucun geste sur un écran tactile (ses gestes sont pour les pavés), donc le `bindgesture` de sway ne sert pas ici.
+- Menu : `pt35-ui` (`layer.rs`) lit `wl_touch` lui-même. Chaque doigt posé appelle `App::touch` tout de suite : c'est le clic au toucher, et un deuxième doigt est un deuxième clic. Le glisser arrive déjà (`App::drag`) mais ne sert qu'à la barre de défilement.
+- Listes : `ListState` défile par lignes entières (`offset` entier), pas au pixel. Six fonctions de dessin en dépendent (lignes, tuiles, accueil, apps, bascule, réglages rapides) et `Canvas` n'a pas de zone de découpe.
+- Upstream : 0.4.2 reste la dernière version, aucune issue ni PR sur le tactile chez therezor.
+
+**Apps tierces : déjà couvertes, vérifié au doigt sur l'appareil.**
+
+- foot (depuis 1.16, Trixie livre 1.21) : glisser = molette, ligne par ligne ; appui long (`[touch] long-press-delay`, 400 ms) puis glisser = sélection ; toucher bref = clic. La molette va à tmux (`mouse on` : historique), yazi, htop. Pas d'inertie.
+- GTK3 / GTK4 (mousepad, Éditeur GNOME) et Firefox : défilement au doigt avec inertie, natif.
+- mpv + uosc : toucher = clic, la barre de lecture se tire au doigt. Suffisant.
+- VLC (Qt) : le doigt devient une souris, sans défilement cinétique. Reste dans All apps.
+
+**Menu : étapes proposées** (fork, puis PR upstream ; chacune livrable seule, tailles estimées)
+
+1. Toucher au relâcher, glisser = défiler (~120 lignes, `layer.rs` et `ListState`). Le doigt posé surligne la ligne. Au-delà d'environ 12 px c'est un glisser : la liste suit le doigt d'une ligne (ou d'une rangée de tuiles) par hauteur de ligne parcourue. Relevé sans bouger = toucher. Même modèle que foot. Le second doigt est ignoré. Barre de défilement, déplacement d'épingle (MOVE) et curseurs inchangés ; la bascule défile en horizontal. `pt35-bar` agit aussi au relâcher, comme à la souris.
+2. Appui long = menu de la ligne (~30 lignes) : Open / Pin, Switch to / Close, ce que fait le clic droit. Évite un geste à deux doigts.
+3. Inertie (~80 lignes) : vitesse des 100 dernières ms au relâcher, puis la liste continue par crans qui ralentissent, sur la boucle 60 fps existante (`App::animating`). Un doigt posé l'arrête.
+4. Défilement au pixel (~300 lignes, les six dessins plus une découpe dans `Canvas`) : la liste colle au doigt comme sur un téléphone. Le plus lourd à reporter à chaque version d'upstream : seulement si 1 et 3 ne suffisent pas à l'usage.
+5. Plus tard, si un usage le demande : balayage horizontal sur la pile de widgets et les pages d'épingles ; gestes à plusieurs doigts (voir lisgd dans `briques.md`).
+
+Suite : 3 après essai de u18 sur l'appareil, 4 seulement si 1 et 3 ne suffisent pas.
+
 ## Limites connues d'upstream (PT35-OS 0.4.2)
 
 Constatées sur l'appareil ou dans le code. Chacune se corrige dans le fork de PT35-OS, puis part en PR upstream.
 
 | Limite | Effet | Contournement en attendant |
 | --- | --- | --- |
-| Pas de défilement au doigt dans le menu | Un toucher est un simple clic à l'endroit où il commence : glisser lance l'élément touché au lieu de faire défiler | D-pad, ou la barre de défilement (cliquer la piste, tirer le curseur) |
+| Pas de défilement au doigt dans le menu | Un toucher est un simple clic à l'endroit où il commence : glisser lance l'élément touché au lieu de faire défiler | Corrigé par u18 (fork #18) : voir Tactile |
 | Pas de fond d'écran image | Couleur unie seulement, et le menu opaque couvre le bureau | Aucun |
 | Une seule famille de police pour tout le menu | Pas de VT323 pour les titres | Fork u5 : VT323 pour les horloges (`[font] family_display`) ; les titres d'écran restent en JetBrains Mono |
 
@@ -159,11 +187,15 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
 - [x] Agent : écran de démarrage PocketTerm OS (thème Plymouth, images générées par `tools/splash.py`)
 - [ ] Appareil : `./install.sh`, redémarrer, vérifier l'écran de démarrage et la barre
-- [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
+- [x] Appareil : Terminal, `seq 500` puis glisser vite vers le bas (l'historique remonte, `q` pour sortir) ; appui long puis glisser (sélection) ; Files, glisser dans la liste ; mousepad, glisser dans un long texte. Noter ce qui gêne
+- [x] Djé : trancher les étapes du menu (1 et 2, voir Tactile)
+- [x] Agent : étapes 1 et 2 du tactile, fork u18 ([fork #18](https://github.com/Kalacione/PocketTerm35-OS/pull/18))
+- [ ] Appareil : après `tools/ship.sh` pour u18, vérifier au doigt : glisser dans All apps et Paramètres fait défiler sans rien ouvrir ; toucher bref ouvre au relâcher ; appui long sur une app ouvre Open / Pin ; balayage sur la bascule ; barre de défilement ; tuiles de l'accueil, widgets et barre du haut au toucher
 
 **Prochains chantiers** (pas commencés)
 
-- [ ] Fil d'Ariane (en-tête « PT35 < SETTINGS ») : il prend trop de place. Maquette à revoir d'abord
+- [x] Fil d'Ariane : 46 → 32 px, prompt `PT35 ❯ SETTINGS ❯` et titre en VT323, 7 lignes de liste au lieu de 6 (fork u19, piste C3 de `design/fil-ariane/` du dossier partagé)
+- [ ] Appareil : après `tools/ship.sh` pour u19, ouvrir Settings, vérifier le fil, la 7e ligne et le retour au doigt sur `PT35`
 - [ ] Reskin des apps aux couleurs Phosphore, au-delà de GTK4, `foot` et mpv : liste des apps à cadrer
 - Mis de côté : fond d'écran animé (pluie), il oblige à redessiner l'accueil en continu
 
