@@ -156,5 +156,5 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - Do : danger et erreur en fond plein, avec icône ou libellé.
 - Do : tout faire au doigt, au D-pad, avec ABXY, L/R et par des menus.
 - Don't : pas de contour seul ni de texte rouge ou orange pour porter un sens.
-- Don't : pas de halo sur le texte courant, pas d'animation de transition, pas de fond animé.
+- Don't : pas de halo sur le texte courant, pas de fond animé. Les transitions courtes de PT35-OS (~0,1 s) sont gardées : le Pi 5 les tient sans peine.
 - Don't : pas de jauge de batterie qui afficherait `--`.

@@ -101,7 +101,7 @@ pre { margin: 0; padding: 16px; border: 1px solid var(--line); background: var(-
       <li><b>Danger et erreur, lisibles par un daltonien</b> : orange (danger) et rouge (erreur, supprimer) toujours en <b>fond plein</b> avec un texte sombre bien contrasté (≥ 7:1), et toujours accompagnés d'une icône ou d'un libellé. Jamais un simple contour ou un texte coloré : la couleur seule ne porte jamais le sens.</li>
       <li><b>Teal</b> : seulement pour une seconde série de données dans un graphique.</li>
       <li><b>Halo</b> : réservé aux titres, aux gros chiffres et aux courbes. Jamais sur le texte courant.</li>
-      <li><b>Mouvement</b> : le curseur clignote, les jauges se mettent à jour. Pas d'animation de transition.</li>
+      <li><b>Mouvement</b> : le curseur clignote, les jauges se mettent à jour, et on garde les transitions courtes de PT35-OS (~0,1 s). Pas de fond animé.</li>
       <li><b>Grille de 8 px</b> pour tout ce qu'on ajoute. La mise en page du menu reste celle de PocketTerm35-OS.</li>
     </ul>
   </section>
@@ -355,9 +355,9 @@ size_hint  = 14.0
 
 [menu]
 radius      = 0
+# animations : on garde le défaut de PT35-OS (true), le Pi 5 suit
 # sélection en blanc léger : accent_fg sur accent = sélection
 # (si pt35-menu utilise accent pour la sélection, accent = "${C.sel}")
-animations  = false
 
 # foot.ini
 # [main]   font=JetBrains Mono:size=10

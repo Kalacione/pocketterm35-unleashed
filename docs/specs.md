@@ -11,6 +11,7 @@ Source de vérité des specs du projet. Charte graphique : [`DESIGN.md`](../DESI
 - **K.I.S.S.** : tactile et boutons d'abord. Ergonomie : pas d'outil à la Vim. On déplace le curseur, on sélectionne, on copie, on coupe et on colle au doigt, au D-pad, avec A/B/X/Y, L/R et par des menus, jamais avec des combinaisons de touches à retenir. Valable pour toutes les apps, éditeur compris.
 - **D.R.Y.** : un seul toolkit pour les apps graphiques (GTK4 / libadwaita), donc un seul thème : `theme.toml` pour le menu, `gtk.css` pour les apps.
 - **Y.A.G.N.I.** : on teste l'app déjà en place avant d'en installer une autre.
+- **Matériel** : Raspberry Pi 5, 8 Go de RAM. Les apps GTK4, un petit modèle IA local et la transcription vocale locale sont à sa portée. Le calcul lourd reste quand même sur le réseau (Jean-Michel, Home Assistant) pour l'autonomie de la batterie.
 
 | Version | Contenu | Critère de fin |
 | --- | --- | --- |
@@ -81,9 +82,9 @@ Pour chaque besoin : ce qui est déjà dans PT35-OS, à tester en premier, puis 
 | Fichiers locaux + SSH | `yazi` (clavier) | [Fichiers GNOME (Nautilus)](https://linuxphoneapps.org/apps/org.gnome.nautilus/), mobile fit 5/5, GTK4. Un serveur SSH s'ouvre comme un dossier (`sftp://nas`, via `gvfs-backends`) et reste en favori. Copier / coller au doigt entre local et distant, et entre deux serveurs | v1 |
 | Éditeur de texte | `mousepad` (Y ouvre sa barre de menus) | [Éditeur de texte GNOME](https://linuxphoneapps.org/apps/org.gnome.texteditor/), mobile fit 5/5 : sélection au doigt, copier / coller par menu, boutons dans la barre. Il ouvre aussi les fichiers distants depuis Fichiers | v1 |
 | Musique (mp3) | VLC | si VLC est pénible au doigt : Amberol (lecteur adaptatif GTK4) | v1 (à tester) |
-| Vidéo | `mpv` | si besoin : Clapper (lecteur adaptatif GTK4) | v1 (à tester) |
+| Vidéo | `mpv` | si besoin : Clapper (lecteur adaptatif GTK4). Le Pi 5 décode le HEVC en matériel et le H.264 1080p en logiciel : pas de limite pratique pour un écran 640 × 480 | v1 (à tester) |
 | Wikipédia | Navigateur | [Wike](https://linuxphoneapps.org/apps/com.github.hugolabe.wike), mobile fit 5/5 : lecteur Wikipédia avec images, sommaire, favoris, 300 langues. Le côté « terminal » vient du thème Phosphore | v2 |
-| Assistant texte (Claude + Jean-Michel) | DarkWire (agent local en terminal) | Newelle : assistant GTK4 qui gère l'API Claude, les modèles locaux via Ollama, la voix (transcription et synthèse) et peut lancer des commandes. À vérifier : rendu à 640 × 480, et si Jean-Michel parle le protocole Ollama | v2 |
+| Assistant texte (Claude + Jean-Michel) | DarkWire (agent sur un petit modèle local, pensé pour le Pi 5 : secours hors réseau) | Newelle : assistant GTK4 qui gère l'API Claude, les modèles locaux via Ollama, la voix (transcription et synthèse) et peut lancer des commandes. À vérifier : rendu à 640 × 480, et si Jean-Michel parle le protocole Ollama | v2 |
 | Assistant vocal + domotique | — | **Home Assistant** sur une machine du réseau. Il apporte Assist (la chaîne voix), l'intégration Anthropic (Claude), l'intégration Ollama (Jean-Michel), Tuya en officiel et Alexa via un module communautaire. Sur le PocketTerm, on installe juste [linux-voice-assistant](https://github.com/OHF-Voice/linux-voice-assistant) (satellite vocal ARM64 avec mot de réveil local) et on affiche le tableau de bord HA | v3 |
 | Rétro-gaming minimal | — | RetroArch. Start et Select restent au système : dans le jeu, Start = X et Select = Y. Il manque un mode où les boutons arrivent bruts au jeu : demander d'abord au mainteneur de PT35-OS, PR seulement s'il n'y a rien | v2 |
 | Radio SDR | — | — | un jour peut-être |

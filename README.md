@@ -16,7 +16,7 @@ charte graphique. Les réglages arrivent au fil des [specs](docs/specs.md).
 
 | quoi | détail |
 |---|---|
-| matériel | PocketTerm 3.5 avec Pi 4B (ou Pi 5) |
+| matériel | PocketTerm 3.5 avec Pi 5 (testé, 8 Go) ou Pi 4B |
 | système | Raspberry Pi OS **Trixie 64 bits**, Lite conseillé (Bookworm n'est pas supporté par PocketTerm35-OS) |
 | PocketTerm35-OS | la version indiquée dans [`PT35_VERSION`](PT35_VERSION) (0.4.2), [installée selon sa doc](https://github.com/therezor/PocketTerm35-OS#install) |
 | firmware clavier | firmware pt35 flashé (`sudo pt35-kbd flash`), sinon ABXY L R envoient des lettres |
