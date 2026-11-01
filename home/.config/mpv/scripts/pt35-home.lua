@@ -10,11 +10,13 @@ local function library()
   return dir, mp.command_native({'expand-path', dir})
 end
 
-local function is_empty(path)
-  for _, name in ipairs(utils.readdir(path) or {}) do
-    if name:sub(1, 1) ~= '.' then return false end
+-- Vide = aucun fichier, sous-dossiers compris. On s'arrête au premier trouvé.
+local function has_files(path)
+  if (utils.readdir(path, 'files') or {})[1] then return true end
+  for _, dir in ipairs(utils.readdir(path, 'dirs') or {}) do
+    if dir:sub(1, 1) ~= '.' and has_files(path .. '/' .. dir) then return true end
   end
-  return true
+  return false
 end
 
 -- format_json renvoie aussi une erreur (nil) : commandv refuserait cet argument en plus.
@@ -22,15 +24,15 @@ local function menu_json(t) return (utils.format_json(t)) end
 
 local function open_home()
   local dir, path = library()
-  local empty = is_empty(path)
+  local empty = not has_files(path)
   local items = {
-    {title = 'Parcourir', hint = dir, value = 'script-binding uosc/open-file'},
-    {title = 'Ouvrir une URL', value = {'script-message-to', script, 'url'}},
+    {title = 'Browse', hint = dir, value = 'script-binding uosc/open-file'},
+    {title = 'Open URL', value = {'script-message-to', script, 'url'}},
   }
-  if not empty then table.insert(items, 1, {title = 'Tout lire', hint = dir, value = {'loadfile', path}}) end
+  if not empty then table.insert(items, 1, {title = 'Play all', hint = dir, value = {'loadfile', path}}) end
   mp.commandv('script-message-to', 'uosc', 'open-menu', menu_json({
     type = 'pt35-home',
-    title = empty and (dir .. ' est vide') or 'Rien en lecture',
+    title = empty and 'Empty folder' or 'Nothing playing',
     search_style = 'disabled',
     items = items,
   }))
@@ -40,11 +42,11 @@ end
 mp.register_script_message('url', function()
   mp.commandv('script-message-to', 'uosc', 'open-menu', menu_json({
     type = 'pt35-url',
-    title = 'Ouvrir une URL',
+    title = 'Open URL',
     search_style = 'palette',
     search_debounce = 'submit',
     on_search = {'script-message-to', script, 'open-url'},
-    footnote = 'A : ouvrir. Lien YouTube : paquet yt-dlp',
+    footnote = 'A: open. YouTube links need yt-dlp',
     items = {},
   }))
 end)
