@@ -44,12 +44,16 @@ Pas de gestes de bord en v1 : la barre des tâches et les boutons couvrent tout.
 
 ## Lanceur et fond d'écran
 
-Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. Il s'affiche en grille de tuiles (3 colonnes par défaut, réglable dans `theme.toml`) et on le parcourt au doigt ou au D-pad.
+Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork (`0.4.2+u2`, PR #2 pas encore fusionnée) l'affiche en grille : `[menu] launcher_columns = 4`, `[icons] size_launcher = 64`, `[icons] glow = 4`, tuile sélectionnée pleine en blanc léger. La colonne latérale (Fenêtres, Paramètres, Énergie) reste à droite.
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
 - **Icônes** : thème Papirus par défaut. Pour le style pixel, on remplace par notre jeu d'icônes 32 px, sinon c'est le glyphe de 2 caractères qui s'affiche.
 - **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe, pas d'animation.
+- **Accueil (prévu, à valider)** : la racine du lanceur devient un écran d'accueil, comme la maquette `01-accueil`.
+  - `0.4.2+u3` (≈ 300 lignes dans `pt35-menu`) : apps épinglées en pages de 3 × 3 (Bas / PageDown, L/R restent réservés), tuile « Toutes les apps » vers la liste où Y épingle ; grande horloge et date ; widget CPU / RAM / température (lu dans `/proc` et `/sys`) ; widget réseau (statut de `pt35d`).
+  - `u4` ou jamais : courbe de débit (demande un historique dans `pt35d` et l'IPC), widget Lecture (MPRIS, `playerctl`).
+  - À trancher par Djé : colonne de widgets à gauche, qui remplace la colonne latérale (Paramètres et Énergie deviennent des tuiles, Fenêtres reste sur Select), ou colonne latérale gardée.
 
 ## App Paramètres
 
@@ -124,6 +128,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : fond d'écran sous le lanceur, patch sur notre fork (`0.4.2+u1`)
 - [x] Appareil : installer `0.4.2+u1`, vérifier le fond d'écran
 - [x] Agent : JetBrains Mono dans le menu et la barre (lien posé par `install.sh`)
+- [ ] Agent : lanceur en grille, fork `0.4.2+u2` (PR #2), puis test sur l'appareil
+- [ ] Agent : écran d'accueil, fork `0.4.2+u3` (prévu, à valider, voir Lanceur)
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **v2 Usage**
@@ -138,6 +144,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 
 ## Questions ouvertes
 
+- Accueil : colonne de widgets à gauche (sans colonne latérale) ou colonne latérale gardée ?
 - Jean-Michel expose-t-il une API compatible Ollama ou OpenAI ? C'est ce qui permet de le brancher sans code dans Newelle et Home Assistant.
 - As-tu déjà un Home Assistant, ou une machine qui pourrait l'héberger (celle de Jean-Michel ?) ?
 - Tenda Beli : passe-t-il par l'app Tuya / Smart Life ? Si oui, l'intégration Tuya suffit.
