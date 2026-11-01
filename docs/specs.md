@@ -44,22 +44,23 @@ Pas de gestes de bord en v1 : la barre des tâches et les boutons couvrent tout.
 
 ## Lanceur et fond d'écran
 
-Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final (épinglée dans `PT35_VERSION`), u5 finitions (PR #5 du fork, PR surcouche #6, pas encore publiée).
+Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final, u5 finitions (épinglée dans `PT35_VERSION`), u6 balayage CRT, légende encadrée, tuiles translucides (PR #6 du fork, PR surcouche #7, pas encore publiée).
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
 - **Icônes** : thème `Phosphore` ([PR #4](https://github.com/Kalacione/pocketterm35-unleashed/pull/4)) : icônes Tabler (MIT) au trait, recolorées en vert phosphore par `tools/icons.sh`, Papirus pour le reste. Sans icône, c'est le glyphe de 2 caractères qui s'affiche.
 - **Scanlines** : effet CRT sur la barre, le menu et les apps, depuis le fork `0.4.2+u2` (`[effects] scanlines`, `pt35-bar --scanlines` dans la config sway), désactivé par défaut et activé par la surcouche. Une ligne sur deux à 15 % ne se voyait pas sur l'écran 3,5" : u5 ajoute `[effects] scanline_period`, et la surcouche passe à une ligne sur quatre à 25 %. Détails dans `DESIGN.md`.
-- **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe, pas d'animation.
-- **Accueil** (fork `0.4.2+u4` ; choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u5.png`](design/accueil-u5.png) ([`accueil-u4.png`](design/accueil-u4.png) avant), liste All apps [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png) (version u3, même fonctionnement).
+- **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe : un fond animé (pluie) a été proposé et mis de côté, car il oblige à redessiner l'accueil en continu.
+- **Accueil** (fork `0.4.2+u4` ; choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u6.png`](design/accueil-u6.png) (avant : [`accueil-u5.png`](design/accueil-u5.png), [`accueil-u4.png`](design/accueil-u4.png)), liste All apps [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png) (version u3, même fonctionnement).
   - Réglages : `[menu] launcher_home = true`, `[menu] launcher_columns = 3`, `[icons] size_launcher = 64`, `[icons] glow = 4`. Tout est désactivé par défaut ; la surcouche les active (PR Unleashed #4).
   - Grille 3 × 3 des seules apps épinglées. Plus de colonne latérale ni de tuiles Toutes les apps, Paramètres ou Énergie ; Fenêtres reste sur Select. Défilement par lignes (D-pad, Bas / PageDown), L et R restent réservés. Tuile sélectionnée pleine en blanc léger.
   - *Widget column* à gauche (216 px, `widgets.rs` dans le fork), deux panneaux à onglet. SYSTEM : grosse horloge, date, jauges segmentées CPU, RAM, TEMP. NETWORK : nom (SSID, Ethernet ou Offline), IP, signal Wi-Fi en segments, débits ↓/↑. Une jauge sans valeur est masquée.
   - All apps (liste) : Y sur l'accueil l'ouvre ; X ou une lettre l'ouvre en recherche ; en mode souris, clic droit sur une tuile. Dans la liste : A ouvre, B revient à l'accueil, X cherche, Y épingle ou désépingle. Paramètres (`screen:quick`) et Énergie (`page:power`) sont en fin de liste et s'épinglent comme une app.
   - Épingles par défaut, posées par `install.sh` si aucune n'existe : terminal, fichiers, éditeur, navigateur, musique, vidéo, DarkWire, Paramètres, Énergie.
   - u5 : plus de bandeau « PT35 // LAUNCHER », barre à 40 px ; horloges du widget et de la barre en VT323 (`[font] family_display`, `[bar] clock_size = 28`), halo sur l'horloge du widget (`[effects] glow = 3`).
+  - u6 : tuiles et widgets translucides sur le fond d'écran (`[menu] tile_opacity`, 85 % chez nous) ; légende du bas comme la maquette, touche carrée colorée et action encadrée (`[menu] hint_frames = true`) ; balayage CRT, menu ouvert seulement (voir `DESIGN.md`).
   - Pas fait : courbe de débit (il faudrait un historique tenu par `pt35d`).
-  - Widget Lecture (prévu, fork après u6) : panneau `MEDIA` à la place de NETWORK tant qu'un lecteur MPRIS joue ou est en pause, sinon NETWORK revient. Titre, artiste, barre de segments de la position, `1:23 / 4:56`, et l'état écrit en toutes lettres avec son icône (`▶ PLAYING`, `❚❚ PAUSED`, comme le reste du menu en anglais), jamais par la couleur seule. Un toucher sur le panneau fait lecture / pause. Lu par `playerctl` hors du fil Wayland, comme le SSID. Paquets `playerctl` et `mpv-mpris`, posés par `install.sh` avec le widget. Coût : `widgets.rs` et `draw_widgets` (environ 150 lignes), à reporter à chaque mise à jour d'upstream.
+  - Widget Lecture (prévu, fork u7) : panneau `MEDIA` à la place de NETWORK tant qu'un lecteur MPRIS joue ou est en pause, sinon NETWORK revient. Titre, artiste, barre de segments de la position, `1:23 / 4:56`, et l'état écrit en toutes lettres avec son icône (`▶ PLAYING`, `❚❚ PAUSED`, comme le reste du menu en anglais), jamais par la couleur seule. Un toucher sur le panneau fait lecture / pause. Lu par `playerctl` hors du fil Wayland, comme le SSID. Paquets `playerctl` et `mpv-mpris`, posés par `install.sh` avec le widget. Coût : `widgets.rs` et `draw_widgets` (environ 150 lignes), à reporter à chaque mise à jour d'upstream.
 
 ## App Paramètres
 
@@ -69,7 +70,7 @@ Paramètres existe déjà dans PT35-OS, en liste avec sous-vues. On complète ce
 | --- | --- | --- | --- |
 | Wi-Fi | oui (scan, connexion) | — | — |
 | Bluetooth | oui | — | — |
-| Son, luminosité | oui (réglages rapides ; u5 : curseurs à partir du tiers de l'écran, libellé 1/3, curseur 2/3 au plus, aperçu [`reglages-rapides-u5.png`](design/reglages-rapides-u5.png)) | — | — |
+| Son, luminosité | oui (réglages rapides ; u5 : curseurs à partir du tiers de l'écran, libellé 1/3, curseur 2/3 au plus, aperçu [`reglages-rapides-u5.png`](design/reglages-rapides-u5.png) ; u6 : curseur « Tiles », opacité des tuiles de 20 à 100 %, rangée dans `appearance.toml` posé par `install.sh`, pas dans `theme.toml` qui passerait devant le curseur) | — | — |
 | Apparence (palette, police, taille) | oui | palette Phosphore | ligne Fond d'écran |
 | Système (CPU, RAM, disque, température, IP) | oui | — | — |
 | Réseau filaire / IP fixe, nom d'hôte | non | `nmtui` | écran natif si besoin |
@@ -138,11 +139,13 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : grille, halo des icônes et scanlines, fork `0.4.2+u2` (publiée)
 - [x] Agent : accueil final (épingles 3 × 3, widget column, All apps), fork `0.4.2+u4`
 - [x] Agent : épingler `0.4.2+u4` et tout activer dans la surcouche, épingles par défaut dans `install.sh`
-- [ ] Agent : finitions u5 (scanlines 1/4 à 25 %, horloges VT323, barre 40 px, réglages rapides), PR #5 du fork et PR surcouche #6
+- [x] Agent : finitions u5 (scanlines 1/4 à 25 %, horloges VT323, barre 40 px, réglages rapides)
+- [ ] Agent : u6 (balayage CRT, légende encadrée, tuiles translucides, curseur Tiles), PR #6 du fork et PR surcouche #7
+- [ ] Appareil : installer u6, vérifier le balayage (menu seul, jamais sur une app) et le curseur Tiles
 - [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
 - [x] Agent : mpv + uosc aux couleurs Phosphore (`home/.config/mpv/`, uosc épinglé dans `install.sh`)
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
-- [ ] Agent : widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork après u6
+- [ ] Agent : widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork u7
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **v2 Usage**
