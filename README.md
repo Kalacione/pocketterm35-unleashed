@@ -104,7 +104,9 @@ cd ~/pocketterm35-unleashed
 Le script relie les fichiers de `home/` dans `~` (avec GNU stow). Un fichier
 existant au même endroit est renommé en `.bak` et restauré à la désinstallation.
 Si la version de PocketTerm35-OS ne correspond pas à `PT35_VERSION`, le script
-s'arrête et indique quoi faire (voir plus bas).
+s'arrête et indique quoi faire (voir plus bas). Avec `sudo`, il lie aussi la
+police JetBrains Mono dans `/usr/share/fonts/TTF` et nos icônes dans
+`/usr/share/icons/Phosphore` : PocketTerm35-OS ne les cherche que là.
 
 **8. Rechargement**
 
@@ -165,6 +167,8 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (avec PocketTerm35-OS `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
+| `home/.local/share/icons/Phosphore/` | icônes pixel des apps du lanceur, Papirus pour le reste |
+| `tools/icons.py` | source de ces icônes (formes sur une grille 32 × 32), regénère les SVG |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |

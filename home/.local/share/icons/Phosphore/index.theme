@@ -1,0 +1,12 @@
+[Icon Theme]
+Name=Phosphore
+Comment=Icônes pixel 32x32 de la charte PocketTerm Phosphore
+Inherits=Papirus-Dark,hicolor
+Directories=32x32/apps
+
+[32x32/apps]
+Size=32
+MinSize=16
+MaxSize=256
+Context=Applications
+Type=Scalable

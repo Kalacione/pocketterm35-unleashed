@@ -22,3 +22,6 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | patch + compilation sur le Pi | écarté | 1 à 2 Go d'outils Rust sur le Pi, patch à rejouer à chaque mise à jour |
 | config Start / Select | inutile | le comportement voulu (menu, bascule d'apps, jamais transmis aux apps) est celui de PT35-OS par défaut |
 | `stow --no-folding` | retenu | sans lui, stow lie tout `~/.config/pt35` vers le dépôt, et Apparence écrirait `appearance.toml` dans le dépôt |
+| [Pixelitos](https://github.com/ItsZariep/pixelitos-icon-theme), [Star Pixel](https://github.com/starciad/star-pixel-icons-theme) | écarté | thèmes d'icônes pixel en PNG et en couleur ; `pt35-menu` ne lit que du SVG |
+| teinte verte des icônes Papirus (patch fork) | écarté | choix de Djé : nos propres icônes pixel plutôt qu'une teinte automatique |
+| icônes pixel maison (`tools/icons.py`) | retenu | 12 icônes 32x32 au trait pour les apps du lanceur, thème `Phosphore` qui hérite de Papirus |
