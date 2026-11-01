@@ -74,3 +74,8 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | bandeau `pt35-actions` pour Files | écarté | le clavier physique fait Ctrl+C / Ctrl+V : pas d'interface en plus |
 | [sshfs.yazi](https://github.com/uhs-robert/sshfs.yazi) | écarté | monte par sshfs (FUSE, paquet en plus) ce que le SFTP natif de yazi fait déjà |
 | L / R pour les onglets de Files (patch `pt35d`) | écarté pour l'instant | L ferme et R change de mode partout : un sens par bouton. Y (F10, libre dans yazi) liste les onglets comme X liste les lieux, et un hôte choisi par X s'ouvre dans son propre onglet : deux onglets suffisent pour copier |
+| défilement tactile de [foot](https://codeberg.org/dnkl/foot) (depuis 1.16) | retenu | glisser = molette, appui long = sélection, sans config ; tmux, yazi et htop défilent déjà au doigt |
+| gestes libinput / `bindgesture` de sway | écarté | pavés tactiles seulement, rien pour un écran tactile |
+| [Touchégg](https://github.com/JoseExposito/touchegg) | écarté | X11, ou GNOME / KDE par extension : rien pour sway |
+| [lisgd](https://git.sr.ht/~mil/lisgd) (sxmo) | en réserve | gestes multi-doigts → commande (ex. 3 doigts = Start), lit evdev sans config sway ; mais l'app sous les doigts reçoit le même geste, donc il agit deux fois. Seulement si un geste système est demandé |
+| défilement tactile dans `pt35-ui` (fork) | à trancher | rien d'existant pour une surface layer-shell en Rust ; on copie le modèle de foot (seuil, puis glisser = défiler), voir `specs.md`, Tactile |
