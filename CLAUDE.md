@@ -69,9 +69,12 @@ Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 - Fork : [Kalacione/PocketTerm35-OS](https://github.com/Kalacione/PocketTerm35-OS),
   seulement pour ce qu'aucune config ne permet (aujourd'hui : le fond d'écran).
   Une version patchée s'appelle `<version upstream>+u<n>` (ex. `0.4.2+u1`),
-  avec son entrée dans le CHANGELOG du fork. Une release `v0.4.2+u1` sur le fork
-  fait construire le `.deb` ARM par sa CI (`release.yml`). La release du fork
-  sert d'archive : on écrit la version dans `PT35_VERSION`, sans `pin-pt35.sh`.
+  montée dans le `Cargo.toml` du fork avec son entrée dans le CHANGELOG, dans la
+  PR du patch. Une fois la PR mergée, `tools/release-fork.sh` (PC avec `gh`)
+  pose le tag `v<version>` sur le main du fork : sa CI (`release.yml`, sur push
+  de tag) construit le `.deb` ARM et crée la release, qui sert d'archive. Le
+  script écrit la version dans `PT35_VERSION`. Jamais de tag à la main ni de
+  `gh release create` : la CI s'en charge.
   Pas de compilation sur le Pi. Un patch qui sert à tous part ensuite en PR chez
   therezor.
 

@@ -111,7 +111,7 @@ v0.2 (31 oct. 2026) : vert adouci, sélection en blanc léger, danger et erreur 
 
 Variantes dans Apparence : Ambre (`#f2b24e` sur `#0f0c08`) et Cyan (`#5fd8e8` sur `#0a0e10`), mêmes rôles.
 
-Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/theme.toml)) : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = selection, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. `pt35-menu` peint la ligne sélectionnée en `accent` : d'où `accent` = selection. Il s'en sert aussi pour le titre « PT35 », son soulignement et les curseurs, qui passent donc en blanc léger. Lanceur en grille (fork `0.4.2+u2`, [PR #2](https://github.com/Kalacione/PocketTerm35-OS/pull/2), pas encore fusionnée) : la tuile sélectionnée est pleine en `accent` (blanc léger), icône en `accent_fg`. Réglages : `[menu] launcher_columns = 4`, `[icons] size_launcher = 64`, `[icons] glow = 4` (halo des icônes, en px), `[effects] scanlines` (voir Elevation & Depth). Tout est à 0 ou off par défaut : on l'active dans `theme.toml` une fois u2 publié. En `0.4.2+u1` et chez upstream, la tuile sélectionnée n'a qu'un halo de 2 px et des coins en `accent`.
+Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/theme.toml)) : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = selection, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. `pt35-menu` peint la ligne sélectionnée en `accent` : d'où `accent` = selection. Il s'en sert aussi pour le titre « PT35 », son soulignement et les curseurs, qui passent donc en blanc léger. Lanceur en grille (fork `0.4.2+u2`) puis accueil (`0.4.2+u4`, [PR #4](https://github.com/Kalacione/PocketTerm35-OS/pull/4) en cours) : la tuile sélectionnée est pleine en `accent` (blanc léger), icône en `accent_fg`. Réglages : `[menu] launcher_home = true`, `[menu] launcher_columns = 3`, `[icons] size_launcher = 64`, `[icons] glow = 4` (halo des icônes, en px), `[effects] scanlines = 15` (voir Elevation & Depth). Tout est à 0 ou off par défaut ; la surcouche les active dans `theme.toml`. En `0.4.2+u1` et chez upstream, la tuile sélectionnée n'a qu'un halo de 2 px et des coins en `accent`.
 
 ## Typography
 
@@ -130,7 +130,7 @@ Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 ## Layout
 
-Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
+Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale. Aperçu : [`docs/design/accueil-u4.png`](docs/design/accueil-u4.png). Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
@@ -146,7 +146,7 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - **list-row-selected / tile-selected** : fond blanc léger, texte sombre.
 - **button-danger / button-error** : fond plein orange ou rouge, texte sombre, icône obligatoire.
 - **action-bar-button** : gros boutons en bas des écrans d'édition (Copier, Couper, Coller, Annuler, Chercher, Enregistrer). C'est la réponse au « pas de Vim ».
-- **barre segmentée** : CPU, RAM, température, signal, volume.
+- **barre segmentée** : CPU, RAM, température, signal, volume. Masquée si la valeur n'existe pas.
 - **courbe en aire** : débit réseau, charge, avec dégradé et halo.
 - **hint-bar** : pastilles pleines aux couleurs des boutons physiques (A primary, B error, X teal, Y danger), cliquables.
 
