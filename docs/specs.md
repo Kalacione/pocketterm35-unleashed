@@ -151,6 +151,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Appareil : `git pull && ./install.sh --pt35 && ./install.sh`, puis vérifier d'un coup : accueil, jauges, All apps et épinglage (u4), balayage menu seul et curseur Tiles (u6), obturateur (u7), panneau MEDIA et pause au toucher (u8), état des interrupteurs lisible d'un coup d'œil (u9)
 - [x] Agent : mpv + uosc aux couleurs Phosphore (`home/.config/mpv/`, uosc épinglé dans `install.sh`)
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
+- [x] Agent : écran de démarrage PocketTerm OS (thème Plymouth, images générées par `tools/splash.py`)
+- [ ] Appareil : `./install.sh`, redémarrer, vérifier l'écran de démarrage et la barre
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **Prochains chantiers** (demandés par Djé, pas commencés)

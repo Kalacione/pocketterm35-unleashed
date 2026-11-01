@@ -14,10 +14,14 @@ ICON_LINK=/usr/share/icons/Phosphore
 UOSC_VERSION=5.9.2
 UOSC_SHA256=81d1d0c896cb8b2c3d3d218e3ed91a33b3f16c6ff420e11f3179130984266375
 MPV_DIR=$HOME/.config/mpv
+SPLASH_DIR=/usr/share/plymouth/themes/pocketterm
+# Dans /usr/sbin, hors du PATH d'un utilisateur sur Debian.
+PLY=/usr/sbin/plymouth-set-default-theme
 # Paquets Debian dont nos réglages ont besoin, au-delà de ceux de PT35-OS.
 # mpv n'est qu'une suggestion du .deb : Musique et Vidéo en dépendent ici.
 # mpv-mpris et playerctl : le widget Lecture lit les lecteurs par MPRIS.
-DEPS="stow fonts-jetbrains-mono fontconfig mpv mpv-mpris playerctl curl unzip"
+# python3-pil : tools/splash.py dessine l'écran de démarrage.
+DEPS="stow fonts-jetbrains-mono fontconfig mpv mpv-mpris playerctl curl unzip python3-pil"
 # Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
 https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
@@ -50,6 +54,12 @@ case "${1:-}" in
     stow -D --no-folding -t "$HOME" home
     sudo rm -f "$FONT_DIR"/JetBrainsMono-Regular.ttf "$FONT_DIR"/JetBrainsMono-Bold.ttf "$ICON_LINK"
     rm -rf "$MPV_DIR/scripts/uosc" "$MPV_DIR"/fonts/uosc_*
+    # Retour au thème de Raspberry Pi OS (pix), sinon au défaut de Plymouth.
+    if [ "$($PLY 2>/dev/null)" = pocketterm ]; then
+      if [ -d /usr/share/plymouth/themes/pix ]; then sudo $PLY -R pix
+      else sudo $PLY -R --reset; fi
+    fi
+    sudo rm -rf "$SPLASH_DIR"
     # On remet ce qu'on avait mis de côté.
     find home -type f -o -type l | while read -r f; do
       dst="$HOME/${f#home/}"
@@ -112,6 +122,22 @@ fi
 
 # Les médiathèques de Musique et Vidéo (profils de mpv.conf).
 mkdir -p "$HOME/Music" "$HOME/Videos"
+
+# Écran de démarrage : thème Plymouth dessiné depuis la charte. Les images sont
+# refaites à chaque fois ; l'initramfs (une minute) seulement si elles changent.
+if [ -x $PLY ]; then
+  tmp=$(mktemp -d)
+  cp plymouth/pocketterm/* "$tmp/"
+  python3 tools/splash.py "$tmp"
+  if ! diff -rq "$tmp" "$SPLASH_DIR" >/dev/null 2>&1 || [ "$($PLY)" != pocketterm ]; then
+    sudo rm -rf "$SPLASH_DIR" && sudo cp -r "$tmp" "$SPLASH_DIR" && sudo chmod -R a+rX "$SPLASH_DIR"
+    echo "écran de démarrage : reconstruction de l'initramfs, une minute"
+    sudo $PLY -R pocketterm
+  fi
+  rm -rf "$tmp"
+else
+  echo "Plymouth absent : écran de démarrage non installé"
+fi
 
 # L'accueil n'affiche que les épingles : on en pose par défaut, sans toucher
 # à celles qui existent. Y sur l'accueil ouvre Toutes les apps pour en changer.
