@@ -1,7 +1,7 @@
 # PocketTerm 3.5 Unleashed
 
 Un thème et quelques réglages pour le
-[WaveShare PocketTerm 3.5](https://www.waveshare.com/), au-dessus de
+[WaveShare PocketTerm 3.5](https://www.waveshare.com/pocketterm35.htm), au-dessus de
 [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS).
 
 ![Accueil : horloge, widget réseau et grille d'apps épinglées](docs/captures/accueil.png)
