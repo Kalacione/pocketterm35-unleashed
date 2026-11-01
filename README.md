@@ -204,7 +204,7 @@ installé reste celui de `PT35_VERSION`.
 | `home/.config/tmux/tmux.conf` | barre du bas du Terminal, souris et copie |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
 | `home/.config/mpv/` | mpv et uosc aux couleurs du thème, boutons A, X, Y ; sans fichier, un accueil pour parcourir sa médiathèque ou ouvrir une URL (`scripts/pt35-home.lua`) |
-| `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, hôtes SSH), Ctrl+C / X / V, onglets Ctrl+T / W |
+| `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, ou un hôte SSH dans un nouvel onglet), Y liste les onglets (Y encore = nouvel onglet), Ctrl+C / X / V, onglets Ctrl+T / W |
 | `home/.local/bin/pt35-yazi-vfs` | traduit `~/.ssh/config` pour le SFTP de yazi, à chaque ouverture de Fichiers |
 | `home/.local/bin/pt35-actions` | bandeau d'actions sous l'éditeur |
 | `home/.local/share/fonts/` | police pixel VT323 des horloges |

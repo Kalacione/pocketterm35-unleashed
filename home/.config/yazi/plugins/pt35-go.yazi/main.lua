@@ -1,5 +1,6 @@
--- X des boutons : Lieux. X encore = dossier personnel, 1 à 9 = hôtes SSH,
--- lus dans le vfs.toml que pt35-yazi-vfs écrit au lancement de Files.
+-- X des boutons : Lieux. X encore = dossier personnel ici, 1 à 9 = un hôte SSH
+-- dans un nouvel onglet (lus dans le vfs.toml que pt35-yazi-vfs écrit au
+-- lancement de Files). Le local reste dans l'onglet d'avant : Y puis 1 y revient.
 return {
 	entry = function()
 		local cands, urls = { { on = "<Tab>", desc = "Home" } }, { "~" }
@@ -13,6 +14,10 @@ return {
 			f:close()
 		end
 		local i = ya.which { cands = cands }
-		if i then ya.emit("cd", { urls[i] }) end
+		if i == 1 then
+			ya.emit("cd", { urls[1] })
+		elseif i then
+			ya.emit("tab_create", { urls[i] })
+		end
 	end,
 }
