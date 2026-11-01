@@ -111,14 +111,14 @@ v0.2 (31 oct. 2026) : vert adouci, sélection en blanc léger, danger et erreur 
 
 Variantes dans Apparence : Ambre (`#f2b24e` sur `#0f0c08`) et Cyan (`#5fd8e8` sur `#0a0e10`), mêmes rôles.
 
-Correspondance `theme.toml` : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = primary, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. À vérifier sur l'appareil : quelle couleur `pt35-menu` utilise pour la ligne sélectionnée. Si c'est `accent`, la sélection blanc léger demande `accent = selection`, ou une petite PR pour une clé dédiée.
+Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/theme.toml)) : `background`, `background_alt` = surface, `foreground` = primary, `muted`, `accent` = selection, `accent_fg` = on-primary, `warning` = danger, `critical` = error, `ok` = primary, `border` = line, `button_a` = primary, `button_b` = error, `button_x` = teal, `button_y` = danger, `button_neutral` = line. `pt35-menu` peint la ligne sélectionnée en `accent` : d'où `accent` = selection. Il s'en sert aussi pour le titre « PT35 », son soulignement et les curseurs, qui passent donc en blanc léger. La tuile sélectionnée du lanceur a un halo de 2 px et des coins en `accent`, pas un fond plein : c'est le dessin de PT35-OS, pas réglable.
 
 ## Typography
 
 Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 - **VT323** (pixel, OFL) : afficheur et titres (horloge, gros chiffres, titres d'écran). Livrée par le dépôt dans `~/.local/share/fonts`. `theme.toml` n'a qu'une famille pour tout le menu : VT323 sert donc là où on dessine nous-mêmes (widgets, fonds d'écran, icônes).
-- **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant, menu, terminal.
+- **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant et le terminal. Le menu et la barre gardent DejaVu Sans tant que PT35-OS ne sait pas trouver JetBrains Mono (voir [`docs/briques.md`](docs/briques.md)).
 
 | token | police | taille | usage |
 |---|---|---|---|

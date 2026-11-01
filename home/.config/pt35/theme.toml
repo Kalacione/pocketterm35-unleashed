@@ -1,0 +1,24 @@
+# PocketTerm Phosphore (DESIGN.md), par-dessus le theme.toml de PocketTerm35-OS 0.4.2.
+# Seules les clés changées sont ici. Ce fichier passe devant Paramètres > Apparence :
+# les palettes choisies là-bas ne changent plus les couleurs tant qu'il est lié.
+
+[color]
+background      = "#0b0f0d"
+background_alt  = "#121a16"   # surface
+foreground      = "#63e6a4"   # phosphore doux
+muted           = "#5e8f78"
+# pt35-menu peint la ligne sélectionnée en `accent` : blanc léger, texte sombre.
+accent          = "#e6fff2"
+accent_fg       = "#06110b"
+warning         = "#ffa94d"   # danger, toujours en fond plein
+critical        = "#ff6e6e"   # erreur, toujours en fond plein
+ok              = "#63e6a4"
+border          = "#24382e"   # line
+button_a        = "#63e6a4"
+button_b        = "#ff6e6e"
+button_x        = "#4fd1d9"
+button_y        = "#ffa94d"
+button_neutral  = "#24382e"
+
+[menu]
+radius          = 0           # angles droits

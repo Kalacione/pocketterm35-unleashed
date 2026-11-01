@@ -108,8 +108,11 @@ s'arrête et indique quoi faire (voir plus bas).
 
 **8. Rechargement**
 
-`Super`+`Shift`+`c` recharge sway. Pour le menu, les apps et le thème,
-redémarrer la session.
+```sh
+pt35ctl reload   # thème, menu et apps
+```
+
+`Super`+`Shift`+`c` recharge sway.
 
 **9. Vérification**
 
@@ -152,12 +155,13 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 |---|---|
 | `home/` | fichiers reliés dans `~` par `install.sh` |
 | `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS |
+| `home/.config/pt35/theme.toml` | thème Phosphore : couleurs du menu et de la barre |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |
 | `docs/specs.md` | specs, priorités et TODO |
 | `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
-| `docs/design/` | aperçu de la charte (`charte.html`) et maquettes SVG 640x480 |
+| `docs/design/` | aperçu de la charte (`charte.html`), maquettes SVG 640x480 et fond d'écran |
 | `docs/briques.md` | logiciels retenus ou écartés, et pourquoi |
 | `CLAUDE.md` | règles du projet, pour les contributeurs humains et IA |
 
