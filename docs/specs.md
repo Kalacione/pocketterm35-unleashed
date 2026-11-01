@@ -60,7 +60,7 @@ Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps éping
   - u5 : plus de bandeau « PT35 // LAUNCHER », barre à 40 px ; horloges du widget et de la barre en VT323 (`[font] family_display`, `[bar] clock_size = 28`), halo sur l'horloge du widget (`[effects] glow = 3`).
   - u6 : tuiles et widgets translucides sur le fond d'écran (`[menu] tile_opacity`, 85 % chez nous) ; légende du bas comme la maquette, touche carrée colorée et action encadrée (`[menu] hint_frames = true`) ; balayage CRT, menu ouvert seulement (voir `DESIGN.md`).
   - Pas fait : courbe de débit (il faudrait un historique tenu par `pt35d`).
-  - Widget Lecture (prévu, fork u8) : panneau `MEDIA` à la place de NETWORK tant qu'un lecteur MPRIS joue ou est en pause, sinon NETWORK revient. Titre, artiste, barre de segments de la position, `1:23 / 4:56`, et l'état écrit en toutes lettres avec son icône (`▶ PLAYING`, `❚❚ PAUSED`, comme le reste du menu en anglais), jamais par la couleur seule. Un toucher sur le panneau fait lecture / pause. Lu par `playerctl` hors du fil Wayland, comme le SSID. Paquets `playerctl` et `mpv-mpris`, posés par `install.sh` avec le widget. Coût : `widgets.rs` et `draw_widgets` (environ 150 lignes), à reporter à chaque mise à jour d'upstream.
+  - Widget Lecture (fork u8, [PR #8 du fork](https://github.com/Kalacione/PocketTerm35-OS/pull/8), aperçu [`accueil-lecture-u8.png`](design/accueil-lecture-u8.png)) : panneau `MEDIA` à la place de NETWORK tant qu'un lecteur MPRIS joue ou est en pause, sinon NETWORK revient. Titre, artiste, barre de segments de la position, `1:23 / 4:56`, et l'état écrit en toutes lettres avec son icône (`▶ PLAYING`, `❚❚ PAUSED`, comme le reste du menu en anglais), jamais par la couleur seule. Un toucher sur le panneau fait lecture / pause. Lu par `playerctl` hors du fil Wayland, comme le SSID. Paquets `playerctl` et `mpv-mpris`, posés par `install.sh`. Coût : `widgets.rs` et `draw_widgets` (environ 150 lignes), à reporter à chaque mise à jour d'upstream.
 
 ## App Paramètres
 
@@ -145,7 +145,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
 - [x] Agent : mpv + uosc aux couleurs Phosphore (`home/.config/mpv/`, uosc épinglé dans `install.sh`)
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
-- [ ] Agent : widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork u8
+- [x] Agent : widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork u8
+- [ ] Appareil : installer `0.4.2+u8`, lancer un morceau dans Musique, vérifier le panneau MEDIA et la pause au toucher
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **v2 Usage**
