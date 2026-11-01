@@ -17,12 +17,14 @@ https://github.com/therezor/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop
 
 case "${1:-}" in
   --pt35)
-    tmp=$(mktemp -d)
-    for u in $DEB_URLS; do curl -fsSL -o "$tmp/pt35-desktop_arm64.deb" "$u" && break; done
+    # Lisible par _apt, sinon apt prévient qu'il télécharge en root.
+    tmp=$(mktemp -d) && chmod 755 "$tmp"
+    # Sans -S : une source absente (404) n'est pas une erreur, on essaie la suivante.
+    for u in $DEB_URLS; do curl -fsL -o "$tmp/pt35-desktop_arm64.deb" "$u" && echo "source : $u" && break; done
     [ -s "$tmp/pt35-desktop_arm64.deb" ] || { echo "Téléchargement impossible." >&2; exit 1; }
     sudo apt-get install -y --allow-downgrades "$tmp/pt35-desktop_arm64.deb"
     rm -rf "$tmp"
-    echo "PocketTerm35-OS $PIN installé. Redémarre."
+    echo "PocketTerm35-OS $PIN installé. Puis : ./install.sh && sudo reboot"
     exit 0 ;;
   --uninstall)
     command -v stow >/dev/null || sudo apt-get install -y stow
