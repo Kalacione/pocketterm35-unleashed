@@ -44,7 +44,7 @@ Pas de gestes de bord en v1 : la barre des tâches et les boutons couvrent tout.
 
 ## Lanceur et fond d'écran
 
-Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final, u5 finitions, u6 balayage CRT, légende encadrée, tuiles translucides, u7 icône principale en obturateur, u8 widget Lecture (épinglée dans `PT35_VERSION`), u9 interrupteurs ON/OFF et pilule de sélection (fork #9, unleashed #13, pas encore publiée).
+Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final, u5 finitions, u6 balayage CRT, légende encadrée, tuiles translucides, u7 icône principale en obturateur, u8 widget Lecture, u9 écrans de réglages en liste encadrée (épinglée dans `PT35_VERSION`). Toutes publiées par `tools/ship.sh`.
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
@@ -81,6 +81,8 @@ Paramètres existe déjà dans PT35-OS, en liste avec sous-vues. On complète ce
 | Mise à jour | à vérifier | `sudo apt full-upgrade` dans `foot` | — |
 
 Les commandes root passent par une règle `sudoers` limitée à cette liste.
+
+**Rendu des listes** (fork u9, `[menu] row_frames`, activé par la surcouche) : icône de chaque ligne dans un cadre carré, Réglages rapides en liste qui défile comme les autres, filets entre les lignes, pas de numéro de ligne (`show_numbers = false`, posé par `install.sh`). Interrupteurs : le mot ON ou OFF à côté du curseur, sur fond plein vert ou rouge ; le mot porte l'état, la couleur n'est qu'un appui. La pilule de sélection s'arrête avant la barre de défilement. Aperçus : [`reglages-rapides-u9.png`](design/reglages-rapides-u9.png), [`parametres-u9.png`](design/parametres-u9.png).
 
 ## Apps cibles
 
@@ -143,22 +145,25 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : finitions u5 (scanlines 1/4 à 25 %, horloges VT323, barre 40 px, réglages rapides)
 - [x] Agent : u6 (balayage CRT, légende encadrée, tuiles translucides, curseur Tiles), fork #6 et unleashed #7
 - [x] Agent : u7 (icône obturateur), fork #7, épinglé par `tools/ship.sh`
-- [ ] Agent : u9, interrupteurs ON/OFF lisibles et pilule de sélection qui s'arrête avant la barre de défilement (fork #9, unleashed #13). Aperçus : [`reglages-rapides-u9.png`](design/reglages-rapides-u9.png), [`parametres-u9.png`](design/parametres-u9.png)
-- [ ] Appareil : installer u9, vérifier qu'on lit l'état des interrupteurs d'un coup d'œil
-- [ ] Chantier fil d'Ariane (en-tête « PT35 < SETTINGS ») : il prend trop de place, maquette à revoir d'abord. Demandé par Djé, pas commencé
-- [ ] Appareil : installer u6, vérifier le balayage (menu seul, jamais sur une app) et le curseur Tiles
-- [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
+- [x] Agent : u8, widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork #8
+- [x] Agent : u9, listes encadrées, interrupteurs ON/OFF sur fond plein, pilule avant la barre de défilement, sans numéro de ligne (fork #9, unleashed #13)
+- [x] Agent : `tools/ship.sh` remplace `release-fork.sh` et `pin-pt35.sh` (unleashed #12) ; `PT35_VERSION` = `0.4.2+u9`
+- [x] Appareil : `git pull && ./install.sh --pt35 && ./install.sh`, puis vérifier d'un coup : accueil, jauges, All apps et épinglage (u4), balayage menu seul et curseur Tiles (u6), obturateur (u7), panneau MEDIA et pause au toucher (u8), état des interrupteurs lisible d'un coup d'œil (u9)
 - [x] Agent : mpv + uosc aux couleurs Phosphore (`home/.config/mpv/`, uosc épinglé dans `install.sh`)
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
-- [x] Agent : widget Lecture (MPRIS via `playerctl`) sur l'accueil, fork u8
-- [ ] Appareil : installer `0.4.2+u8`, lancer un morceau dans Musique, vérifier le panneau MEDIA et la pause au toucher
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
+
+**Prochains chantiers** (demandés par Djé, pas commencés)
+
+- [ ] Fil d'Ariane (en-tête « PT35 < SETTINGS ») : il prend trop de place. Maquette à revoir d'abord
+- [ ] Écran de sélection des widgets de l'accueil, sur le modèle de All apps (liste, Y ajoute ou retire)
+- [ ] Reskin des apps aux couleurs Phosphore, au-delà de GTK4, `foot` et mpv : liste des apps à cadrer
+- Mis de côté : fond d'écran animé (pluie), il oblige à redessiner l'accueil en continu
 
 **v2 Usage**
 
 - [ ] Wike
 - [ ] Newelle : tester à 640 × 480 avec Claude, puis Jean-Michel
-- [ ] Écran de sélection des widgets de l'accueil, sur le modèle de All apps (liste, Y ajoute ou retire). Demandé par Djé, pas commencé
 - [ ] Rétro-gaming : RetroArch + demande au mainteneur pour le mode boutons bruts
 
 **v3 Bonus**

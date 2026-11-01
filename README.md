@@ -144,10 +144,10 @@ testée :
 `./install.sh --force` installe quand même sur une autre version.
 
 Une version en `+u<n>` (par exemple `0.4.2+u1`) est PocketTerm35-OS avec
-un petit patch, construit sur
+nos patchs, construit sur
 [notre fork](https://github.com/Kalacione/PocketTerm35-OS) (détail dans son
-CHANGELOG). Aujourd'hui : le fond d'écran du lanceur. Sans ce patch, tout le
-reste fonctionne, et `wallpaper.svg` est simplement ignoré.
+CHANGELOG) : fond d'écran, accueil en grille avec widgets, effets CRT,
+icône obturateur, widget Lecture et listes de réglages encadrées.
 
 ## Désinstallation
 
