@@ -64,3 +64,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | ping (ICMP) pour HOSTS | écarté | une connexion TCP au port SSH dit si on peut s'y connecter, et passe quand l'ICMP est filtré ; un test toutes les 2 min par `pt35d` |
 | VPN OpenVPN dans NETWORK | à cadrer | NetworkManager importe les `.ovpn` (`network-manager-openvpn`) ; le widget ferait `nmcli con up/down` |
 | redémarrer `pt35d` et la barre dans le `postinst` (fork u14) | retenu | les boucles de respawn du sway config relancent les nouveaux binaires ; sinon l'ancien démon reste jusqu'au prochain login et les widgets HOSTS et NETWORK restent vides |
+| réordonner les épingles de l'accueil avec B (fork u15) | retenu | B ne fait rien sur l'accueil ; L/R tournent déjà les widgets et il n'y a pas d'autre bouton au dos. Croix = échange avec la voisine, A ou B pose, ordre écrit dans le fichier `pinned` à chaque pas. Tuile saisie : cadre épais + étiquette MOVE |
