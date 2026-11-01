@@ -26,8 +26,9 @@ Le désinstaller rend le bureau d'origine.
 - **Musique et Vidéo** sur mpv avec l'interface tactile [uosc](https://github.com/tomasklaen/uosc).
 - **Fichiers** (yazi) aux couleurs du thème, avec des onglets et les serveurs
   de `~/.ssh/config` : copier / coller entre local et SSH, ou entre deux serveurs.
-- **Éditeur** avec un bandeau de gros boutons (Copier, Coller, Enregistrer...)
-  utilisables au doigt.
+- **Éditeur** avec un bandeau de gros boutons (Copy, Paste, Save...)
+  utilisables au doigt, une barre de menus aux couleurs du thème et le texte à
+  la taille du terminal.
 - **Navigateur** Firefox qui affiche la version mobile des sites, avec une
   interface agrandie aux couleurs du thème. Chromium reste disponible.
 - **Écran de démarrage** Plymouth assorti.
@@ -204,6 +205,7 @@ installé reste celui de `PT35_VERSION`.
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/tmux/tmux.conf` | barre du bas du Terminal, souris et copie |
+| `home/.config/gtk-3.0/gtk.css` | barre de menus de l'éditeur (Mousepad) |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
 | `home/.config/mpv/` | mpv et uosc aux couleurs du thème, boutons A, X, Y ; sans fichier, un accueil pour parcourir sa médiathèque ou ouvrir une URL (`scripts/pt35-home.lua`) |
 | `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, ou un hôte SSH dans un nouvel onglet), Y liste les onglets (Y encore = nouvel onglet), Ctrl+C / X / V, onglets Ctrl+T / W |

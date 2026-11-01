@@ -174,6 +174,15 @@ seed_menu() {
 }
 seed_menu tile_opacity 55      # tuiles translucides à 55 %
 seed_menu show_numbers false   # pas de numéro de ligne : le fil d'Ariane donne la position
+# Éditeur : texte en JetBrains Mono 14 px, comme Files (foot). Posé une fois,
+# tant que Mousepad garde sa police par défaut : ses Préférences la changent
+# ensuite. 14 pt font 14 px car PT35-OS lance Mousepad avec GDK_DPI_SCALE=0.75.
+MP=org.xfce.mousepad.preferences.view
+if [ "$(gsettings get $MP use-default-monospace-font 2>/dev/null)" = true ]; then
+  gsettings set $MP font-name 'JetBrains Mono 14'
+  gsettings set $MP use-default-monospace-font false
+  echo "éditeur : JetBrains Mono 14"
+fi
 # pt35d ne relit apps.toml et menu.toml qu'au démarrage ou sur reload.
 pt35ctl reload 2>/dev/null && echo "pt35d rechargé"
 echo "ok"
