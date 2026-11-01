@@ -74,3 +74,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | bandeau `pt35-actions` pour Files | écarté | le clavier physique fait Ctrl+C / Ctrl+V : pas d'interface en plus |
 | [sshfs.yazi](https://github.com/uhs-robert/sshfs.yazi) | écarté | monte par sshfs (FUSE, paquet en plus) ce que le SFTP natif de yazi fait déjà |
 | L / R pour les onglets de Files (patch `pt35d`) | écarté pour l'instant | L ferme et R change de mode partout : un sens par bouton. Y (F10, libre dans yazi) liste les onglets comme X liste les lieux, et un hôte choisi par X s'ouvre dans son propre onglet : deux onglets suffisent pour copier |
+| fil d'Ariane en prompt, `❯` et titre en VT323 sur 32 px (fork u19) | retenu | piste C3 parmi un onglet plein et deux autres séparateurs (`>`, chemin bash). À 32 px la liste montre 7 lignes ; 64 px dans la maquette de la charte, 46 chez upstream |
