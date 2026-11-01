@@ -49,3 +49,7 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | accueil uosc à l'idle, `scripts/pt35-home.lua` (API de menus d'uosc) | retenu | écran noir sans fichier une fois « Drop files » masqué. Un menu uosc dit que la médiathèque est vide et propose Browse (navigateur d'uosc) et une URL tapée dans son champ de recherche : thème déjà fait, aucun patch du fork |
 | liste de `~/Music` dans `pt35-menu` | écarté | patch Rust à reporter à chaque mise à jour d'upstream, refait le navigateur d'uosc |
 | profils mpv `pt35-music` / `pt35-video` | retenu | chaque app a sa médiathèque (`uosc-default_directory`) ; les playlists sont déjà séparées, un processus mpv par app. Les `.m3u` s'ouvrent depuis Browse sans réglage |
+| vnstat pour la courbe de débit | écarté | historique par tranches de 5 min au mieux, il faut un point toutes les 2 s : `pt35d` lit déjà les compteurs de `/sys/class/net` à chaque tour |
+| courbe de débit en échelle log fixe 1k → 1G (fork u12) | retenu | repos et téléchargement lisibles sur le même graphe, aucun saut d'échelle ; les lignes sont les unités. Le linéaire auto écrasait le repos 3 min après chaque rafale |
+| widgets en pile, L / R et toucher sur l'en-tête (fork u12) | retenu | pas de glisser possible ; les onglets ne tiennent pas plus de 2 widgets dans 216 px. L / R ne servaient sur l'accueil qu'à changer de mode, que l'icône de la barre fait déjà |
+| un widget par connexion (LAN, Wi-Fi) | écarté | afficher un périphérique inutilisé n'apporte rien : NETWORK suit la route que `pt35d` connaît déjà |

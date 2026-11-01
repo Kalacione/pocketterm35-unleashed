@@ -139,7 +139,7 @@ Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 ## Layout
 
-Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u6.png`](docs/design/accueil-u6.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
+Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (deux panneaux à onglet de même hauteur depuis u12 : SYSTEM, puis la pile de widgets avec sa place `1/2` dans l'en-tête), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u6.png`](docs/design/accueil-u6.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
