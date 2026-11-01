@@ -325,13 +325,13 @@ const MOCKS=[
 document.getElementById('mocks').innerHTML = MOCKS.map(([fn,t,c,f],i)=>
   `<figure>${fn()}<figcaption><b>${String(i+1).padStart(2,'0')} ${t}</b>${c} <span class="feas">${f}</span></figcaption></figure>`).join('');
 
-const tokens = `# PocketTerm Phosphore : surcharge de theme.toml
+const tokens = `# PocketTerm Phosphore : copie de home/.config/pt35/theme.toml (le fichier fait foi)
 [color]
 background      = "${C.bg}"
 background_alt  = "${C.surface}"
 foreground      = "${C.ph}"
 muted           = "${C.muted}"
-accent          = "${C.ph}"
+accent          = "${C.sel}"   # pt35-menu peint la sélection en accent
 accent_fg       = "${C.onph}"
 warning         = "${C.amber}"
 critical        = "${C.alert}"
@@ -343,21 +343,10 @@ button_x        = "${C.teal}"
 button_y        = "${C.amber}"
 button_neutral  = "${C.line}"
 
-[font]
-family           = "JetBrains Mono"
-family_bold      = "JetBrains Mono Bold"
-family_mono      = "JetBrains Mono"
-family_mono_bold = "JetBrains Mono Bold"
-size_bar   = 14.0
-size_menu  = 19.0
-size_title = 22.0
-size_hint  = 14.0
-
 [menu]
-radius      = 0
-# animations : on garde le défaut de PT35-OS (true), le Pi 5 suit
-# sélection en blanc léger : accent_fg sur accent = sélection
-# (si pt35-menu utilise accent pour la sélection, accent = "${C.sel}")
+radius          = 0
+
+# [font] : DejaVu de PT35-OS gardée (0.4.2 ne trouve pas JetBrains Mono)
 
 # foot.ini
 # [main]   font=JetBrains Mono:size=10

@@ -49,7 +49,7 @@ Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps éping
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
 - **Icônes** : thème Papirus par défaut. Pour le style pixel, on remplace par notre jeu d'icônes 32 px, sinon c'est le glyphe de 2 caractères qui s'affiche.
-- **Fond d'écran** : aujourd'hui PT35-OS met une couleur unie (`output * bg <couleur> solid_color`). C'est un manque : petite PR dans `pt35d` pour accepter une clé `wallpaper = <chemin>` dans `theme.toml`, et une ligne « Fond d'écran » dans Apparence pour choisir parmi `~/Pictures/wallpapers/`. Image fixe, pas d'animation.
+- **Fond d'écran** : aujourd'hui PT35-OS met une couleur unie (`output * bg <couleur> solid_color`, remis par `pt35d` au démarrage et à chaque rechargement). Une image posée par sway ou un hook ne se verrait pas : sans fenêtre ouverte, le menu plein écran et opaque sert de bureau. Il faut donc que `pt35-menu` dessine l'image sous le lanceur : issue puis petite PR, clé `wallpaper = <chemin>` dans `[menu]` de `theme.toml` (une clé inconnue y est refusée, on ne peut pas l'ajouter avant). Image fixe, pas d'animation. Maquette : [`design/fond-phosphore.svg`](design/fond-phosphore.svg).
 
 ## App Paramètres
 
@@ -105,10 +105,14 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : tester au doigt ce qui est déjà là (menu, bascule, Paramètres, mousepad, VLC, `mpv`) et noter ce qui gêne
 - [ ] Appareil : `apt install nautilus gvfs-backends gnome-text-editor`, ouvrir `sftp://<serveur>` et tester copier / coller
 - [ ] Appareil : brancher le micro-casque, `arecord -l`
-- [ ] Agent : thème Phosphore (`theme.toml` pour le menu + `gtk.css` pour les apps GTK4)
+- [x] Agent : thème Phosphore pour le menu et la barre (`theme.toml`)
+- [ ] Appareil : appliquer le thème Phosphore, vérifier la sélection blanc léger et l'écran d'erreur
+- [ ] Agent : thème Phosphore pour les apps GTK4 (`gtk.css`) et `foot`
 - [ ] Agent : `menu.toml` avec le sous-menu Admin, une entrée par serveur SSH, et les entrées Paramètres manquantes (`nmtui`, fuseau, langue)
-- [ ] Agent : fonds d'écran 640 × 480 et icônes pixel-art
-- [ ] Agent : fond d'écran image, ouvrir d'abord une issue chez PT35-OS
+- [x] Agent : fond d'écran 640 × 480 ([`design/fond-phosphore.svg`](design/fond-phosphore.svg)), maquette pour l'issue
+- [ ] Agent : icônes pixel-art
+- [ ] Agent : fond d'écran image, ouvrir d'abord une issue chez PT35-OS. En 0.4.2 il serait invisible : sans fenêtre ouverte, le menu (opaque, plein écran) sert de bureau
+- [ ] Agent : JetBrains Mono dans le menu, issue ou PR chez PT35-OS (recherche des polices)
 
 **v2 Usage**
 

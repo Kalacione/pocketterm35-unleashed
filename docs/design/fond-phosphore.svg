@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+<defs><pattern id="g" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#121a16"/></pattern>
+<pattern id="s" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" opacity=".25"/></pattern></defs>
+<rect width="640" height="480" fill="#0b0f0d"/><rect width="640" height="480" fill="url(#g)"/>
+<g font-family="JetBrains Mono,DejaVu Sans Mono,monospace" font-size="14" fill="#24382e">
+<text x="56" y="182" writing-mode="tb" letter-spacing="4">キ*コ=イコ0ソ0イセコ0ケ#セ</text>
+<text x="56" y="476" writing-mode="tb" fill="#5e8f78">1</text>
+<text x="136" y="-189" writing-mode="tb" letter-spacing="4">ケアエケエ=アセコアク</text>
+<text x="136" y="15" writing-mode="tb" fill="#5e8f78">エ</text>
+<text x="152" y="95" writing-mode="tb" letter-spacing="4">#ウ/スセケサ+サ</text>
+<text x="152" y="263" writing-mode="tb" fill="#5e8f78">1</text>
+<text x="264" y="-65" writing-mode="tb" letter-spacing="4">スソ/1イ#ケ/セイアササオスサ#</text>
+<text x="264" y="247" writing-mode="tb" fill="#5e8f78">0</text>
+<text x="296" y="-68" writing-mode="tb" letter-spacing="4">カカ=エ0#アイイエ0ウセ++0#</text>
+<text x="296" y="244" writing-mode="tb" fill="#5e8f78">ス</text>
+<text x="344" y="57" writing-mode="tb" letter-spacing="4">/ク/スサ1サソ+キ</text>
+<text x="344" y="243" writing-mode="tb" fill="#5e8f78">/</text>
+<text x="440" y="58" writing-mode="tb" letter-spacing="4">ケ+セクセ#イコ/ア</text>
+<text x="440" y="244" writing-mode="tb" fill="#5e8f78">+</text>
+<text x="568" y="88" writing-mode="tb" letter-spacing="4">ス#サ0ス+*スイカコ#/</text>
+<text x="568" y="328" writing-mode="tb" fill="#5e8f78">エ</text>
+<text x="616" y="33" writing-mode="tb" letter-spacing="4">カクイカシ1シコス</text>
+<text x="616" y="201" writing-mode="tb" fill="#5e8f78">/</text>
+</g>
+<rect y="190" width="640" height="92" fill="#0b0f0d" opacity=".85"/>
+<g font-family="VT323,monospace" text-anchor="middle"><text x="320" y="236" font-size="56" fill="#63e6a4" opacity=".9">KALAPOCKET</text>
+<text x="320" y="266" font-size="20" fill="#5e8f78" letter-spacing="4">POCKETTERM 3.5 // PHOSPHORE</text></g>
+<rect width="640" height="480" fill="url(#s)"/></svg>

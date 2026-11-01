@@ -23,7 +23,7 @@ case "${1:-}" in
     exit 0 ;;
   --uninstall)
     command -v stow >/dev/null || sudo apt-get install -y stow
-    stow -D -t "$HOME" home
+    stow -D --no-folding -t "$HOME" home
     # On remet ce qu'on avait mis de côté.
     find home -type f -o -type l | while read -r f; do
       dst="$HOME/${f#home/}"
@@ -52,5 +52,6 @@ find home -type f -o -type l | while read -r f; do
   fi
 done
 
-stow -R -t "$HOME" home
+# --no-folding : de vrais dossiers dans ~, sinon PT35-OS écrirait dans le dépôt.
+stow -R --no-folding -t "$HOME" home
 echo "ok"
