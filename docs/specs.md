@@ -44,18 +44,19 @@ Pas de gestes de bord en v1 : la barre des tâches et les boutons couvrent tout.
 
 ## Lanceur et fond d'écran
 
-Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork (`0.4.2+u2`, PR #2 pas encore fusionnée) le remplace par un écran d'accueil, décrit plus bas.
+Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil (`0.4.2+u4`), décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines (publiée), u3 première version de l'accueil (fusionnée, pas publiée), u4 accueil final (en cours).
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
 - **Icônes** : thème `Phosphore` ([PR #4](https://github.com/Kalacione/pocketterm35-unleashed/pull/4)) : icônes Tabler (MIT) au trait, recolorées en vert phosphore par `tools/icons.sh`, Papirus pour le reste. Sans icône, c'est le glyphe de 2 caractères qui s'affiche.
-- **Scanlines** : effet CRT discret sur la barre, le menu et les apps, dans le fork `0.4.2+u2` (`[effects] scanlines`, `pt35-bar --scanlines`), désactivé par défaut. Détails dans `DESIGN.md`.
+- **Scanlines** : effet CRT discret sur la barre, le menu et les apps, depuis le fork `0.4.2+u2` (`[effects] scanlines = 15`, `pt35-bar --scanlines` dans la config sway), désactivé par défaut et activé par la surcouche. Détails dans `DESIGN.md`.
 - **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe, pas d'animation.
-- **Accueil** (fork `0.4.2+u2`, choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u2.png`](design/accueil-u2.png), [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png).
-  - Réglages : `[menu] launcher_home = true`, `[menu] launcher_columns = 3`, `[icons] size_launcher = 64`, `[icons] glow = 4`. Tout est désactivé par défaut.
-  - Grille : apps épinglées, puis les tuiles Toutes les apps, Paramètres et Énergie. Plus de colonne latérale ; Fenêtres reste sur Select. Défilement par lignes au D-pad, L et R restent réservés. Tuile sélectionnée pleine en blanc léger.
-  - Colonne de gauche (216 px), deux panneaux à onglet. SYSTEM : grosse horloge, date, jauges segmentées CPU, RAM, TEMP. NETWORK : nom (SSID, Ethernet ou Offline), IP, signal Wi-Fi en segments, débits ↓/↑. Une jauge sans valeur est masquée.
-  - Toutes les apps : X ou la frappe d'une lettre ouvre la liste de toutes les apps avec recherche ; Y épingle ou désépingle, la home le montre au retour.
+- **Accueil** (fork `0.4.2+u4`, [PR #4](https://github.com/Kalacione/PocketTerm35-OS/pull/4) en cours ; choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus de la première version (u3, remplacée) : [`accueil-u2.png`](design/accueil-u2.png), [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png).
+  - Réglages : `[menu] launcher_home = true`, `[menu] launcher_columns = 3`, `[icons] size_launcher = 64`, `[icons] glow = 4`. Tout est désactivé par défaut ; la surcouche les active (PR Unleashed #4).
+  - Grille 3 × 3 des seules apps épinglées. Plus de colonne latérale ni de tuiles Toutes les apps, Paramètres ou Énergie ; Fenêtres reste sur Select. Défilement par lignes (D-pad, Bas / PageDown), L et R restent réservés. Tuile sélectionnée pleine en blanc léger.
+  - *Widget column* à gauche (216 px, `widgets.rs` dans le fork), deux panneaux à onglet. SYSTEM : grosse horloge, date, jauges segmentées CPU, RAM, TEMP. NETWORK : nom (SSID, Ethernet ou Offline), IP, signal Wi-Fi en segments, débits ↓/↑. Une jauge sans valeur est masquée.
+  - All apps (liste) : Y sur l'accueil l'ouvre ; X ou une lettre l'ouvre en recherche ; en mode souris, clic droit sur une tuile. Dans la liste : A ouvre, B revient à l'accueil, X cherche, Y épingle ou désépingle. Paramètres (`screen:quick`) et Énergie (`page:power`) sont en fin de liste et s'épinglent comme une app.
+  - Épingles par défaut, posées par `install.sh` si aucune n'existe : terminal, fichiers, éditeur, navigateur, musique, vidéo, DarkWire, Paramètres, Énergie.
   - Pas fait : courbe de débit (il faudrait un historique tenu par `pt35d`) et widget Lecture (MPRIS).
 
 ## App Paramètres
@@ -132,9 +133,10 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : fond d'écran sous le lanceur, patch sur notre fork (`0.4.2+u1`)
 - [x] Appareil : installer `0.4.2+u1`, vérifier le fond d'écran
 - [x] Agent : JetBrains Mono dans le menu et la barre (lien posé par `install.sh`)
-- [x] Agent : accueil (grille, widgets, Toutes les apps), halo des icônes et scanlines dans le fork `0.4.2+u2` (PR #2)
-- [ ] Agent : après la release u2, activer accueil, halo et scanlines dans `theme.toml` et la barre
-- [ ] Appareil : installer `0.4.2+u2`, vérifier l'accueil, les jauges et l'épinglage
+- [x] Agent : grille, halo des icônes et scanlines, fork `0.4.2+u2` (publiée)
+- [ ] Agent : accueil final (épingles 3 × 3, widget column, All apps), fork `0.4.2+u4` (PR #4 du fork)
+- [ ] Agent : épingler `0.4.2+u4` et tout activer dans la surcouche, épingles par défaut dans `install.sh` (PR Unleashed #4)
+- [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **v2 Usage**
