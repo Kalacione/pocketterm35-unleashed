@@ -16,8 +16,9 @@ gi.require_version("GtkLayerShell", "0.1")
 from gi.repository import Gdk, GLib, Gtk, GtkLayerShell  # noqa: E402
 
 # app_id sway -> (libellé, touche envoyée avec Ctrl). Une app de plus = une entrée.
-EDIT = [("COPIER", "c"), ("COUPER", "x"), ("COLLER", "v"),
-        ("ANNULER", "z"), ("CHERCHER", "f"), ("ENREGISTRER", "s")]
+# En anglais, comme l'interface de PT35-OS et de Mousepad.
+EDIT = [("COPY", "c"), ("CUT", "x"), ("PASTE", "v"),
+        ("UNDO", "z"), ("FIND", "f"), ("SAVE", "s")]
 ACTIONS = {"mousepad": EDIT, "org.xfce.mousepad": EDIT}
 
 CSS = b"""
