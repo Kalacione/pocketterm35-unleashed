@@ -63,3 +63,7 @@ glow            = 3           # halo de l'horloge de l'accueil, en px
 sweep           = 8
 sweep_jitter    = 5
 sweep_strength  = 8           # %
+# Pluie d'hexa derrière l'accueil (fork u19) : une ligne par tick du menu,
+# 4 par seconde, tête à 40 % du phosphore. Visible dans les marges, à peine
+# sous les tuiles (85 %). 0 la coupe.
+rain            = 40          # %
