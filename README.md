@@ -141,6 +141,12 @@ testée :
 
 `./install.sh --force` installe quand même sur une autre version.
 
+Une version en `+u<n>` (par exemple `0.4.2+u1`) est PocketTerm35-OS avec
+un petit patch, construit sur
+[notre fork](https://github.com/Kalacione/PocketTerm35-OS) (détail dans son
+CHANGELOG). Aujourd'hui : le fond d'écran du lanceur. Sans ce patch, tout le
+reste fonctionne, et `wallpaper.svg` est simplement ignoré.
+
 ## Désinstallation
 
 ```sh
@@ -155,13 +161,16 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 |---|---|
 | `home/` | fichiers reliés dans `~` par `install.sh` |
 | `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS |
-| `home/.config/pt35/theme.toml` | thème Phosphore : couleurs du menu et de la barre |
+| `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
+| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (avec PocketTerm35-OS `0.4.2+u1`) |
+| `home/.config/foot/foot.ini` | couleurs et police du terminal |
+| `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |
 | `docs/specs.md` | specs, priorités et TODO |
 | `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
-| `docs/design/` | aperçu de la charte (`charte.html`), maquettes SVG 640x480 et fond d'écran |
+| `docs/design/` | aperçu de la charte (`charte.html`), maquettes SVG 640x480 |
 | `docs/briques.md` | logiciels retenus ou écartés, et pourquoi |
 | `CLAUDE.md` | règles du projet, pour les contributeurs humains et IA |
 
