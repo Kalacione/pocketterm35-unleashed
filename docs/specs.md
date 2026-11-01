@@ -112,7 +112,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : fond d'écran 640 × 480 (`home/.config/pt35/wallpaper.svg`)
 - [ ] Agent : icônes pixel-art
 - [x] Agent : fond d'écran sous le lanceur, patch sur notre fork (`0.4.2+u1`)
-- [ ] Appareil : épingler `0.4.2+u1`, `./install.sh --pt35`, vérifier le fond d'écran
+- [x] Appareil : installer `0.4.2+u1`, vérifier le fond d'écran
 - [x] Agent : JetBrains Mono dans le menu et la barre (lien posé par `install.sh`)
 
 **v2 Usage**

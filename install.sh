@@ -9,8 +9,9 @@ cd "$(dirname "$0")"
 
 PIN=$(cat PT35_VERSION)
 FONT_DIR=/usr/share/fonts/TTF
-# Notre archive d'abord, upstream en secours.
+# Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
+https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
 https://github.com/therezor/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb"
 
 case "${1:-}" in
