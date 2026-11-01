@@ -14,10 +14,25 @@ ICON_LINK=/usr/share/icons/Phosphore
 UOSC_VERSION=5.9.2
 UOSC_SHA256=81d1d0c896cb8b2c3d3d218e3ed91a33b3f16c6ff420e11f3179130984266375
 MPV_DIR=$HOME/.config/mpv
+# Paquets Debian dont nos réglages ont besoin, au-delà de ceux de PT35-OS.
+# mpv n'est qu'une suggestion du .deb : Musique et Vidéo en dépendent ici.
+# mpv-mpris et playerctl : le widget Lecture lit les lecteurs par MPRIS.
+DEPS="stow fonts-jetbrains-mono fontconfig mpv mpv-mpris playerctl curl unzip"
 # Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
 https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
 https://github.com/therezor/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb"
+
+# N'installe que les paquets absents, sans rien toucher s'ils sont tous là.
+need() {
+  local missing=() p
+  for p in "$@"; do
+    dpkg-query -W -f='${Status}' "$p" 2>/dev/null | grep -q 'ok installed' || missing+=("$p")
+  done
+  [ ${#missing[@]} -eq 0 ] && return
+  sudo apt-get update -qq
+  sudo apt-get install -y "${missing[@]}"
+}
 
 case "${1:-}" in
   --pt35)
@@ -31,7 +46,7 @@ case "${1:-}" in
     echo "PocketTerm35-OS $PIN installé. Puis : ./install.sh && sudo reboot"
     exit 0 ;;
   --uninstall)
-    command -v stow >/dev/null || sudo apt-get install -y stow
+    need stow
     stow -D --no-folding -t "$HOME" home
     sudo rm -f "$FONT_DIR"/JetBrainsMono-Regular.ttf "$FONT_DIR"/JetBrainsMono-Bold.ttf "$ICON_LINK"
     rm -rf "$MPV_DIR/scripts/uosc" "$MPV_DIR"/fonts/uosc_*
@@ -52,14 +67,14 @@ if [ "${have%%-*}" != "$PIN" ] && [ "${1:-}" != "--force" ]; then
   exit 1
 fi
 
-command -v stow >/dev/null || sudo apt-get install -y stow
+# shellcheck disable=SC2086 # une liste de paquets, à découper
+need $DEPS
 
 # PT35-OS cherche ses polices dans quelques dossiers fixes, sans fontconfig.
 # /usr/share/fonts/TTF en fait partie et n'existe pas sur Debian : on y lie
 # JetBrains Mono. Sans elle, theme.toml empêcherait la barre de démarrer.
 for style in Regular Bold; do
   [ -e "$FONT_DIR/JetBrainsMono-$style.ttf" ] && continue
-  dpkg -s fonts-jetbrains-mono fontconfig >/dev/null 2>&1 || sudo apt-get install -y fonts-jetbrains-mono fontconfig
   src=$(fc-match -f '%{file}' "JetBrains Mono:style=$style")
   case "$src" in
     *JetBrainsMono-$style.ttf) sudo mkdir -p "$FONT_DIR" && sudo ln -sf "$src" "$FONT_DIR/JetBrainsMono-$style.ttf" ;;
@@ -83,13 +98,8 @@ stow -R --no-folding -t "$HOME" home
 # dans /usr/local, Papirus passerait devant.
 [ -L "$ICON_LINK" ] || sudo ln -sfn "$HOME/.local/share/icons/Phosphore" "$ICON_LINK"
 
-# Le widget Lecture de l'accueil lit les lecteurs par MPRIS ; mpv a besoin
-# d'un greffon pour en parler (VLC le fait seul).
-dpkg -s playerctl mpv-mpris >/dev/null 2>&1 || sudo apt-get install -y playerctl mpv-mpris
-
 # uosc n'est pas dans Debian : on prend l'archive de sa release, vérifiée.
 if [ "$(cat "$MPV_DIR/scripts/uosc/.version" 2>/dev/null)" != "$UOSC_VERSION" ]; then
-  command -v unzip >/dev/null || sudo apt-get install -y unzip
   tmp=$(mktemp -d)
   curl -fsSL -o "$tmp/uosc.zip" "https://github.com/tomasklaen/uosc/releases/download/$UOSC_VERSION/uosc.zip"
   echo "$UOSC_SHA256  $tmp/uosc.zip" | sha256sum -c --quiet
