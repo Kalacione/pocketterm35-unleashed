@@ -20,5 +20,12 @@ button_x        = "#4fd1d9"
 button_y        = "#ffa94d"
 button_neutral  = "#24382e"
 
+# Polices liées dans /usr/share/fonts/TTF par install.sh (PT35-OS n'a pas fontconfig).
+[font]
+family           = "JetBrains Mono"
+family_bold      = "JetBrains Mono Bold"
+family_mono      = "JetBrains Mono"
+family_mono_bold = "JetBrains Mono Bold"
+
 [menu]
 radius          = 0           # angles droits

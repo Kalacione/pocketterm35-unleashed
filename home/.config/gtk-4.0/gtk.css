@@ -1,0 +1,25 @@
+/* PocketTerm Phosphore (DESIGN.md) pour les apps GTK4 / libadwaita. */
+@define-color window_bg_color #0b0f0d;
+@define-color window_fg_color #d4ffe9;
+@define-color view_bg_color #0b0f0d;
+@define-color view_fg_color #d4ffe9;
+@define-color headerbar_bg_color #121a16;
+@define-color headerbar_fg_color #63e6a4;
+@define-color sidebar_bg_color #121a16;
+@define-color card_bg_color #121a16;
+@define-color popover_bg_color #121a16;
+@define-color dialog_bg_color #121a16;
+/* Sélection et boutons d'action : blanc léger, texte sombre. */
+@define-color accent_bg_color #e6fff2;
+@define-color accent_fg_color #06110b;
+@define-color accent_color #63e6a4;
+/* Danger et erreur : fond plein, texte sombre. */
+@define-color destructive_bg_color #ff6e6e;
+@define-color destructive_fg_color #06110b;
+@define-color destructive_color #ff6e6e;
+@define-color warning_bg_color #ffa94d;
+@define-color warning_fg_color #06110b;
+@define-color error_bg_color #ff6e6e;
+@define-color error_fg_color #06110b;
+@define-color success_bg_color #63e6a4;
+@define-color success_fg_color #06110b;

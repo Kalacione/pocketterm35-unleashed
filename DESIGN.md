@@ -118,7 +118,7 @@ Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/
 Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 - **VT323** (pixel, OFL) : afficheur et titres (horloge, gros chiffres, titres d'écran). Livrée par le dépôt dans `~/.local/share/fonts`. `theme.toml` n'a qu'une famille pour tout le menu : VT323 sert donc là où on dessine nous-mêmes (widgets, fonds d'écran, icônes).
-- **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant et le terminal. Le menu et la barre gardent DejaVu Sans tant que PT35-OS ne sait pas trouver JetBrains Mono (voir [`docs/briques.md`](docs/briques.md)).
+- **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant, menu, barre et terminal. `install.sh` la lie dans `/usr/share/fonts/TTF`, seul dossier où PT35-OS peut la trouver (voir [`docs/briques.md`](docs/briques.md)).
 
 | token | police | taille | usage |
 |---|---|---|---|

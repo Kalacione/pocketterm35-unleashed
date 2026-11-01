@@ -66,9 +66,14 @@ Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 - Changer de version est un choix volontaire : sur un PC avec `gh` connecté,
   `tools/pin-pt35.sh <version>` archive le `.deb` (et la licence) en release et
   met à jour `PT35_VERSION`. On teste sur le Pi, puis on commit.
-- Pas de fork tant qu'on n'en a pas besoin. On forke seulement pour porter une
-  PR upstream, ou si upstream casse et qu'il faut patcher. La CI d'upstream
-  (`release.yml`) construit alors le `.deb` ARM sur le fork à chaque tag.
+- Fork : [Kalacione/PocketTerm35-OS](https://github.com/Kalacione/PocketTerm35-OS),
+  seulement pour ce qu'aucune config ne permet (aujourd'hui : le fond d'écran).
+  Une version patchée s'appelle `<version upstream>+u<n>` (ex. `0.4.2+u1`),
+  avec son entrée dans le CHANGELOG du fork. Une release `v0.4.2+u1` sur le fork
+  fait construire le `.deb` ARM par sa CI (`release.yml`). La release du fork
+  sert d'archive : on écrit la version dans `PT35_VERSION`, sans `pin-pt35.sh`.
+  Pas de compilation sur le Pi. Un patch qui sert à tous part ensuite en PR chez
+  therezor.
 
 ## Documentation
 
