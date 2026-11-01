@@ -167,8 +167,8 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (avec PocketTerm35-OS `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
-| `home/.local/share/icons/Phosphore/` | icônes pixel des apps du lanceur, Papirus pour le reste |
-| `tools/icons.py` | source de ces icônes (formes sur une grille 32 × 32), regénère les SVG |
+| `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
+| `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |

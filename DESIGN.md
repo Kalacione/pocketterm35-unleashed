@@ -138,7 +138,7 @@ Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux 
 
 ## Shapes
 
-Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes pixel-art sur une grille 32 × 32, au trait, fond transparent, pour le fond Phosphore uniquement (pas de variante claire). Nettes à 32, 64 et 128 px. Source : `tools/icons.py`.
+Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes pixel-art 32 px.
 
 ## Components
 

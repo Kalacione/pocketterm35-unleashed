@@ -30,6 +30,6 @@ family_mono_bold = "JetBrains Mono Bold"
 [menu]
 radius          = 0           # angles droits
 
-# Nos icônes pixel (tools/icons.py), Papirus pour le reste.
+# Tabler Icons en vert pour le lanceur (tools/icons.sh), Papirus pour le reste.
 [icons]
 theme           = "Phosphore"

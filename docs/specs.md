@@ -48,7 +48,7 @@ Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps éping
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
-- **Icônes** : notre thème `Phosphore` (icônes pixel 32 × 32, `tools/icons.py`) pour les apps du lanceur, hérité de Papirus pour le reste. Une app ajoutée garde son icône Papirus tant qu'on ne lui en dessine pas une.
+- **Icônes** : thème Papirus par défaut. Pour le style pixel, on remplace par notre jeu d'icônes 32 px, sinon c'est le glyphe de 2 caractères qui s'affiche.
 - **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe, pas d'animation.
 
 ## App Paramètres
@@ -120,9 +120,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : thème Phosphore pour les apps GTK4 (`gtk.css`) et `foot`
 - [ ] Agent : `menu.toml` avec le sous-menu Admin, une entrée par serveur SSH, et les entrées Paramètres manquantes (`nmtui`, fuseau, langue)
 - [x] Agent : fond d'écran 640 × 480 (`home/.config/pt35/wallpaper.svg`)
-- [x] Agent : icônes pixel-art des apps du lanceur (`tools/icons.py`, thème `Phosphore`)
-- [ ] Appareil : vérifier les icônes dans le lanceur
-- [ ] Agent : lanceur en grille de la charte (icône au-dessus du nom), patch sur notre fork (`0.4.2+u2`)
+- [ ] Agent : icônes pixel-art
 - [x] Agent : fond d'écran sous le lanceur, patch sur notre fork (`0.4.2+u1`)
 - [x] Appareil : installer `0.4.2+u1`, vérifier le fond d'écran
 - [x] Agent : JetBrains Mono dans le menu et la barre (lien posé par `install.sh`)
