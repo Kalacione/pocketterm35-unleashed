@@ -83,3 +83,5 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | barre de menus de Mousepad skinnée par `~/.config/gtk-3.0/gtk.css` (classe `window.mousepad`) | retenu | 32 px, VT323 et filet comme le fil d'Ariane, sans patch. Tailles en px : le `GDK_DPI_SCALE=0.75` d'upstream ne les réduit pas. Menus déroulants laissés en Adwaita |
 | police du texte de Mousepad par gsettings (`font-name`), posée par `install.sh` | retenu | JetBrains Mono 14 px comme Files ; le zoom Ctrl +/- et les Préférences restent maîtres. Une règle `textview` dans `gtk.css` aurait cassé le zoom |
 | `[app.editor] scale = 1.0` | écarté | grossit aussi menus déroulants et dialogues, qui débordent des 480 px |
+| Pluie dans `pt35-menu` (`[effects] rain`, fork u20) | retenu | le menu peint déjà le fond (u1) et redessine 4 fois par seconde : ~70 lignes, aucun processus en plus, s'arrête avec le menu. ~1 ms de plus par image, 4 images/s, moins que le balayage |
+| swww, mpvpaper, glpaper (fond animé sway) | écarté | le menu couvre tout l'écran d'un fond opaque : il faudrait le rendre transparent (patch) et garder un processus qui tourne aussi sous les apps |
