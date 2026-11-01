@@ -162,9 +162,9 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | chemin | rôle |
 |---|---|
 | `home/` | fichiers reliés dans `~` par `install.sh` |
-| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS |
+| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps |
 | `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
-| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (avec PocketTerm35-OS `0.4.2+u1`) |
+| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (notre fork, dès `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
 | `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
