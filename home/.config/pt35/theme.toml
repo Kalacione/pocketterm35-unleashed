@@ -11,6 +11,7 @@ muted           = "#5e8f78"
 # pt35-menu peint la ligne sélectionnée en `accent` : blanc léger, texte sombre.
 accent          = "#e6fff2"
 accent_fg       = "#06110b"
+clock           = "#d4ffe9"   # bright : heure et date du widget SYSTEM, avec halo (fork u22)
 warning         = "#ffa94d"   # danger, toujours en fond plein
 critical        = "#ff6e6e"   # erreur, toujours en fond plein
 ok              = "#63e6a4"
