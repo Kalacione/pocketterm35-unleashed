@@ -132,7 +132,7 @@ seed_menu() {
   fi
   echo "$1 = $2 : $LOOK"
 }
-seed_menu tile_opacity 85      # tuiles translucides à 85 %
+seed_menu tile_opacity 55      # tuiles translucides à 55 %
 seed_menu show_numbers false   # pas de numéro de ligne : le fil d'Ariane donne la position
 # pt35d ne relit apps.toml et menu.toml qu'au démarrage ou sur reload.
 pt35ctl reload 2>/dev/null && echo "pt35d rechargé"

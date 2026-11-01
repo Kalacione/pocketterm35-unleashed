@@ -5,6 +5,7 @@
 [color]
 background      = "#0b0f0d"
 background_alt  = "#121a16"   # surface
+tile            = "#1c2a23"   # tuiles et panneaux de l'accueil (fork u10) : assez clair pour que l'opacité se voie
 foreground      = "#63e6a4"   # phosphore doux
 muted           = "#5e8f78"
 # pt35-menu peint la ligne sélectionnée en `accent` : blanc léger, texte sombre.
