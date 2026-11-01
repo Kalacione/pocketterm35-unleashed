@@ -23,15 +23,25 @@ charte graphique. Les réglages arrivent au fil des [specs](docs/specs.md).
 | réseau | Wi-Fi ou Ethernet |
 | paquets | `git` et `stow` |
 
-Vérifier la version de PocketTerm35-OS :
-
-```sh
-dpkg -s pt35-desktop | grep Version
-```
-
 ## Installation
 
 Sur le PocketTerm, dans un terminal ou en SSH.
+
+**0. Base système**
+
+Vérifier la base :
+
+```sh
+grep VERSION_CODENAME /etc/os-release   # trixie
+getconf LONG_BIT                        # 64
+dpkg -s pt35-desktop | grep Version     # celle de PT35_VERSION
+```
+
+Si la base n'est pas Trixie 64 bits, flasher Raspberry Pi OS Lite (Trixie,
+64 bits) avec Raspberry Pi Imager. Puis installer PocketTerm35-OS et son
+firmware clavier [selon sa doc](https://github.com/therezor/PocketTerm35-OS#install).
+Il configure lui-même l'écran, le tactile et la connexion : l'image ou les
+pilotes Waveshare ne sont pas nécessaires.
 
 **1. Outils**
 
