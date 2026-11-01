@@ -44,7 +44,8 @@ recopier ici, résumer seulement :
 
 PocketTerm35-OS installe ses défauts dans `/usr/share/pt35-desktop/` et fusionne
 `~/.config/pt35/*.toml` par-dessus, table par table (les tableaux sont remplacés,
-pas concaténés). Ce dépôt ne contient que nos surcharges :
+pas concaténés). Ce dépôt ne contient que nos surcharges. Convention des chemins (un dossier
+n'est créé qu'au premier fichier qui en a besoin) :
 
 | chemin | rôle |
 |---|---|
@@ -57,9 +58,24 @@ pas concaténés). Ce dépôt ne contient que nos surcharges :
 
 Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 
-Upstream est épinglé dans `PT35_VERSION` (`.deb` archivé en release, voir le
-README). Changer de version est un choix volontaire, testé sur le Pi. Ne jamais
-conseiller la commande d'install d'upstream : elle prend la dernière version.
+## Version d'upstream
+
+- Upstream est épinglé dans `PT35_VERSION`. Ne jamais conseiller la commande
+  d'install d'upstream : elle prend la dernière version.
+- Changer de version est un choix volontaire : sur un PC avec `gh` connecté,
+  `tools/pin-pt35.sh <version>` archive le `.deb` (et la licence) en release et
+  met à jour `PT35_VERSION`. On teste sur le Pi, puis on commit.
+- Pas de fork tant qu'on n'en a pas besoin. On forke seulement pour porter une
+  PR upstream, ou si upstream casse et qu'il faut patcher. La CI d'upstream
+  (`release.yml`) construit alors le `.deb` ARM sur le fork à chaque tag.
+
+## Documentation
+
+- `README.md` présente le projet à quelqu'un d'extérieur : ce que c'est,
+  comment l'installer, le retirer, le contenu réel du dépôt. Pas de règles
+  internes ni de notes pour nous-mêmes.
+- Les règles du projet vont ici, les décisions et briques dans `docs/`.
+- Le README ne décrit que ce qui existe dans le dépôt.
 
 ## Tests
 

@@ -1,71 +1,76 @@
 # PocketTerm 3.5 Unleashed
 
-Nos réglages et petits scripts par-dessus
-[PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS), pour le
-WaveShare PocketTerm 3.5.
+Une couche de réglages et de petits scripts pour le
+WaveShare PocketTerm 3.5, posée par-dessus
+[PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS).
 
-Ce dépôt ne remplace rien : PocketTerm35-OS garde ses défauts dans
-`/usr/share/pt35-desktop/`, et on ne pose dans `~` que ce qu'on change.
+PocketTerm35-OS fournit le bureau (sway, launcher, barre, gestion des boutons).
+Ce projet ne le remplace pas : il ajoute ses propres réglages dans `~/.config`,
+que PocketTerm35-OS fusionne avec ses défauts. Retirer le projet rend le bureau
+d'origine intact.
+
+**État :** en démarrage. Le dépôt pose la structure, l'installation et la
+charte graphique. Les réglages arrivent au fil des [specs](docs/specs.md).
 
 ## Prérequis
 
 | quoi | détail |
 |---|---|
 | matériel | PocketTerm 3.5 avec Pi 4B (ou Pi 5) |
-| système | Raspberry Pi OS **Trixie 64 bits** (Lite conseillé). Bookworm n'est pas supporté par upstream. |
-| socle | PocketTerm35-OS installé, **version épinglée dans [`PT35_VERSION`](PT35_VERSION)** (0.4.2) ([install upstream](https://github.com/therezor/PocketTerm35-OS#install)) |
-| firmware clavier | firmware pt35 flashé (`sudo pt35-kbd flash`) : sans lui, ABXY L R envoient des lettres et Start/Select ne sont pas fiables |
-| réseau | Wi-Fi ou Ethernet, pour cloner le dépôt |
-| paquets | `git` et `stow` (`install.sh` installe `stow` s'il manque) |
+| système | Raspberry Pi OS **Trixie 64 bits**, Lite conseillé (Bookworm n'est pas supporté par PocketTerm35-OS) |
+| PocketTerm35-OS | la version indiquée dans [`PT35_VERSION`](PT35_VERSION) (0.4.2), [installée selon sa doc](https://github.com/therezor/PocketTerm35-OS#install) |
+| firmware clavier | firmware pt35 flashé (`sudo pt35-kbd flash`), sinon ABXY L R envoient des lettres |
+| réseau | Wi-Fi ou Ethernet |
+| paquets | `git` et `stow` |
 
-Vérifier le socle :
+Vérifier la version de PocketTerm35-OS :
 
 ```sh
-dpkg -s pt35-desktop | grep Version   # doit afficher la version de PT35_VERSION
+dpkg -s pt35-desktop | grep Version
 ```
 
-## Getting started
+## Installation
 
-Tout se fait sur le Pi, dans un terminal (foot) ou en SSH.
+Sur le PocketTerm, dans un terminal ou en SSH.
 
-**1. Installer les outils.**
+**1. Outils**
 
 ```sh
 sudo apt update && sudo apt install -y git stow
 ```
 
-**2. Cloner le dépôt.**
+**2. Dépôt**
 
 ```sh
 git clone https://github.com/Kalacione/pocketterm35-unleashed.git ~/pocketterm35-unleashed
 cd ~/pocketterm35-unleashed
 ```
 
-**3. Installer.**
+**3. Installation**
 
 ```sh
 ./install.sh
 ```
 
-Le script crée des liens de `~` vers `home/` du dépôt. Un vrai fichier déjà
-présent à la place d'un des nôtres (par exemple `~/.config/sway/config` créé
-par upstream) est renommé en `.bak`, puis remis en place à la désinstallation.
+Le script relie les fichiers de `home/` dans `~` (avec GNU stow). Un fichier
+existant au même endroit est renommé en `.bak` et restauré à la désinstallation.
+Si la version de PocketTerm35-OS ne correspond pas, le script s'arrête et
+indique quoi faire.
 
-**4. Recharger.**
+**4. Rechargement**
 
-`Super`+`Shift`+`c` recharge sway. Pour menu, apps et thème, redémarrer la
-session (ou le Pi) est le plus sûr.
+`Super`+`Shift`+`c` recharge sway. Pour le menu, les apps et le thème,
+redémarrer la session.
 
-**5. Vérifier.**
+**5. Vérification**
 
 ```sh
-ls -l ~/.config/sway/config   # doit pointer vers ~/pocketterm35-unleashed/home/...
+ls -l ~/.config/sway/config   # lien vers ~/pocketterm35-unleashed/home/...
 ```
 
-Le bureau doit se comporter comme avant, avec nos surcharges en plus. En cas de
-souci, les logs sont dans `/run/user/1000/pt35/sway.log`.
+Logs : `/run/user/1000/pt35/sway.log`.
 
-## Mettre à jour
+## Mise à jour
 
 ```sh
 cd ~/pocketterm35-unleashed && git pull && ./install.sh
@@ -73,62 +78,51 @@ cd ~/pocketterm35-unleashed && git pull && ./install.sh
 
 ## Version de PocketTerm35-OS
 
-On ne suit pas upstream en continu : nos réglages sont testés sur la version
-écrite dans `PT35_VERSION`. `install.sh` refuse de s'installer sur une autre
-version (`--force` pour passer outre).
+Le projet est testé sur une seule version de PocketTerm35-OS, celle de
+`PT35_VERSION`. La commande d'installation de PocketTerm35-OS prend toujours la
+dernière version, ce qui peut casser ces réglages. Pour revenir à la version
+testée :
 
-- **Ne pas relancer la commande d'install d'upstream** : elle prend toujours la
-  dernière version. `apt upgrade` ne touche pas à `pt35-desktop`.
-- **Remettre la version épinglée** : `./install.sh --pt35`, puis redémarrer. Le
-  `.deb` vient de notre release `pt35-<version>`, sinon de la release upstream.
-- **Passer à une nouvelle version** : sur un PC avec `gh` connecté,
-  `tools/pin-pt35.sh <version>` archive le `.deb` dans une release de notre
-  dépôt et met à jour `PT35_VERSION`. On teste sur le Pi, puis on commit.
+```sh
+./install.sh --pt35   # puis redémarrer
+```
 
-Si upstream casse tout un jour, on garde notre archive et on forke à ce
-moment-là seulement, pour patcher.
+`./install.sh --force` installe quand même sur une autre version.
 
-## Retirer, revenir en arrière
+## Désinstallation
 
 ```sh
 cd ~/pocketterm35-unleashed && ./install.sh --uninstall
 ```
 
-Les liens sont retirés et les `.bak` remis en place : on retrouve le
-PocketTerm35-OS d'origine. Recharger comme à l'étape 4.
-
-Pour annuler un seul changement : `git log`, puis `git revert <commit>` et
-`./install.sh`.
+Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 4.
 
 ## Contenu
 
 | chemin | rôle |
 |---|---|
-| `home/` | miroir de `~`, lié par `install.sh` |
-| `home/.config/pt35/` | surcharges menu, apps, thème, et hooks |
-| `home/.config/sway/config` | inclut la config upstream, puis nos surcharges |
-| `home/.local/bin/` | nos petits scripts |
-| `docs/specs.md` | specs, priorités et TODO (source de vérité) |
+| `home/` | fichiers reliés dans `~` par `install.sh` |
+| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS |
+| `install.sh` | installation, désinstallation, retour à la version testée |
+| `PT35_VERSION` | version de PocketTerm35-OS testée |
+| `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |
+| `docs/specs.md` | specs, priorités et TODO |
 | `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
 | `docs/design/` | aperçu de la charte (`charte.html`) et maquettes SVG 640x480 |
-| `docs/briques.md` | briques retenues ou écartées, et pourquoi |
-| `CLAUDE.md` | méthode et règles pour les agents |
-| `PT35_VERSION` | version de PocketTerm35-OS testée |
-| `tools/pin-pt35.sh` | archive et épingle une version d'upstream |
+| `docs/briques.md` | logiciels retenus ou écartés, et pourquoi |
+| `CLAUDE.md` | règles du projet, pour les contributeurs humains et IA |
 
 ## Remerciements
 
-Tout repose sur [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS)
-de [therezor](https://github.com/therezor) : le bureau, le launcher, la config
-fusionnée, les hooks et le firmware clavier patché. Ce dépôt n'en est qu'une
-surcouche. Merci à therezor. Ce qui peut servir à tous repart chez upstream
-sous forme de PR.
+Ce projet repose sur [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS)
+de [therezor](https://github.com/therezor) : bureau, launcher, configuration
+fusionnée, hooks et firmware clavier. Merci à therezor.
 
 ## Licence
 
-Notre code est sous licence MIT ([LICENSE](LICENSE)).
+MIT ([LICENSE](LICENSE)).
 
 PocketTerm35-OS est sous licence MIT, Copyright (c) 2026 REZOR
-([licence upstream](https://github.com/therezor/PocketTerm35-OS/blob/main/LICENSE)).
-Les `.deb` archivés dans nos releases sont ses binaires, non modifiés, publiés
-avec sa licence.
+([licence](https://github.com/therezor/PocketTerm35-OS/blob/main/LICENSE)).
+Les `.deb` archivés dans les releases de ce dépôt sont ses binaires, non
+modifiés, accompagnés de sa licence.
