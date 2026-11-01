@@ -27,8 +27,8 @@ family_bold      = "JetBrains Mono Bold"
 family_mono      = "JetBrains Mono"
 family_mono_bold = "JetBrains Mono Bold"
 
-# L'accueil de la charte (PT35-OS 0.4.2+u3, notre fork) : widgets à gauche,
-# épingles en grille 3x3 à droite, Toutes les apps / Paramètres / Énergie en tuiles.
+# L'accueil de la charte (PT35-OS 0.4.2+u4, notre fork) : widgets à gauche,
+# épingles en grille 3x3 à droite. Y ouvre Toutes les apps, où Y épingle.
 [menu]
 radius          = 0           # angles droits
 launcher_columns = 3

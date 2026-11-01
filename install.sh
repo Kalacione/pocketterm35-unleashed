@@ -75,4 +75,14 @@ stow -R --no-folding -t "$HOME" home
 # PT35-OS ne lit pas ~/.local/share/icons, et cherche /usr/share/icons en premier :
 # dans /usr/local, Papirus passerait devant.
 [ -L "$ICON_LINK" ] || sudo ln -sfn "$HOME/.local/share/icons/Phosphore" "$ICON_LINK"
+
+# L'accueil n'affiche que les épingles : on en pose par défaut, sans toucher
+# à celles qui existent. Y sur l'accueil ouvre Toutes les apps pour en changer.
+PINS="${XDG_STATE_HOME:-$HOME/.local/state}/pt35/pinned"
+if [ ! -s "$PINS" ]; then
+  mkdir -p "$(dirname "$PINS")"
+  printf '%s\n' app:terminal app:files app:editor app:browser app:music app:video \
+    app:darkwire screen:quick page:power > "$PINS"
+  echo "épingles par défaut : $PINS"
+fi
 echo "ok"
