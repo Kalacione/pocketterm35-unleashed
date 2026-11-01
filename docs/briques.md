@@ -60,3 +60,6 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | barre d'outils native de mousepad | écarté | toujours en haut, en anglais, quinze icônes : ni la maquette ni le pouce |
 | Waybar (modules custom + `on-click`) | écarté | pas de moyen fiable de l'afficher seulement sur l'éditeur (SIGUSR1 bascule à l'aveugle) |
 | barre d'actions par app dans `pt35-bar` (fork) | en réserve | la bonne place à terme, et proposable à upstream ; patch Rust à reporter à chaque version, pour six boutons |
+| hosts du widget HOSTS lus dans `~/.ssh/config` (fork u13) | retenu | déjà la source de vérité, reste sur l'appareil, rien dans le dépôt ; `ssh -G` résout comme ssh. Pin / unpin sur l'écran SSH |
+| ping (ICMP) pour HOSTS | écarté | une connexion TCP au port SSH dit si on peut s'y connecter, et passe quand l'ICMP est filtré ; un test toutes les 2 min par `pt35d` |
+| VPN OpenVPN dans NETWORK | à cadrer | NetworkManager importe les `.ovpn` (`network-manager-openvpn`) ; le widget ferait `nmcli con up/down` |
