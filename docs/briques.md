@@ -16,7 +16,7 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | [sdm](https://github.com/gitbls/sdm) | écarté | personnalise aussi une image Raspberry Pi OS sur x86, mais plus lourd (plugins, nspawn) pour notre besoin |
 | [pi-gen](https://github.com/RPi-Distro/pi-gen), [rpi-image-gen](https://github.com/raspberrypi/rpi-image-gen) | écarté | construisent l'OS de zéro (lent) ; rpi-image-gen ne supporte officiellement que les hôtes arm64 |
 | `theme.toml` (couleurs + `menu.radius`) | retenu | le thème passe par la config de PT35-OS, aucune PR ; il passe devant les palettes d'Apparence |
-| JetBrains Mono dans le menu et la barre | reporté | PT35-OS 0.4.2 cherche les polices dans quelques dossiers fixes (dejavu, liberation, noto), sans fontconfig ; une famille introuvable empêche la barre de démarrer. DejaVu en attendant une PR upstream |
+| JetBrains Mono dans le menu et la barre | retenu | PT35-OS 0.4.2 cherche les polices dans quelques dossiers fixes, sans fontconfig, dont `/usr/share/fonts/TTF` (absent sur Debian) : `install.sh` y lie les TTF du paquet Debian. Ni patch ni compilation |
 | fond d'écran via sway (`output * bg`) ou un hook | écarté | `pt35d` remet une couleur unie au démarrage et au rechargement, et le menu opaque couvre le bureau vide : image invisible. Voie retenue : PR `pt35-menu` |
 | config Start / Select | inutile | le comportement voulu (menu, bascule d'apps, jamais transmis aux apps) est celui de PT35-OS par défaut |
 | `stow --no-folding` | retenu | sans lui, stow lie tout `~/.config/pt35` vers le dépôt, et Apparence écrirait `appearance.toml` dans le dépôt |

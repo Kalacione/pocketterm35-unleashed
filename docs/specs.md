@@ -112,7 +112,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : fond d'écran 640 × 480 ([`design/fond-phosphore.svg`](design/fond-phosphore.svg)), maquette pour l'issue
 - [ ] Agent : icônes pixel-art
 - [ ] Agent : fond d'écran image, ouvrir d'abord une issue chez PT35-OS. En 0.4.2 il serait invisible : sans fenêtre ouverte, le menu (opaque, plein écran) sert de bureau
-- [ ] Agent : JetBrains Mono dans le menu, issue ou PR chez PT35-OS (recherche des polices)
+- [x] Agent : JetBrains Mono dans le menu et la barre (lien posé par `install.sh`)
 
 **v2 Usage**
 
