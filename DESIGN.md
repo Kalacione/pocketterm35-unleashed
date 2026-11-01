@@ -35,7 +35,7 @@ rounded:
   none: 0px
 spacing:
   unit: 8px
-  bar: 34px
+  bar: 40px
   header: 46px
   row: 50px
   hint: 46px
@@ -117,7 +117,7 @@ Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/
 
 Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
-- **VT323** (pixel, OFL) : afficheur et titres (horloge, gros chiffres, titres d'écran). Livrée par le dépôt dans `~/.local/share/fonts`. `theme.toml` n'a qu'une famille pour tout le menu : VT323 sert donc là où on dessine nous-mêmes (widgets, fonds d'écran).
+- **VT323** (pixel, OFL) : afficheur (horloges, gros chiffres). Livrée par le dépôt dans `~/.local/share/fonts`, où le fork la cherche depuis u5. `[font] family_display = "VT323"` sert aux horloges du widget SYSTEM et de la barre (`[bar] clock_size = 28`). Le menu n'a pas de police par rôle pour les titres : les titres d'écran restent en JetBrains Mono, le token `title` est une cible.
 - **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant, menu, barre et terminal. `install.sh` la lie dans `/usr/share/fonts/TTF`, seul dossier où PT35-OS peut la trouver (voir [`docs/briques.md`](docs/briques.md)).
 
 | token | police | taille | usage |
@@ -130,11 +130,11 @@ Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 ## Layout
 
-Mise en page de PT35-OS conservée : barre des tâches 34 px, en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale. Aperçu : [`docs/design/accueil-u4.png`](docs/design/accueil-u4.png). Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
+Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u5.png`](docs/design/accueil-u5.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
-Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux et d'un léger halo (flou de 2 px) réservé aux titres, gros chiffres et courbes. **Scanlines CRT** discrètes : une ligne sur deux assombrie d'environ 15 %, sur la barre, le menu et par-dessus les apps. Le menu les dessine (`[effects] scanlines`), et `pt35-bar --scanlines` pose une surface transparente sous la barre, qui couvre les apps et laisse passer les clics (fork `0.4.2+u2`). Jamais plus marquées : le texte doit rester net.
+Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux et d'un léger halo réservé aux titres, gros chiffres et courbes : 3 px sur l'horloge du widget (`[effects] glow = 3`, u5), 4 px sous les icônes de la grille (`[icons] glow`). **Scanlines CRT** : une ligne sur quatre assombrie de 25 % (motif de 4 px, comme la maquette), sur la barre, le menu et par-dessus les apps. Une ligne sur deux à 15 % ne se voyait pas sur l'écran 3,5". Le menu les dessine (`[effects] scanlines`, `[effects] scanline_period` depuis u5), et `pt35-bar --scanlines` pose une surface transparente sous la barre, qui couvre les apps et laisse passer les clics. La hauteur de la barre doit être un multiple de la période. Pas plus marquées : le texte doit rester net.
 
 ## Shapes
 
@@ -148,6 +148,7 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - **action-bar-button** : gros boutons en bas des écrans d'édition (Copier, Couper, Coller, Annuler, Chercher, Enregistrer). C'est la réponse au « pas de Vim ».
 - **barre segmentée** : CPU, RAM, température, signal, volume. Masquée si la valeur n'existe pas.
 - **courbe en aire** : débit réseau, charge, avec dégradé et halo.
+- **app active dans la barre** (u5) : case pleine en `accent`, icône teintée sombre.
 - **hint-bar** : pastilles pleines aux couleurs des boutons physiques (A primary, B error, X teal, Y danger), cliquables.
 
 ## Do's and Don'ts

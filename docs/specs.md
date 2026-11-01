@@ -44,19 +44,20 @@ Pas de gestes de bord en v1 : la barre des tâches et les boutons couvrent tout.
 
 ## Lanceur et fond d'écran
 
-Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil (`0.4.2+u4`), décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines (publiée), u3 première version de l'accueil (fusionnée, pas publiée), u4 accueil final (en cours).
+Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps épinglées, puis les 5 dernières lancées, puis tout le reste. On le parcourt au doigt ou au D-pad. Notre fork le remplace par un écran d'accueil, décrit plus bas. Versions du fork : u1 fond d'écran, u2 grille + halo + scanlines, u3 première version de l'accueil (jamais publiée), u4 accueil final (épinglée dans `PT35_VERSION`), u5 finitions (PR #5 du fork, PR surcouche #6, pas encore publiée).
 
 - **Manifeste d'app** : une entrée `[app.<id>]` dans `~/.config/pt35/apps.toml` (nom, icône ou 2 caractères, commande, workspace, une ou plusieurs instances). Un outil CLI/TUI se lance avec `foot -a <id> <commande>`. Les fichiers `.desktop` sont aussi lus. C'est le format qu'on utilise, pas besoin d'en inventer un.
 - **Sous-menus** : `~/.config/pt35/menu.toml` (types d'entrée `goto`, `app`, `exec`, `action`, `builtin`). Nos ajouts (menu Admin, écrans Paramètres) passent par là.
 - **Icônes** : thème `Phosphore` ([PR #4](https://github.com/Kalacione/pocketterm35-unleashed/pull/4)) : icônes Tabler (MIT) au trait, recolorées en vert phosphore par `tools/icons.sh`, Papirus pour le reste. Sans icône, c'est le glyphe de 2 caractères qui s'affiche.
-- **Scanlines** : effet CRT discret sur la barre, le menu et les apps, depuis le fork `0.4.2+u2` (`[effects] scanlines = 15`, `pt35-bar --scanlines` dans la config sway), désactivé par défaut et activé par la surcouche. Détails dans `DESIGN.md`.
+- **Scanlines** : effet CRT sur la barre, le menu et les apps, depuis le fork `0.4.2+u2` (`[effects] scanlines`, `pt35-bar --scanlines` dans la config sway), désactivé par défaut et activé par la surcouche. Une ligne sur deux à 15 % ne se voyait pas sur l'écran 3,5" : u5 ajoute `[effects] scanline_period`, et la surcouche passe à une ligne sur quatre à 25 %. Détails dans `DESIGN.md`.
 - **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe, pas d'animation.
-- **Accueil** (fork `0.4.2+u4`, [PR #4](https://github.com/Kalacione/PocketTerm35-OS/pull/4) en cours ; choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u4.png`](design/accueil-u4.png), liste All apps [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png) (version u3, même fonctionnement).
+- **Accueil** (fork `0.4.2+u4` ; choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u5.png`](design/accueil-u5.png) ([`accueil-u4.png`](design/accueil-u4.png) avant), liste All apps [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png) (version u3, même fonctionnement).
   - Réglages : `[menu] launcher_home = true`, `[menu] launcher_columns = 3`, `[icons] size_launcher = 64`, `[icons] glow = 4`. Tout est désactivé par défaut ; la surcouche les active (PR Unleashed #4).
   - Grille 3 × 3 des seules apps épinglées. Plus de colonne latérale ni de tuiles Toutes les apps, Paramètres ou Énergie ; Fenêtres reste sur Select. Défilement par lignes (D-pad, Bas / PageDown), L et R restent réservés. Tuile sélectionnée pleine en blanc léger.
   - *Widget column* à gauche (216 px, `widgets.rs` dans le fork), deux panneaux à onglet. SYSTEM : grosse horloge, date, jauges segmentées CPU, RAM, TEMP. NETWORK : nom (SSID, Ethernet ou Offline), IP, signal Wi-Fi en segments, débits ↓/↑. Une jauge sans valeur est masquée.
   - All apps (liste) : Y sur l'accueil l'ouvre ; X ou une lettre l'ouvre en recherche ; en mode souris, clic droit sur une tuile. Dans la liste : A ouvre, B revient à l'accueil, X cherche, Y épingle ou désépingle. Paramètres (`screen:quick`) et Énergie (`page:power`) sont en fin de liste et s'épinglent comme une app.
   - Épingles par défaut, posées par `install.sh` si aucune n'existe : terminal, fichiers, éditeur, navigateur, musique, vidéo, DarkWire, Paramètres, Énergie.
+  - u5 : plus de bandeau « PT35 // LAUNCHER », barre à 40 px ; horloges du widget et de la barre en VT323 (`[font] family_display`, `[bar] clock_size = 28`), halo sur l'horloge du widget (`[effects] glow = 3`).
   - Pas fait : courbe de débit (il faudrait un historique tenu par `pt35d`) et widget Lecture (MPRIS).
 
 ## App Paramètres
@@ -67,7 +68,7 @@ Paramètres existe déjà dans PT35-OS, en liste avec sous-vues. On complète ce
 | --- | --- | --- | --- |
 | Wi-Fi | oui (scan, connexion) | — | — |
 | Bluetooth | oui | — | — |
-| Son, luminosité | oui (réglages rapides) | — | — |
+| Son, luminosité | oui (réglages rapides ; u5 : curseurs à partir du tiers de l'écran, libellé 1/3, curseur 2/3 au plus, aperçu [`reglages-rapides-u5.png`](design/reglages-rapides-u5.png)) | — | — |
 | Apparence (palette, police, taille) | oui | palette Phosphore | ligne Fond d'écran |
 | Système (CPU, RAM, disque, température, IP) | oui | — | — |
 | Réseau filaire / IP fixe, nom d'hôte | non | `nmtui` | écran natif si besoin |
@@ -109,7 +110,7 @@ Constatées sur l'appareil ou dans le code. Chacune se corrige dans le fork de P
 | --- | --- | --- |
 | Pas de défilement au doigt dans le menu | Un toucher est un simple clic à l'endroit où il commence : glisser lance l'élément touché au lieu de faire défiler | D-pad, ou la barre de défilement (cliquer la piste, tirer le curseur) |
 | Pas de fond d'écran image | Couleur unie seulement, et le menu opaque couvre le bureau | Aucun |
-| Une seule famille de police pour tout le menu | Pas de VT323 pour les titres, JetBrains Mono à vérifier | Police par défaut |
+| Une seule famille de police pour tout le menu | Pas de VT323 pour les titres | Fork u5 : VT323 pour les horloges (`[font] family_display`) ; les titres d'écran restent en JetBrains Mono |
 
 ## TODO
 
@@ -134,8 +135,9 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Appareil : installer `0.4.2+u1`, vérifier le fond d'écran
 - [x] Agent : JetBrains Mono dans le menu et la barre (lien posé par `install.sh`)
 - [x] Agent : grille, halo des icônes et scanlines, fork `0.4.2+u2` (publiée)
-- [ ] Agent : accueil final (épingles 3 × 3, widget column, All apps), fork `0.4.2+u4` (PR #4 du fork)
-- [ ] Agent : épingler `0.4.2+u4` et tout activer dans la surcouche, épingles par défaut dans `install.sh` (PR Unleashed #4)
+- [x] Agent : accueil final (épingles 3 × 3, widget column, All apps), fork `0.4.2+u4`
+- [x] Agent : épingler `0.4.2+u4` et tout activer dans la surcouche, épingles par défaut dans `install.sh`
+- [ ] Agent : finitions u5 (scanlines 1/4 à 25 %, horloges VT323, barre 40 px, réglages rapides), PR #5 du fork et PR surcouche #6
 - [ ] Appareil : installer `0.4.2+u4`, vérifier l'accueil, les jauges, All apps et l'épinglage
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
@@ -143,6 +145,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 
 - [ ] Wike
 - [ ] Newelle : tester à 640 × 480 avec Claude, puis Jean-Michel
+- [ ] Écran de sélection des widgets de l'accueil, sur le modèle de All apps (liste, Y ajoute ou retire). Demandé par Djé, pas commencé
 - [ ] Rétro-gaming : RetroArch + demande au mainteneur pour le mode boutons bruts
 
 **v3 Bonus**
