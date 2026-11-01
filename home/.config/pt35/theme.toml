@@ -20,12 +20,20 @@ button_x        = "#4fd1d9"
 button_y        = "#ffa94d"
 button_neutral  = "#24382e"
 
-# Polices liées dans /usr/share/fonts/TTF par install.sh (PT35-OS n'a pas fontconfig).
+# JetBrains Mono liée dans /usr/share/fonts/TTF par install.sh (PT35-OS n'a pas
+# fontconfig). VT323 vient de ~/.local/share/fonts (fork 0.4.2+u5) : les horloges.
 [font]
 family           = "JetBrains Mono"
 family_bold      = "JetBrains Mono Bold"
 family_mono      = "JetBrains Mono"
 family_mono_bold = "JetBrains Mono Bold"
+family_display   = "VT323"
+
+# Barre plus haute (34 chez upstream). Multiple de scanline_period : les lignes
+# de la barre tombent alors dans le prolongement de celles du menu.
+[bar]
+height          = 40
+clock_size      = 28.0        # horloge en VT323
 
 # L'accueil de la charte (PT35-OS 0.4.2+u4, notre fork) : widgets à gauche,
 # épingles en grille 3x3 à droite. Y ouvre Toutes les apps, où Y épingle.
@@ -39,6 +47,9 @@ launcher_home   = true
 theme           = "Phosphore"
 glow            = 4           # halo flou sous les icônes de la grille, en px
 
-# Scanlines CRT : une ligne sur deux 15 % plus sombre (barre, menu, apps).
+# Scanlines CRT comme la maquette : une ligne sur quatre 25 % plus sombre
+# (barre, menu, apps). Une sur deux à 15 % ne se voyait pas sur l'écran 3,5".
 [effects]
-scanlines       = 15
+scanlines       = 25
+scanline_period = 4
+glow            = 3           # halo de l'horloge de l'accueil, en px
