@@ -42,6 +42,7 @@ radius          = 0           # angles droits
 launcher_columns = 3
 launcher_home   = true
 hint_frames     = true        # légende : touche carrée, action encadrée (fork u6)
+row_frames      = true        # icônes encadrées, Réglages rapides en liste, interrupteurs 0/1 (fork u9)
 # tile_opacity n'est pas ici : ce fichier passerait devant le curseur Tuiles
 # des Réglages rapides. install.sh le pose à 85 % dans appearance.toml.
 
