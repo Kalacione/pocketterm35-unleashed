@@ -43,3 +43,6 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | icône principale : obturateur 8 lames en pixel art (fork `0.4.2+u7`) | retenu | clin d'œil à Portal, net à 16 px car ses fentes suivent la grille ; remplace le dessin du crâne tel quel. Pistes : `design/icone-main-pistes-v2.png` du dossier partagé |
 | interrupteurs `0` / `1` (premier jet u9) | remplacé | ON / OFF en toutes lettres sur fond plein vert ou rouge : l'état se lit sans distinguer les couleurs |
 | numéros de ligne dans les listes | écarté | bruit à 640x480, le fil d'Ariane donne déjà la position ; `install.sh` pose `show_numbers = false` |
+| accueil uosc à l'idle, `scripts/pt35-home.lua` (API de menus d'uosc) | retenu | écran noir sans fichier une fois « Drop files » masqué. Un menu uosc dit que la médiathèque est vide et propose Parcourir (navigateur d'uosc) et une URL tapée dans son champ de recherche : thème déjà fait, aucun patch du fork |
+| liste de `~/Music` dans `pt35-menu` | écarté | patch Rust à reporter à chaque mise à jour d'upstream, refait le navigateur d'uosc |
+| profils mpv `pt35-music` / `pt35-video` | retenu | chaque app a sa médiathèque (`uosc-default_directory`) ; les playlists sont déjà séparées, un processus mpv par app. Les `.m3u` s'ouvrent depuis Parcourir sans réglage |
