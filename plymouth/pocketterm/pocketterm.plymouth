@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=PocketTerm
+Description=PocketTerm OS, charte Phosphore
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/pocketterm
+ScriptFile=/usr/share/plymouth/themes/pocketterm/pocketterm.script

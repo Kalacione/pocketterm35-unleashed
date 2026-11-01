@@ -1,0 +1,17 @@
+# Une image par état de la barre, toutes dessinées par tools/splash.py.
+last = 14;
+i = 0;
+while (i <= last) {
+  frames[i] = Image("splash-" + i + ".png");
+  i = i + 1;
+}
+sprite = Sprite(frames[0]);
+sprite.SetX(Window.GetX() + (Window.GetWidth() - frames[0].GetWidth()) / 2);
+sprite.SetY(Window.GetY() + (Window.GetHeight() - frames[0].GetHeight()) / 2);
+
+fun progress_callback(duration, progress) {
+  n = Math.Int(progress * last);
+  if (n > last) n = last;
+  sprite.SetImage(frames[n]);
+}
+Plymouth.SetBootProgressFunction(progress_callback);

@@ -55,6 +55,7 @@ n'est créé qu'au premier fichier qui en a besoin) :
 | `home/.config/pt35/hooks/hook_*` | scripts sur `startup`, `launch`, `shutdown`, `screenshot`, `reload`, `lowbattery` |
 | `home/.config/sway/config` | `include` upstream puis nos surcharges sway |
 | `home/.local/bin/` | nos petits scripts |
+| `plymouth/<thème>/` | thème Plymouth, images générées par `tools/splash.py` à l'install |
 | `docs/briques.md` | briques retenues ou écartées, et pourquoi |
 
 Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.

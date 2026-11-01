@@ -106,7 +106,9 @@ existant au même endroit est renommé en `.bak` et restauré à la désinstalla
 Si la version de PocketTerm35-OS ne correspond pas à `PT35_VERSION`, le script
 s'arrête et indique quoi faire (voir plus bas). Avec `sudo`, il lie aussi la
 police JetBrains Mono dans `/usr/share/fonts/TTF` et nos icônes dans
-`/usr/share/icons/Phosphore` : PocketTerm35-OS ne les cherche que là.
+`/usr/share/icons/Phosphore` : PocketTerm35-OS ne les cherche que là. Si
+Plymouth est installé (Raspberry Pi OS Desktop), il remplace l'écran de
+démarrage par le nôtre et reconstruit l'initramfs, ce qui prend une minute.
 
 **8. Rechargement**
 
@@ -155,7 +157,7 @@ icône obturateur, widget Lecture et listes de réglages encadrées.
 cd ~/pocketterm35-unleashed && ./install.sh --uninstall
 ```
 
-Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
+Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de Raspberry Pi OS remis. Recharger comme à l'étape 8.
 
 ## Contenu
 
@@ -172,6 +174,8 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | `home/.local/share/fonts/` | police pixel [VT323](https://fonts.google.com/specimen/VT323) (OFL) des horloges, lue par notre fork dès `0.4.2+u5` |
 | `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
 | `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
+| `plymouth/pocketterm/` | thème Plymouth de l'écran de démarrage |
+| `tools/splash.py` | dessine ses images depuis `DESIGN.md`, l'obturateur et VT323 ; lancé par `install.sh` |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/ship.sh` | publie la version courante du fork de PocketTerm35-OS (tag, build et release par sa CI) et l'épingle dans `PT35_VERSION` |
