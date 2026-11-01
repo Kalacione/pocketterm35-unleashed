@@ -11,12 +11,12 @@ Source de vérité des specs du projet. Charte graphique : [`DESIGN.md`](../DESI
 - **K.I.S.S.** : tactile et boutons d'abord. Ergonomie : pas d'outil à la Vim. On déplace le curseur, on sélectionne, on copie, on coupe et on colle au doigt, au D-pad, avec A/B/X/Y, L/R et par des menus, jamais avec des combinaisons de touches à retenir. Valable pour toutes les apps, éditeur compris.
 - **D.R.Y.** : un seul toolkit pour les apps graphiques (GTK4 / libadwaita), donc un seul thème : `theme.toml` pour le menu, `gtk.css` pour les apps.
 - **Y.A.G.N.I.** : on teste l'app déjà en place avant d'en installer une autre.
-- **Matériel** : Raspberry Pi 5, 8 Go de RAM. Les apps GTK4, un petit modèle IA local et la transcription vocale locale sont à sa portée. Le calcul lourd reste quand même sur le réseau (Jean-Michel, Home Assistant) pour l'autonomie de la batterie.
+- **Matériel** : Raspberry Pi 5, 8 Go de RAM. Les apps GTK4, un petit modèle IA local et la transcription vocale locale sont à sa portée. Le calcul lourd reste quand même sur le réseau (serveur IA local, Home Assistant) pour l'autonomie de la batterie.
 
 | Version | Contenu | Critère de fin |
 | --- | --- | --- |
 | v1 Socle + admin | PT35-OS installé, thème Phosphore, fond d'écran image, écrans Paramètres manquants, menu Admin réseau, SSH, fichiers locaux et SSH, éditeur, musique et vidéo | Régler l'appareil et administrer le réseau sans taper de commande de config |
-| v2 Usage | Wikipédia, assistant texte (Claude + Jean-Michel), rétro-gaming minimal | Une semaine d'usage quotidien sans manque bloquant |
+| v2 Usage | Wikipédia, assistant texte (Claude + serveur IA local), rétro-gaming minimal | Une semaine d'usage quotidien sans manque bloquant |
 | v3 Bonus | Assistant vocal, domotique | À cadrer après v2 |
 | Un jour peut-être | Radio SDR | — |
 
@@ -52,7 +52,7 @@ Le lanceur de PT35-OS est la racine du menu : écrans système, puis apps éping
 - **Icônes** : thème `Phosphore` ([PR #4](https://github.com/Kalacione/pocketterm35-unleashed/pull/4)) : icônes Tabler (MIT) au trait, recolorées en vert phosphore par `tools/icons.sh`, Papirus pour le reste. Sans icône, c'est le glyphe de 2 caractères qui s'affiche.
 - **Scanlines** : effet CRT sur la barre, le menu et les apps, depuis le fork `0.4.2+u2` (`[effects] scanlines`, `pt35-bar --scanlines` dans la config sway), désactivé par défaut et activé par la surcouche. Une ligne sur deux à 15 % ne se voyait pas sur l'écran 3,5" : u5 ajoute `[effects] scanline_period`, et la surcouche passe à une ligne sur quatre à 25 %. Détails dans `DESIGN.md`.
 - **Fond d'écran** : PT35-OS 0.4.2 met une couleur unie, et sans fenêtre ouverte le menu plein écran et opaque sert de bureau : une image posée par sway ne se verrait pas. Notre fork (`0.4.2+u1`) dessine `~/.config/pt35/wallpaper.svg` sous le lanceur, s'il existe. Le SVG est fait de formes (le moteur SVG du menu n'a pas de texte). Image fixe : un fond animé (pluie) a été proposé et mis de côté, car il oblige à redessiner l'accueil en continu.
-- **Accueil** (fork `0.4.2+u4` ; choix de Djé : widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u6.png`](design/accueil-u6.png) (avant : [`accueil-u5.png`](design/accueil-u5.png), [`accueil-u4.png`](design/accueil-u4.png)), liste All apps [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png) (version u3, même fonctionnement).
+- **Accueil** (fork `0.4.2+u4` ; widgets à gauche, comme la maquette `01-accueil`). Aperçus : [`accueil-u6.png`](design/accueil-u6.png) (avant : [`accueil-u5.png`](design/accueil-u5.png), [`accueil-u4.png`](design/accueil-u4.png)), liste All apps [`toutes-les-apps-u2.png`](design/toutes-les-apps-u2.png) (version u3, même fonctionnement).
   - Réglages : `[menu] launcher_home = true`, `[menu] launcher_columns = 3`, `[icons] size_launcher = 64`, `[icons] glow = 4`. Tout est désactivé par défaut ; la surcouche les active (PR Unleashed #4).
   - Grille 3 × 3 des seules apps épinglées. Plus de colonne latérale ni de tuiles Toutes les apps, Paramètres ou Énergie ; Fenêtres reste sur Select. Défilement par lignes (D-pad, Bas / PageDown), L et R restent réservés. Tuile sélectionnée pleine en blanc léger.
   - *Widget column* à gauche (216 px, `widgets.rs` dans le fork), deux panneaux à onglet de même hauteur (u12). SYSTEM : grosse horloge, date, jauges segmentées CPU, RAM, TEMP. Une jauge sans valeur est masquée.
@@ -100,8 +100,8 @@ Pour chaque besoin : ce qui est déjà dans PT35-OS, à tester en premier, puis 
 | Musique (mp3) | VLC | `mpv` + uosc, comme Vidéo (`home/.config/pt35/apps.toml`) : une seule interface, ouvre `~/Music`. Sans fichier, Musique et Vidéo affichent un accueil uosc (`scripts/pt35-home.lua`) : `Empty folder` (aucun fichier, sous-dossiers compris) ou `Nothing playing`, puis Play all, Browse (aussi les `.m3u`), Open URL au clavier. En anglais comme le reste. `install.sh` crée `~/Music` et `~/Videos`. Il revient tant que rien ne joue : B ne laisse jamais d'écran noir. VLC reste dans All apps | v1 (à tester) |
 | Vidéo | `mpv` avec [uosc](https://github.com/tomasklaen/uosc) aux couleurs Phosphore (`home/.config/mpv/`) : toucher la vidéo = pause, A pause, X affiche les contrôles, Y et B (clic droit) ouvrent le menu | si besoin : Clapper (lecteur adaptatif GTK4). Le Pi 5 décode le HEVC en matériel et le H.264 1080p en logiciel : pas de limite pratique pour un écran 640 × 480 | v1 (à tester) |
 | Wikipédia | Navigateur | [Wike](https://linuxphoneapps.org/apps/com.github.hugolabe.wike), mobile fit 5/5 : lecteur Wikipédia avec images, sommaire, favoris, 300 langues. Le côté « terminal » vient du thème Phosphore | v2 |
-| Assistant texte (Claude + Jean-Michel) | DarkWire (agent sur un petit modèle local, pensé pour le Pi 5 : secours hors réseau) | Newelle : assistant GTK4 qui gère l'API Claude, les modèles locaux via Ollama, la voix (transcription et synthèse) et peut lancer des commandes. À vérifier : rendu à 640 × 480, et si Jean-Michel parle le protocole Ollama | v2 |
-| Assistant vocal + domotique | — | **Home Assistant** sur une machine du réseau. Il apporte Assist (la chaîne voix), l'intégration Anthropic (Claude), l'intégration Ollama (Jean-Michel), Tuya en officiel et Alexa via un module communautaire. Sur le PocketTerm, on installe juste [linux-voice-assistant](https://github.com/OHF-Voice/linux-voice-assistant) (satellite vocal ARM64 avec mot de réveil local) et on affiche le tableau de bord HA | v3 |
+| Assistant texte (Claude + serveur IA local) | DarkWire (agent sur un petit modèle local, pensé pour le Pi 5 : secours hors réseau) | Newelle : assistant GTK4 qui gère l'API Claude, les modèles locaux via Ollama, la voix (transcription et synthèse) et peut lancer des commandes. À vérifier : rendu à 640 × 480, et si Jean-Michel parle le protocole Ollama | v2 |
+| Assistant vocal + domotique | — | **Home Assistant** sur une machine du réseau. Il apporte Assist (la chaîne voix), l'intégration Anthropic (Claude), l'intégration Ollama (serveur IA local), Tuya en officiel et Alexa via un module communautaire. Sur le PocketTerm, on installe juste [linux-voice-assistant](https://github.com/OHF-Voice/linux-voice-assistant) (satellite vocal ARM64 avec mot de réveil local) et on affiche le tableau de bord HA | v3 |
 | Rétro-gaming minimal | — | RetroArch. Start et Select restent au système : dans le jeu, Start = X et Select = Y. Il manque un mode où les boutons arrivent bruts au jeu : demander d'abord au mainteneur de PT35-OS, PR seulement s'il n'y a rien | v2 |
 | Radio SDR | — | — | un jour peut-être |
 
@@ -121,7 +121,7 @@ Constatées sur l'appareil ou dans le code. Chacune se corrige dans le fork de P
 
 ## TODO
 
-L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appareil » chez Djé sur le PocketTerm, « agent » quand un agent prépare les fichiers dans ce dépôt.
+L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appareil » sur le PocketTerm, « agent » quand un agent prépare les fichiers dans ce dépôt.
 
 **v1 Socle + admin**
 
@@ -161,7 +161,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : `./install.sh`, redémarrer, vérifier l'écran de démarrage et la barre
 - [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
-**Prochains chantiers** (demandés par Djé, pas commencés)
+**Prochains chantiers** (pas commencés)
 
 - [ ] Fil d'Ariane (en-tête « PT35 < SETTINGS ») : il prend trop de place. Maquette à revoir d'abord
 - [ ] Reskin des apps aux couleurs Phosphore, au-delà de GTK4, `foot` et mpv : liste des apps à cadrer
@@ -170,7 +170,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 **v2 Usage**
 
 - [ ] Wike
-- [ ] Newelle : tester à 640 × 480 avec Claude, puis Jean-Michel
+- [ ] Newelle : tester à 640 × 480 avec Claude, puis le serveur IA local
 - [ ] Rétro-gaming : RetroArch + demande au mainteneur pour le mode boutons bruts
 
 **v3 Bonus**
@@ -179,6 +179,6 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 
 ## Questions ouvertes
 
-- Jean-Michel expose-t-il une API compatible Ollama ou OpenAI ? C'est ce qui permet de le brancher sans code dans Newelle et Home Assistant.
-- As-tu déjà un Home Assistant, ou une machine qui pourrait l'héberger (celle de Jean-Michel ?) ?
+- Le serveur IA local expose-t-il une API compatible Ollama ou OpenAI ? C'est ce qui permet de le brancher sans code dans Newelle et Home Assistant.
+- Quelle machine du réseau peut héberger Home Assistant ?
 - Tenda Beli : passe-t-il par l'app Tuya / Smart Life ? Si oui, l'intégration Tuya suffit.
