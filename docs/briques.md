@@ -74,5 +74,5 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | bandeau `pt35-actions` pour Files | écarté | le clavier physique fait Ctrl+C / Ctrl+V : pas d'interface en plus |
 | [sshfs.yazi](https://github.com/uhs-robert/sshfs.yazi) | écarté | monte par sshfs (FUSE, paquet en plus) ce que le SFTP natif de yazi fait déjà |
 | L / R pour les onglets de Files (patch `pt35d`) | écarté pour l'instant | L ferme et R change de mode partout : un sens par bouton. Y (F10, libre dans yazi) liste les onglets comme X liste les lieux, et un hôte choisi par X s'ouvre dans son propre onglet : deux onglets suffisent pour copier |
-| Pluie dans `pt35-menu` (`[effects] rain`, fork u19) | retenu | le menu peint déjà le fond (u1) et redessine 4 fois par seconde : ~70 lignes, aucun processus en plus, s'arrête avec le menu. ~1 ms de plus par image, 4 images/s, moins que le balayage |
+| Pluie dans `pt35-menu` (`[effects] rain`, fork u20) | retenu | le menu peint déjà le fond (u1) et redessine 4 fois par seconde : ~70 lignes, aucun processus en plus, s'arrête avec le menu. ~1 ms de plus par image, 4 images/s, moins que le balayage |
 | swww, mpvpaper, glpaper (fond animé sway) | écarté | le menu couvre tout l'écran d'un fond opaque : il faudrait le rendre transparent (patch) et garder un processus qui tourne aussi sous les apps |
