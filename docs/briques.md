@@ -66,3 +66,10 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | redémarrer `pt35d` et la barre dans le `postinst` (fork u14) | retenu | les boucles de respawn du sway config relancent les nouveaux binaires ; sinon l'ancien démon reste jusqu'au prochain login et les widgets HOSTS et NETWORK restent vides |
 | réordonner les épingles de l'accueil avec B (fork u15) | retenu | B ne fait rien sur l'accueil ; L/R tournent déjà les widgets et il n'y a pas d'autre bouton au dos. Croix = échange avec la voisine, A ou B pose, ordre écrit dans le fichier `pinned` à chaque pas. Tuile saisie : cadre épais + étiquette MOVE |
 | captures du README : sway headless (`WLR_BACKENDS=headless`, 640x480) + `grim`, binaires du fork compilés sur PC | retenu | rendu réel du menu, de la barre et des apps sans l'appareil ; seules les icônes système et les valeurs (IP, disques) diffèrent du Pi |
+| [yazi](https://github.com/sxyazi/yazi) (MIT) avec son VFS SFTP et ses onglets | retenu | déjà l'explorateur de PT35-OS ; copier / coller local ↔ SSH ↔ SSH entre onglets sans paquet ni patch. Thème, touches et deux petits plugins Lua dans `home/.config/yazi/`. Limite : yazi ne vérifie pas la clé d'hôte du serveur et ignore ProxyJump |
+| `pt35-yazi-vfs` (`ssh -G` → `vfs.toml`) | retenu | yazi ne lit pas `~/.ssh/config` : on le traduit à chaque ouverture de Files, la liste d'hôtes reste hors du git |
+| [smart-enter](https://github.com/yazi-rs/plugins) (MIT) | copié | A doit entrer dans un dossier, pas l'ouvrir avec une autre app ; trois lignes reprises dans `pt35-nav` plutôt qu'un `ya pkg` de plus |
+| Nautilus + GVFS, Thunar | écarté | lit `~/.ssh/config` et va au doigt, mais ~100 Mo de dépendances et une interface serrée à 640x480, pour refaire ce que yazi fait |
+| mc (double panneau, sftpfs) | écarté | 40 colonnes par panneau à 640x480, touches F |
+| bandeau `pt35-actions` pour Files | écarté | le clavier physique fait Ctrl+C / Ctrl+V : pas d'interface en plus |
+| [sshfs.yazi](https://github.com/uhs-robert/sshfs.yazi) | écarté | monte par sshfs (FUSE, paquet en plus) ce que le SFTP natif de yazi fait déjà |

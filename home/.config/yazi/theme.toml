@@ -1,0 +1,116 @@
+# PocketTerm Phosphore (DESIGN.md) pour yazi : seules les clés qu'on change.
+# Un état ne tient jamais à la couleur seule : mot ou forme à côté (init.lua).
+# Coins carrés : bordures "plain".
+
+[mgr]
+cwd             = { fg = "#63e6a4", bold = true }
+find_keyword    = { fg = "#06110b", bg = "#63e6a4", bold = true }
+find_position   = { fg = "#5e8f78" }
+marker_copied   = { fg = "#63e6a4", bg = "#63e6a4" }
+marker_cut      = { fg = "#ffa94d", bg = "#ffa94d" }
+marker_marked   = { fg = "#4fd1d9", bg = "#4fd1d9" }
+marker_selected = { fg = "#e6fff2", bg = "#e6fff2" }
+count_copied    = { fg = "#06110b", bg = "#63e6a4", bold = true }
+count_cut       = { fg = "#06110b", bg = "#ffa94d", bold = true }
+count_selected  = { fg = "#06110b", bg = "#e6fff2", bold = true }
+border_style    = { fg = "#24382e" }
+
+[tabs]
+active    = { fg = "#06110b", bg = "#e6fff2", bold = true }
+inactive  = { fg = "#63e6a4", bg = "#1c2a23" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "#06110b", bg = "#63e6a4", bold = true }
+normal_alt  = { fg = "#63e6a4", bg = "#1c2a23" }
+select_main = { fg = "#06110b", bg = "#e6fff2", bold = true }
+select_alt  = { fg = "#e6fff2", bg = "#1c2a23" }
+unset_main  = { fg = "#06110b", bg = "#ffa94d", bold = true }
+unset_alt   = { fg = "#ffa94d", bg = "#1c2a23" }
+
+# Sélection : blanc léger, texte sombre.
+[indicator]
+parent  = { fg = "#06110b", bg = "#63e6a4" }
+current = { fg = "#06110b", bg = "#e6fff2" }
+padding = { open = " ", close = " " }
+
+[status]
+overall    = { fg = "#63e6a4", bg = "#121a16" }
+sep_left   = { open = "", close = "" }
+sep_right  = { open = "", close = "" }
+perm_sep   = { fg = "#5e8f78" }
+perm_type  = { fg = "#d4ffe9" }
+perm_read  = { fg = "#63e6a4" }
+perm_write = { fg = "#63e6a4" }
+perm_exec  = { fg = "#63e6a4" }
+progress_label  = { fg = "#d4ffe9", bold = true }
+progress_normal = { fg = "#63e6a4", bg = "#1c2a23" }
+progress_error  = { fg = "#06110b", bg = "#ff6e6e" }
+
+[which]
+border          = { fg = "#63e6a4" }
+border_set      = { as = "plain" }
+cand            = { fg = "#e6fff2", bold = true }
+rest            = { fg = "#5e8f78" }
+desc            = { fg = "#63e6a4" }
+separator_style = { fg = "#5e8f78" }
+
+[confirm]
+border     = { fg = "#ffa94d" }
+border_set = { as = "plain" }
+title      = { fg = "#ffa94d", bold = true }
+btn_yes    = { fg = "#06110b", bg = "#e6fff2", bold = true }
+btn_no     = { fg = "#63e6a4" }
+
+[spot]
+border     = { fg = "#63e6a4" }
+border_set = { as = "plain" }
+title      = { fg = "#63e6a4" }
+tbl_col    = { fg = "#63e6a4" }
+tbl_cell   = { fg = "#06110b", bg = "#e6fff2" }
+
+[notify]
+border_set  = { as = "plain" }
+title_info  = { fg = "#63e6a4" }
+title_warn  = { fg = "#06110b", bg = "#ffa94d" }
+title_error = { fg = "#06110b", bg = "#ff6e6e" }
+
+[pick]
+border     = { fg = "#63e6a4" }
+border_set = { as = "plain" }
+active     = { fg = "#06110b", bg = "#e6fff2", bold = true }
+
+[input]
+border     = { fg = "#63e6a4" }
+border_set = { as = "plain" }
+title      = { fg = "#63e6a4" }
+selected   = { fg = "#06110b", bg = "#e6fff2" }
+
+[cmp]
+border     = { fg = "#63e6a4" }
+border_set = { as = "plain" }
+active     = { fg = "#06110b", bg = "#e6fff2" }
+
+[tasks]
+border     = { fg = "#63e6a4" }
+border_set = { as = "plain" }
+hovered    = { fg = "#06110b", bg = "#e6fff2", bold = true }
+
+[help]
+border     = { fg = "#63e6a4" }
+border_set = { as = "plain" }
+chord      = { fg = "#e6fff2", bold = true }
+hovered    = { fg = "#06110b", bg = "#e6fff2", bold = true }
+
+# Deux tons seulement : dossiers en vert gras, fichiers en clair. Le type se
+# lit à l'icône, que init.lua laisse dans la couleur de la ligne.
+[filetype]
+rules = [
+	{ url = "*", is = "orphan", fg = "#06110b", bg = "#ff6e6e" },
+	{ url = "*", is = "dummy", fg = "#06110b", bg = "#ff6e6e" },
+	{ url = "*/", is = "dummy", fg = "#06110b", bg = "#ff6e6e" },
+	{ mime = "vfs/{absent,stale}", fg = "#5e8f78" },
+	{ url = "*/", fg = "#63e6a4", bold = true },
+	{ url = "*", fg = "#d4ffe9" },
+]

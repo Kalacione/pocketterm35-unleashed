@@ -15,3 +15,7 @@ exec = "mpv --player-operation-mode=pseudo-gui --idle=yes --profile=pt35-video"
 # Le Terminal dans tmux, pour sa barre du bas (~/.config/tmux/tmux.conf).
 [app.terminal]
 exec = "foot tmux new-session pt35-hello"
+
+# Files reste yazi : vfs.toml (hôtes SSH) refait depuis ~/.ssh/config à chaque ouverture.
+[app.files]
+exec = "foot -a pt35-files sh -c '\"$HOME/.local/bin/pt35-yazi-vfs\"; exec yazi'"

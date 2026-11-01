@@ -95,7 +95,7 @@ Pour chaque besoin : ce qui est déjà dans PT35-OS, à tester en premier, puis 
 | Terminal | `foot` + `tmux` (barre du bas Phosphore) | — | v1 |
 | SSH | Terminal | une entrée de menu par serveur dans `menu.toml` (`exec = "foot ssh nas"`) : config, pas de script | v1 |
 | Admin réseau | Moniteur (`htop`), Disque (`ncdu`) | sous-menu « Admin » qui lance des outils standard : `mtr`, `nmap`, `iperf3`, `termshark` | v1 |
-| Fichiers locaux + SSH | `yazi` (clavier) | [Fichiers GNOME (Nautilus)](https://linuxphoneapps.org/apps/org.gnome.nautilus/), mobile fit 5/5, GTK4. Un serveur SSH s'ouvre comme un dossier (`sftp://nas`, via `gvfs-backends`) et reste en favori. Copier / coller au doigt entre local et distant, et entre deux serveurs | v1 |
+| Fichiers locaux + SSH | `yazi` (clavier) | `yazi` gardé, avec son SFTP natif (v25.12 et plus) et ses onglets : copier dans un onglet, coller dans un autre, local ou serveur. Thème Phosphore (`home/.config/yazi/`). A ouvre, B annule puis remonte, X ouvre Lieux (X encore = dossier perso, 1 à 9 = hôtes SSH). Ctrl+C / X / V copient, coupent, collent, Ctrl+T / W ouvrent et ferment un onglet. Hôtes lus dans `~/.ssh/config` par `pt35-yazi-vfs` à chaque ouverture | v1 |
 | Éditeur de texte | `mousepad` (Y ouvre sa barre de menus), avec notre bandeau d'actions en bas (`pt35-actions`, maquette `05-editeur`) | [Éditeur de texte GNOME](https://linuxphoneapps.org/apps/org.gnome.texteditor/), mobile fit 5/5 : sélection au doigt, copier / coller par menu, boutons dans la barre. Il ouvre aussi les fichiers distants depuis Fichiers | v1 |
 | Musique (mp3) | VLC | `mpv` + uosc, comme Vidéo (`home/.config/pt35/apps.toml`) : une seule interface, ouvre `~/Music`. Sans fichier, Musique et Vidéo affichent un accueil uosc (`scripts/pt35-home.lua`) : `Empty folder` (aucun fichier, sous-dossiers compris) ou `Nothing playing`, puis Play all, Browse (aussi les `.m3u`), Open URL au clavier. En anglais comme le reste. `install.sh` crée `~/Music` et `~/Videos`. Il revient tant que rien ne joue : B ne laisse jamais d'écran noir. VLC reste dans All apps | v1 (à tester) |
 | Vidéo | `mpv` avec [uosc](https://github.com/tomasklaen/uosc) aux couleurs Phosphore (`home/.config/mpv/`) : toucher la vidéo = pause, A pause, X affiche les contrôles, Y et B (clic droit) ouvrent le menu | si besoin : Clapper (lecteur adaptatif GTK4). Le Pi 5 décode le HEVC en matériel et le H.264 1080p en logiciel : pas de limite pratique pour un écran 640 × 480 | v1 (à tester) |
@@ -129,7 +129,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Créer le dépôt (surcouche dotfiles, pas de fork) et y verser specs et charte
 - [ ] Appareil : installer Pi OS Trixie Lite + PocketTerm35-OS, puis `sudo pt35-kbd flash`
 - [ ] Appareil : tester au doigt ce qui est déjà là (menu, bascule, Paramètres, mousepad, VLC, `mpv`) et noter ce qui gêne
-- [ ] Appareil : `apt install nautilus gvfs-backends gnome-text-editor`, ouvrir `sftp://<serveur>` et tester copier / coller
+- [ ] Appareil : Files (yazi), X puis un chiffre pour un hôte SSH, copier / coller entre deux onglets
 - [ ] Appareil : brancher le micro-casque, `arecord -l`
 - [x] Agent : thème Phosphore pour le menu et la barre (`theme.toml`)
 - [ ] Appareil : appliquer le thème Phosphore, vérifier la sélection blanc léger et l'écran d'erreur

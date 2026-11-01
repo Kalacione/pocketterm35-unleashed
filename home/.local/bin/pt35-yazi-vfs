@@ -1,0 +1,32 @@
+#!/bin/sh
+# Écrit ~/.config/yazi/vfs.toml depuis ~/.ssh/config : yazi ne lit pas ce
+# dernier. Lancé avant chaque ouverture de Files. Rien de tout ça dans le git.
+out=${XDG_CONFIG_HOME:-$HOME/.config}/yazi/vfs.toml
+conf=$HOME/.ssh/config
+[ -r "$conf" ] || exit 0
+mkdir -p "$(dirname "$out")"
+{
+	echo "# Généré par pt35-yazi-vfs depuis ~/.ssh/config : ne pas éditer."
+	# Les Host sans joker, dans l'ordre du fichier, sans doublon.
+	awk 'tolower($1) == "host" { for (i = 2; i <= NF; i++) if ($i !~ /[*?!]/) print $i }' "$conf" |
+	awk '!seen[$0]++' | while read -r alias; do
+		# ssh -G applique tout le fichier : HostName, User, Port, IdentityFile.
+		ssh -F "$conf" -G "$alias" 2>/dev/null | awk -v alias="$alias" -v agent="$SSH_AUTH_SOCK" '
+			$1 == "hostname" { host = $2 }
+			$1 == "user" { user = $2 }
+			$1 == "port" { port = $2 }
+			$1 == "identityfile" && key == "" {
+				sub(/^~/, ENVIRON["HOME"], $2)
+				if ((getline line < $2) > 0) key = $2
+				close($2)
+			}
+			END {
+				if (host == "") exit
+				# Nom de service yazi : minuscules, lettres, chiffres et tirets, 20 au plus.
+				name = tolower(alias); gsub(/[^a-z0-9-]/, "-", name); name = substr(name, 1, 20)
+				printf "\n[sftp.%s]\nhost = \"%s\"\nuser = \"%s\"\nport = %s\n", name, host, user, port
+				# Sans agent SSH, la première clé lisible ; avec, yazi passe par lui.
+				if (agent == "" && key != "") printf "key_file = \"%s\"\n", key
+			}'
+	done
+} > "$out.tmp" && mv "$out.tmp" "$out"
