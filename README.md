@@ -175,7 +175,7 @@ Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de Rasp
 | `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
 | `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
 | `plymouth/pocketterm/` | thème Plymouth de l'écran de démarrage |
-| `tools/splash.py` | dessine ses images depuis `DESIGN.md`, l'obturateur et VT323 ; lancé par `install.sh` |
+| `tools/splash.py` | dessine ses images depuis `DESIGN.md`, l'obturateur, VT323 et `PT35_VERSION` ; lancé par `install.sh` |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/ship.sh` | publie la version courante du fork de PocketTerm35-OS (tag, build et release par sa CI) et l'épingle dans `PT35_VERSION` |
