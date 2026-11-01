@@ -63,3 +63,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | hosts du widget HOSTS lus dans `~/.ssh/config` (fork u13) | retenu | déjà la source de vérité, reste sur l'appareil, rien dans le dépôt ; `ssh -G` résout comme ssh. Pin / unpin sur l'écran SSH |
 | ping (ICMP) pour HOSTS | écarté | une connexion TCP au port SSH dit si on peut s'y connecter, et passe quand l'ICMP est filtré ; un test toutes les 2 min par `pt35d` |
 | VPN OpenVPN dans NETWORK | à cadrer | NetworkManager importe les `.ovpn` (`network-manager-openvpn`) ; le widget ferait `nmcli con up/down` |
+| redémarrer `pt35d` et la barre dans le `postinst` (fork u14) | retenu | les boucles de respawn du sway config relancent les nouveaux binaires ; sinon l'ancien démon reste jusqu'au prochain login et les widgets HOSTS et NETWORK restent vides |
