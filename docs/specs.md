@@ -194,7 +194,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 
 **Prochains chantiers** (demandés par Djé, pas commencés)
 
-- [ ] Fil d'Ariane (en-tête « PT35 < SETTINGS ») : il prend trop de place. Maquette à revoir d'abord
+- [x] Fil d'Ariane : 46 → 32 px, prompt `PT35 ❯ SETTINGS ❯` et titre en VT323, 7 lignes de liste au lieu de 6 (fork u19, piste C3 de `design/fil-ariane/` du dossier partagé)
+- [ ] Appareil : après `tools/ship.sh` pour u19, ouvrir Settings, vérifier le fil, la 7e ligne et le retour au doigt sur `PT35`
 - [ ] Reskin des apps aux couleurs Phosphore, au-delà de GTK4, `foot` et mpv : liste des apps à cadrer
 - Mis de côté : fond d'écran animé (pluie), il oblige à redessiner l'accueil en continu
 

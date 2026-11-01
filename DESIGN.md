@@ -37,7 +37,7 @@ rounded:
 spacing:
   unit: 8px
   bar: 40px
-  header: 46px
+  header: 32px
   row: 50px
   hint: 46px
   target-min: 48px
@@ -126,20 +126,20 @@ Correspondance `theme.toml` ([`home/.config/pt35/theme.toml`](home/.config/pt35/
 
 Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
-- **VT323** (pixel, OFL) : afficheur (horloges, gros chiffres). Livrée par le dépôt dans `~/.local/share/fonts`, où le fork la cherche depuis u5. `[font] family_display = "VT323"` sert aux horloges du widget SYSTEM et de la barre (`[bar] clock_size = 28`). Le menu n'a pas de police par rôle pour les titres : les titres d'écran restent en JetBrains Mono, le token `title` est une cible.
+- **VT323** (pixel, OFL) : afficheur (horloges, gros chiffres). Livrée par le dépôt dans `~/.local/share/fonts`, où le fork la cherche depuis u5. `[font] family_display = "VT323"` sert aux horloges du widget SYSTEM et de la barre (`[bar] clock_size = 28`). Elle sert aussi au titre d'écran dans le fil d'Ariane (fork u19, `[menu] title_header`).
 - **JetBrains Mono** (paquet Debian `fonts-jetbrains-mono`) : tout le texte courant, menu, barre et terminal. `install.sh` la lie dans `/usr/share/fonts/TTF`, seul dossier où PT35-OS peut la trouver (voir [`docs/briques.md`](docs/briques.md)).
 
 | token | police | taille | usage |
 |---|---|---|---|
 | display | VT323 | 48-64 px | horloge, gros chiffres |
-| title | VT323 | 28 px | titre d'écran |
+| title | VT323 | 30 px | titre d'écran, dans le fil d'Ariane |
 | body | JetBrains Mono | 17 px | lignes de liste, tuiles |
 | label | JetBrains Mono | 12 px, capitales espacées | étiquettes de panneau, méta |
 | terminal | JetBrains Mono | 14 px | foot (`size=10.5`), barre du bas tmux |
 
 ## Layout
 
-Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (deux panneaux à onglet de même hauteur depuis u12 : SYSTEM, puis la pile de widgets avec sa place `1/2` dans l'en-tête), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u6.png`](docs/design/accueil-u6.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
+Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 32 px (u19 ; 46 chez upstream), lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (deux panneaux à onglet de même hauteur depuis u12 : SYSTEM, puis la pile de widgets avec sa place `1/2` dans l'en-tête), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u6.png`](docs/design/accueil-u6.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
@@ -166,6 +166,7 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - **barre segmentée** : CPU, RAM, température, signal, volume. Masquée si la valeur n'existe pas.
 - **courbe en aire** : débit réseau, charge, avec dégradé et halo.
 - **app active dans la barre** (u5) : case pleine en `accent`, icône teintée sombre.
+- **fil d'Ariane** (u19, `[menu] title_header`) : bande `surface` de 32 px, filet `primary` de 1 px. Le chemin en JetBrains Mono 16 `muted`, séparé par `❯` comme un prompt (`PT35 ❯ SETTINGS ❯`), puis l'écran en cours en VT323 avec halo. Trop long, il perd d'abord les écrans sous PT35, remplacés par `…`, comme `PROMPT_DIRTRIM` de bash. Chaque écran du chemin se touche pour y revenir. Aperçu : [`docs/design/fil-ariane-u19.png`](docs/design/fil-ariane-u19.png).
 - **hint-bar** : touche carrée pleine aux couleurs des boutons physiques (A primary, B error, X teal, Y danger) et action encadrée, cliquables (`[menu] hint_frames = true`, u6).
 
 ## Do's and Don'ts
