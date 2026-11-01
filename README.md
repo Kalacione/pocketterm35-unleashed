@@ -167,6 +167,7 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (notre fork, dès `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
+| `home/.local/share/fonts/` | police pixel [VT323](https://fonts.google.com/specimen/VT323) (OFL) des horloges, lue par notre fork dès `0.4.2+u5` |
 | `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
 | `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
 | `install.sh` | installation, désinstallation, retour à la version testée |
@@ -193,3 +194,6 @@ PocketTerm35-OS est sous licence MIT, Copyright (c) 2026 REZOR
 ([licence](https://github.com/therezor/PocketTerm35-OS/blob/main/LICENSE)).
 Les `.deb` archivés dans les releases de ce dépôt sont ses binaires, non
 modifiés, accompagnés de sa licence.
+
+La police VT323 est sous SIL Open Font License 1.1, Copyright 2011 The VT323
+Project Authors ([licence](home/.local/share/fonts/VT323-OFL.txt)).
