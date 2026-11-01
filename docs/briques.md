@@ -86,3 +86,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | `dom.meta-viewport.enabled` (viewport mobile de Firefox) | écarté | une page sans balise viewport serait rendue sur 980 px puis réduite : illisible à 640x480. La largeur de 427 px suffit aux sites adaptatifs |
 | `policies.json` de Firefox | écarté | demande root (`/etc/firefox/policies`) et vaut pour tous les profils : `user.js` suffit |
 | mode kiosque (`--kiosk`, `--app`) | écarté | plus de barre d'adresse ni de menus |
+| navigateur par défaut : `[app.browser]` pour la tuile, `pt35-browser.desktop` + `xdg-mime` pour les liens | retenu | les deux mécanismes standard, sans script : la tuile a besoin d'un `match` propre à chaque navigateur, un script commun n'enlèverait donc rien. `install.sh` ne pose le défaut des liens qu'une fois, un choix fait avec `xdg-settings` est gardé |

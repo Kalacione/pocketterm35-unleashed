@@ -209,6 +209,7 @@ installé reste celui de `PT35_VERSION`.
 | `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, ou un hôte SSH dans un nouvel onglet), Y liste les onglets (Y encore = nouvel onglet), Ctrl+C / X / V, onglets Ctrl+T / W |
 | `home/.local/bin/pt35-yazi-vfs` | traduit `~/.ssh/config` pour le SFTP de yazi, à chaque ouverture de Fichiers |
 | `home/.local/bin/pt35-actions` | bandeau d'actions sous l'éditeur |
+| `home/.local/share/applications/pt35-browser.desktop` | navigateur par défaut pour les liens (`xdg-open`), le même Firefox que la tuile ; posé une fois par `install.sh` |
 | `home/.local/share/pt35-firefox/` | profil Firefox du Navigateur : user-agent mobile, échelle 1,5 (`user.js`), barre et menus aux couleurs du thème (`chrome/userChrome.css`) |
 | `home/.local/share/fonts/` | police pixel VT323 des horloges |
 | `home/.local/share/icons/Phosphore/` | icônes des apps, tirées de Tabler Icons, Papirus pour le reste |

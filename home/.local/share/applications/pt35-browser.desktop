@@ -1,0 +1,9 @@
+[Desktop Entry]
+# Navigateur par défaut du PocketTerm pour les liens (xdg-open) : le même
+# Firefox que la tuile Navigateur, dans son profil. Caché du lanceur, qui a
+# déjà la tuile.
+Type=Application
+Name=Browser
+Exec=sh -c 'exec firefox --profile "$HOME/.local/share/pt35-firefox" "$@"' sh %u
+MimeType=x-scheme-handler/http;x-scheme-handler/https;text/html;
+NoDisplay=true

@@ -23,8 +23,9 @@ PLY=/usr/sbin/plymouth-set-default-theme
 # python3-pil : tools/splash.py dessine l'écran de démarrage.
 # tmux : la barre du bas du Terminal.
 # python3-gi et les gir1.2-* : pt35-actions, le bandeau d'actions de l'éditeur.
+# xdg-utils : xdg-mime, pour le navigateur par défaut.
 DEPS="stow fonts-jetbrains-mono fontconfig mpv mpv-mpris playerctl curl unzip python3-pil tmux
-  python3-gi gir1.2-gtk-3.0 gir1.2-gtklayershell-0.1"
+  python3-gi gir1.2-gtk-3.0 gir1.2-gtklayershell-0.1 xdg-utils"
 # Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
 https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
@@ -150,6 +151,13 @@ if [ ! -s "$PINS" ]; then
   printf '%s\n' app:terminal app:files app:editor app:browser app:music app:video \
     app:darkwire screen:quick page:power > "$PINS"
   echo "épingles par défaut : $PINS"
+fi
+# Les liens (xdg-open) s'ouvrent dans le Navigateur, posé une fois : un
+# choix fait ensuite avec xdg-settings est écrit dans le même fichier et gardé.
+MIME="${XDG_CONFIG_HOME:-$HOME/.config}/mimeapps.list"
+if ! grep -qs '^x-scheme-handler/https=' "$MIME"; then
+  xdg-mime default pt35-browser.desktop x-scheme-handler/http x-scheme-handler/https text/html
+  echo "navigateur par défaut : pt35-browser.desktop"
 fi
 # Défauts posés une fois dans appearance.toml, que Paramètres > Apparence et
 # les Réglages rapides réécrivent (theme.toml passerait devant eux).
