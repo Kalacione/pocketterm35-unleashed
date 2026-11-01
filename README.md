@@ -167,6 +167,7 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (notre fork, dès `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
+| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv |
 | `home/.config/mpv/` | mpv avec l'interface tactile [uosc](https://github.com/tomasklaen/uosc) (LGPL-2.1, téléchargée par `install.sh`) aux couleurs Phosphore, boutons A, X, Y |
 | `home/.local/share/fonts/` | police pixel [VT323](https://fonts.google.com/specimen/VT323) (OFL) des horloges, lue par notre fork dès `0.4.2+u5` |
 | `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |

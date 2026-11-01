@@ -1,0 +1,8 @@
+# Seules les clés qu'on change ; PT35-OS fusionne le reste.
+
+# Musique sur mpv + uosc, comme Vidéo : une seule interface pour les deux.
+# Un app_id à part, sinon la barre confondrait Musique et Vidéo.
+[app.music]
+icon  = "multimedia-audio-player"
+exec  = "sh -c 'mpv --player-operation-mode=pseudo-gui --force-window=yes --wayland-app-id=pt35-music \"${HOME}/Music\"'"
+match = { app_id = "pt35-music", class = "pt35-music" }

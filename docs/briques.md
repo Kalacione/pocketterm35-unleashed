@@ -36,3 +36,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | MPRIS + [playerctl](https://github.com/altdesktop/playerctl) (Debian) | retenu pour le widget Lecture | un seul protocole pour VLC (natif) et mpv (paquet `mpv-mpris`), et pour tout lecteur futur ; `playerctl` en CLI, comme `nmcli` pour le widget réseau : aucune dépendance Rust en plus |
 | IPC de mpv (`--input-ipc-server`), interfaces rc / http de VLC | écarté | une API par lecteur, à coder deux fois |
 | client D-Bus en Rust (`zbus`) | écarté | nouvelle dépendance et plus de code pour ce que `playerctl` fait déjà |
+| VLC pour Musique | remplacé | Musique passe sur mpv + uosc : une seule interface à habiller pour la musique et la vidéo |
