@@ -9,3 +9,6 @@ exec --no-startup-id sh -c 'while swaymsg -t get_version >/dev/null 2>&1; do pt3
 # Super+Entrée ouvre le même Terminal que la tuile, avec la barre tmux.
 bindsym Mod1+Return exec foot tmux new-session pt35-hello
 bindsym Mod4+Return exec foot tmux new-session pt35-hello
+
+# Bandeau d'actions (Copier, Coller...) sous l'éditeur, caché ailleurs.
+exec --no-startup-id sh -c 'while swaymsg -t get_version >/dev/null 2>&1; do ~/.local/bin/pt35-actions; sleep 2; done'

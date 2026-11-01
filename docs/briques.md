@@ -56,3 +56,7 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | [tmux](https://github.com/tmux/tmux) (ISC, Debian) pour la barre du bas du Terminal | retenu | barre de statut native, couleurs en config ; donne aussi la molette sur l'historique et la copie OSC 52 vers foot. Lancé par la tuile Terminal et Super+Entrée seulement : `foot ssh …` et les apps en `foot -a` restent sans |
 | [Zellij](https://zellij.dev/) | écarté | barre plus riche mais binaire hors Debian, plus lourd, raccourcis qui prennent beaucoup de touches : YAGNI |
 | barre de prompt ([Starship](https://starship.rs/)) | écarté | habille le prompt, pas le bas de l'écran ; à reconsidérer à part |
+| bandeau d'actions `pt35-actions` (Python, GTK3 + [gtk-layer-shell](https://github.com/wmww/gtk-layer-shell), wtype) | retenu | maquette `05-editeur` : Copier, Couper, Coller, Annuler, Chercher, Enregistrer en bas de l'éditeur. Surface layer-shell sans clavier, montrée quand l'app a le focus (`swaymsg subscribe`), raccourcis Ctrl envoyés par wtype (déjà dépendance de PT35-OS). Une app de plus = une entrée dans `ACTIONS` |
+| barre d'outils native de mousepad | écarté | toujours en haut, en anglais, quinze icônes : ni la maquette ni le pouce |
+| Waybar (modules custom + `on-click`) | écarté | pas de moyen fiable de l'afficher seulement sur l'éditeur (SIGUSR1 bascule à l'aveugle) |
+| barre d'actions par app dans `pt35-bar` (fork) | en réserve | la bonne place à terme, et proposable à upstream ; patch Rust à reporter à chaque version, pour six boutons |
