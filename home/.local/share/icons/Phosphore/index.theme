@@ -1,0 +1,12 @@
+[Icon Theme]
+Name=Phosphore
+Comment=Icônes du lanceur PocketTerm Phosphore (Tabler Icons, MIT)
+Inherits=Papirus-Dark,hicolor
+Directories=scalable/apps
+
+[scalable/apps]
+Size=24
+MinSize=16
+MaxSize=256
+Context=Applications
+Type=Scalable

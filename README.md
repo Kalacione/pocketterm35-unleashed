@@ -104,7 +104,9 @@ cd ~/pocketterm35-unleashed
 Le script relie les fichiers de `home/` dans `~` (avec GNU stow). Un fichier
 existant au même endroit est renommé en `.bak` et restauré à la désinstallation.
 Si la version de PocketTerm35-OS ne correspond pas à `PT35_VERSION`, le script
-s'arrête et indique quoi faire (voir plus bas).
+s'arrête et indique quoi faire (voir plus bas). Avec `sudo`, il lie aussi la
+police JetBrains Mono dans `/usr/share/fonts/TTF` et nos icônes dans
+`/usr/share/icons/Phosphore` : PocketTerm35-OS ne les cherche que là.
 
 **8. Rechargement**
 
@@ -160,11 +162,13 @@ Les liens sont retirés et les `.bak` restaurés. Recharger comme à l'étape 8.
 | chemin | rôle |
 |---|---|
 | `home/` | fichiers reliés dans `~` par `install.sh` |
-| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS |
+| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps |
 | `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
-| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (avec PocketTerm35-OS `0.4.2+u1`) |
+| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (notre fork, dès `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
+| `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
+| `tools/icons.sh` | regénère ces icônes depuis Tabler, couleur en option |
 | `install.sh` | installation, désinstallation, retour à la version testée |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `tools/pin-pt35.sh` | archive une version de PocketTerm35-OS dans les releases |

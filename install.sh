@@ -9,6 +9,7 @@ cd "$(dirname "$0")"
 
 PIN=$(cat PT35_VERSION)
 FONT_DIR=/usr/share/fonts/TTF
+ICON_LINK=/usr/share/icons/Phosphore
 # Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
 https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
@@ -26,7 +27,7 @@ case "${1:-}" in
   --uninstall)
     command -v stow >/dev/null || sudo apt-get install -y stow
     stow -D --no-folding -t "$HOME" home
-    sudo rm -f "$FONT_DIR"/JetBrainsMono-Regular.ttf "$FONT_DIR"/JetBrainsMono-Bold.ttf
+    sudo rm -f "$FONT_DIR"/JetBrainsMono-Regular.ttf "$FONT_DIR"/JetBrainsMono-Bold.ttf "$ICON_LINK"
     # On remet ce qu'on avait mis de côté.
     find home -type f -o -type l | while read -r f; do
       dst="$HOME/${f#home/}"
@@ -70,4 +71,18 @@ done
 
 # --no-folding : de vrais dossiers dans ~, sinon PT35-OS écrirait dans le dépôt.
 stow -R --no-folding -t "$HOME" home
+
+# PT35-OS ne lit pas ~/.local/share/icons, et cherche /usr/share/icons en premier :
+# dans /usr/local, Papirus passerait devant.
+[ -L "$ICON_LINK" ] || sudo ln -sfn "$HOME/.local/share/icons/Phosphore" "$ICON_LINK"
+
+# L'accueil n'affiche que les épingles : on en pose par défaut, sans toucher
+# à celles qui existent. Y sur l'accueil ouvre Toutes les apps pour en changer.
+PINS="${XDG_STATE_HOME:-$HOME/.local/state}/pt35/pinned"
+if [ ! -s "$PINS" ]; then
+  mkdir -p "$(dirname "$PINS")"
+  printf '%s\n' app:terminal app:files app:editor app:browser app:music app:video \
+    app:darkwire screen:quick page:power > "$PINS"
+  echo "épingles par défaut : $PINS"
+fi
 echo "ok"

@@ -22,4 +22,11 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | patch + compilation sur le Pi | écarté | 1 à 2 Go d'outils Rust sur le Pi, patch à rejouer à chaque mise à jour |
 | config Start / Select | inutile | le comportement voulu (menu, bascule d'apps, jamais transmis aux apps) est celui de PT35-OS par défaut |
 | `stow --no-folding` | retenu | sans lui, stow lie tout `~/.config/pt35` vers le dépôt, et Apparence écrirait `appearance.toml` dans le dépôt |
+| [Pixelitos](https://github.com/ItsZariep/pixelitos-icon-theme), [Star Pixel](https://github.com/starciad/star-pixel-icons-theme) | écarté | thèmes d'icônes pixel en PNG et en couleur ; `pt35-menu` ne lit que du SVG |
+| teinte verte des icônes Papirus (patch fork) | écarté | choix de Djé : nos propres icônes pixel plutôt qu'une teinte automatique |
+| icônes pixel maison (32x32) | écarté | dessinées puis remplacées : Djé préfère des SVG nets, le halo et les scanlines venant du rendu |
+| [Tabler Icons](https://github.com/tabler/tabler-icons) (MIT) | retenu | SVG au trait, 5900 icônes, cône VLC compris ; `tools/icons.sh` en copie 12 en vert dans le thème `Phosphore`, qui hérite de Papirus |
+| [Lucide](https://github.com/lucide-icons/lucide) (ISC) | écarté | même style et a toutes nos icônes, mais deux fois moins fourni que Tabler |
+| halo et scanlines en SVG (`feGaussianBlur`, resvg le gère) | écarté | à refaire dans chaque fichier ; fait une fois au rendu dans notre fork (`0.4.2+u2`) |
+| `screen_shader` CRT de Hyprland | écarté | il faudrait quitter sway, sur lequel PT35-OS repose ; une surface layer-shell transparente fait le même effet |
 | `tools/release-fork.sh` (tag via `gh api`) | retenu | la version vit déjà dans le `Cargo.toml` du fork (le `.deb` la porte) : le script la lit et pose le tag, la CI fait la release. Ni clone local, ni incrément de tag séparé qui contredirait le `.deb` |
