@@ -53,3 +53,6 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | courbe de débit en échelle log fixe 1k → 1G (fork u12) | retenu | repos et téléchargement lisibles sur le même graphe, aucun saut d'échelle ; les lignes sont les unités. Le linéaire auto écrasait le repos 3 min après chaque rafale |
 | widgets en pile, L / R et toucher sur l'en-tête (fork u12) | retenu | pas de glisser possible ; les onglets ne tiennent pas plus de 2 widgets dans 216 px. L / R ne servaient sur l'accueil qu'à changer de mode, que l'icône de la barre fait déjà |
 | un widget par connexion (LAN, Wi-Fi) | écarté | afficher un périphérique inutilisé n'apporte rien : NETWORK suit la route que `pt35d` connaît déjà |
+| [tmux](https://github.com/tmux/tmux) (ISC, Debian) pour la barre du bas du Terminal | retenu | barre de statut native, couleurs en config ; donne aussi la molette sur l'historique et la copie OSC 52 vers foot. Lancé par la tuile Terminal et Super+Entrée seulement : `foot ssh …` et les apps en `foot -a` restent sans |
+| [Zellij](https://zellij.dev/) | écarté | barre plus riche mais binaire hors Debian, plus lourd, raccourcis qui prennent beaucoup de touches : YAGNI |
+| barre de prompt ([Starship](https://starship.rs/)) | écarté | habille le prompt, pas le bas de l'écran ; à reconsidérer à part |

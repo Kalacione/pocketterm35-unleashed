@@ -164,12 +164,13 @@ Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de Rasp
 | chemin | rôle |
 |---|---|
 | `home/` | fichiers reliés dans `~` par `install.sh` |
-| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps |
+| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps, Super+Entrée ouvre le Terminal avec tmux |
 | `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
 | `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur (notre fork, dès `0.4.2+u1`) |
 | `home/.config/foot/foot.ini` | couleurs et police du terminal |
+| `home/.config/tmux/tmux.conf` | barre du bas du Terminal aux couleurs Phosphore, souris et copie |
 | `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
-| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, un profil mpv par app |
+| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, un profil mpv par app, Terminal dans tmux |
 | `home/.config/mpv/` | mpv avec l'interface tactile [uosc](https://github.com/tomasklaen/uosc) (LGPL-2.1, téléchargée par `install.sh`) aux couleurs Phosphore, boutons A, X, Y ; sans fichier, un accueil pour parcourir sa médiathèque ou ouvrir une URL (`scripts/pt35-home.lua`) |
 | `home/.local/share/fonts/` | police pixel [VT323](https://fonts.google.com/specimen/VT323) (OFL) des horloges, lue par notre fork dès `0.4.2+u5` |
 | `home/.local/share/icons/Phosphore/` | icônes des apps du lanceur ([Tabler Icons](https://tabler.io/icons), MIT) en vert, Papirus pour le reste |
