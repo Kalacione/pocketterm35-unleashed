@@ -6,80 +6,71 @@ Un thème et quelques réglages pour le
 
 ![Accueil : horloge, widget réseau et grille d'apps épinglées](docs/captures/accueil.png)
 
-PocketTerm35-OS fournit le bureau : sway, le lanceur, la barre, la gestion des
-boutons. Ce projet s'appuie dessus. Une partie passe par sa configuration
-(fichiers dans `~/.config`, fusionnés avec ses défauts), le reste par des
-patchs sur [un fork](https://github.com/Kalacione/PocketTerm35-OS), installé à
-la place du paquet d'origine. La désinstallation retire nos fichiers.
+PocketTerm35-OS fournit le bureau : le lanceur, la barre, les boutons. Ce
+projet change son apparence et ajoute quelques fonctions. Il se désinstalle
+d'une commande.
 
 C'est un projet personnel, testé sur un seul appareil (Raspberry Pi 5, 8 Go).
 
 ## Ce que ça ajoute
 
-### Un accueil avec ses apps épinglées
+### Un accueil avec vos apps
 
-L'accueil n'affiche que les apps épinglées, en grille. Y ouvre Toutes les
-apps, où Y épingle ou retire une app (X cherche). Sur l'accueil, B saisit une
-tuile, la croix la déplace et A ou B la pose. L'ordre est gardé dans
-`~/.local/state/pt35/pinned`. L'installation épingle un premier jeu d'apps.
+L'accueil affiche une sélection d'apps.
 
-### Des widgets épinglés
+- Pour épingler ou désépingler une app : `Y` ouvre toutes les apps, puis `Y`
+  sur l'app.
+- Pour réordonner les tuiles : `B` prend une tuile, la croix la déplace, `B`
+  la pose.
 
-À gauche de l'accueil, un panneau fixe (heure, CPU, RAM) et, dessous, une
-pile de widgets épinglés, un visible à la fois. L ou R, ou un toucher sur
-l'en-tête, passe au suivant. X ouvre Tous les widgets, où Y épingle.
+### Des widgets
+
+À gauche de l'accueil : l'heure, le CPU et la RAM, et un widget à la fois en
+dessous.
+
+- Pour passer au widget suivant : `L` ou `R`, ou toucher son titre.
+- Pour choisir les widgets affichés : `X`, puis `Y` sur le widget.
 
 | | |
 |---|---|
 | ![Accueil avec le widget Hosts](docs/captures/accueil-hosts.png) | ![Tous les widgets](docs/captures/tous-les-widgets.png) |
 | Widget Hosts | Tous les widgets |
 
-- **Network** : la connexion utilisée (LAN, Wi-Fi ou hors ligne), l'adresse IP
-  et le débit des trois dernières minutes.
-- **Media** : le lecteur en cours (MPRIS), avec précédent, lecture / pause,
-  suivant. Il passe devant quand un lecteur démarre.
-- **Storage** : le disque système et les clés USB, avec une alerte au-delà de
-  75 % puis 90 %.
-- **Hosts** : jusqu'à trois hôtes de `~/.ssh/config`, choisis sur l'écran SSH
-  (Toutes les apps). Chacun est UP, SLOW ou DOWN ; un toucher ouvre la
-  connexion. La liste reste sur l'appareil.
+- **Network** : la connexion et son débit sur trois minutes.
+- **Media** : la musique ou la vidéo en cours, avec lecture / pause.
+- **Storage** : la place libre sur la carte et les clés USB.
+- **Hosts** : l'état de trois serveurs SSH au plus (UP, SLOW, DOWN). Un
+  toucher ouvre la connexion. Pour les choisir : l'app SSH, puis `Y` sur le
+  serveur.
 
 ### Le défilement au doigt
 
-Dans PocketTerm35-OS 0.4.2, un toucher est un clic à l'endroit du contact :
-une liste ne défile pas au doigt. Ici, le doigt agit quand il se lève. Un
-glisser fait défiler la liste sans ouvrir ce qu'il touchait, un balayage
-change de carte dans la bascule entre fenêtres, et un appui d'une demi-seconde
-ouvre le menu de la ligne (Ouvrir et Épingler sur une app, Fermer sur une
-fenêtre).
+- Glisser fait défiler les listes.
+- Balayer change de fenêtre dans la bascule (`Select`).
+- Un appui long ouvre le menu de l'élément (épingler, fermer...).
 
-### Un thème : Phosphore
+### Le thème Phosphore
 
-Vert doux sur fond sombre, police pixel VT323 pour les horloges, JetBrains
-Mono pour le texte, lignes de balayage façon écran cathodique. Derrière
-l'accueil, une pluie de caractères façon *Matrix*, dont la vitesse se règle
-dans Réglages rapides (0 l'arrête). Les états (ON, OFF, UP, DOWN, FULL)
-sont écrits en toutes lettres sur fond plein : on les lit sans distinguer les
-couleurs. Les icônes des apps viennent de
-[Tabler Icons](https://tabler.io/icons). La charte est dans
-[`DESIGN.md`](DESIGN.md).
+Vert sur fond sombre, police pixel pour les horloges, lignes de balayage façon
+vieil écran, et une pluie de caractères derrière l'accueil.
 
-### Des apps réglées pour l'écran
+- Pour régler la vitesse de la pluie, ou l'arrêter : Réglages rapides.
+- Les états (ON, OFF, UP, DOWN...) sont écrits en toutes lettres : on les lit
+  sans distinguer les couleurs.
 
-- **Terminal** dans tmux, avec une barre du bas aux couleurs du thème.
-- **Fichiers** (yazi) avec des onglets et les hôtes de `~/.ssh/config` :
-  copier et coller entre l'appareil et un serveur, ou entre deux serveurs.
-- **Musique et Vidéo** sur mpv avec l'interface tactile
-  [uosc](https://github.com/tomasklaen/uosc).
-- **Éditeur** avec un bandeau de gros boutons (Copy, Paste, Save...) en bas
-  de l'écran, une barre de menus aux couleurs du thème et le texte à la taille
-  du terminal.
-- **Navigateur** : Firefox dans un profil à part, qui affiche la version mobile
-  des sites, avec une interface agrandie aux couleurs du thème. Il ouvre aussi
-  les liens des autres apps. Chromium reste dans Toutes les apps.
+### Des apps faites pour le petit écran
+
+- **Terminal** : une barre en bas, aux couleurs du thème.
+- **Fichiers** : des onglets, et vos serveurs SSH comme des dossiers (`X`).
+  Copier-coller entre l'appareil et un serveur, ou entre deux serveurs.
+- **Musique et Vidéo** : une interface tactile. `A` lecture / pause, `Y` menu.
+- **Éditeur** : une rangée de gros boutons (Copy, Paste, Save...) en bas de
+  l'écran.
+- **Navigateur** : les sites en version mobile, lisibles à cette taille.
 - Un **écran de démarrage** assorti.
 
-Pour habiller une autre app de la même façon : [`docs/habiller-une-app.md`](docs/habiller-une-app.md).
+Pour habiller une autre app de la même façon :
+[`docs/habiller-une-app.md`](docs/habiller-une-app.md).
 
 ## Captures
 
@@ -181,21 +172,10 @@ cd ~/pocketterm35-unleashed
 sudo reboot
 ```
 
-`./install.sh` relie les fichiers de `home/` dans `~` avec GNU stow. Un
-fichier existant au même endroit est renommé en `.bak` et restauré à la
-désinstallation. Il installe aussi les paquets Debian nécessaires (mpv, tmux,
-playerctl...), uosc (version et empreinte vérifiées), la police JetBrains Mono
-et les icônes dans `/usr/share` où PocketTerm35-OS les cherche, et l'écran de
-démarrage si Plymouth est présent (une minute pour reconstruire l'initramfs).
+La première installation prend quelques minutes : elle ajoute les paquets
+nécessaires (mpv, tmux...) et l'écran de démarrage.
 
-**7. Vérifier**
-
-```sh
-ls -l ~/.config/sway/config   # lien vers ~/pocketterm35-unleashed/home/...
-```
-
-Logs : `/run/user/1000/pt35/sway.log`. `pt35ctl reload` recharge thème, menu
-et apps, `Super`+`Shift`+`c` recharge sway.
+En cas de souci, le journal est dans `/run/user/1000/pt35/sway.log`.
 
 ## Mise à jour
 
@@ -207,15 +187,10 @@ Puis redémarrer si `PT35_VERSION` a changé.
 
 ## Versions
 
-Le projet est testé avec une seule version de PocketTerm35-OS, écrite dans
-[`PT35_VERSION`](PT35_VERSION). L'installeur de PocketTerm35-OS prend toujours
-la dernière version : `./install.sh` s'arrête alors et propose
-`./install.sh --pt35`. `./install.sh --force` passe outre.
-
-Une version en `+u<n>` (par exemple `0.4.2+u1`) est PocketTerm35-OS avec nos
-patchs. Le [CHANGELOG du fork](https://github.com/Kalacione/PocketTerm35-OS/blob/main/CHANGELOG.md)
-les décrit un par un. Pour revenir à la version d'avant : `git revert` du
-dernier commit de `PT35_VERSION`, puis la mise à jour ci-dessus.
+Le projet est testé avec une seule version de PocketTerm35-OS, notée dans
+[`PT35_VERSION`](PT35_VERSION). `./install.sh --pt35` installe celle-là.
+C'est PocketTerm35-OS avec nos modifications, décrites dans le
+[CHANGELOG du fork](https://github.com/Kalacione/PocketTerm35-OS/blob/main/CHANGELOG.md).
 
 ## Désinstallation
 
@@ -223,44 +198,29 @@ dernier commit de `PT35_VERSION`, puis la mise à jour ci-dessus.
 cd ~/pocketterm35-unleashed && ./install.sh --uninstall
 ```
 
-Les liens sont retirés, les `.bak` restaurés et l'écran de démarrage de
-Raspberry Pi OS remis. Puis `pt35ctl reload`. Le paquet de PocketTerm35-OS
-installé reste celui de `PT35_VERSION`.
+Les réglages d'origine et l'écran de démarrage de Raspberry Pi OS reviennent.
+PocketTerm35-OS reste installé.
 
 ## Contenu
 
 | chemin | rôle |
 |---|---|
-| `home/` | fichiers reliés dans `~` par `install.sh` |
-| `home/.config/sway/config` | inclut la config sway de PocketTerm35-OS, ajoute les scanlines sur les apps, Super+Entrée ouvre le Terminal avec tmux |
-| `home/.config/pt35/theme.toml` | thème Phosphore : couleurs et polices du menu et de la barre |
-| `home/.config/pt35/apps.toml` | Musique passe de VLC à mpv, Terminal dans tmux, Fichiers charge les hôtes SSH, Navigateur passe sur Firefox |
-| `home/.config/pt35/wallpaper.svg` | fond d'écran du lanceur |
-| `home/.config/foot/foot.ini` | couleurs et police du terminal |
-| `home/.config/tmux/tmux.conf` | barre du bas du Terminal, souris et copie |
-| `home/.config/gtk-3.0/gtk.css` | barre de menus de l'éditeur (Mousepad) |
-| `home/.config/gtk-4.0/gtk.css` | couleurs des apps GTK4 |
-| `home/.config/mpv/` | mpv et uosc aux couleurs du thème, boutons A, X, Y ; sans fichier, un accueil pour parcourir sa médiathèque ou ouvrir une URL (`scripts/pt35-home.lua`) |
-| `home/.config/yazi/` | yazi (Fichiers) aux couleurs du thème ; A ouvre, B revient, X ouvre Lieux (dossier perso, ou un hôte SSH dans un nouvel onglet), Y liste les onglets (Y encore = nouvel onglet), Ctrl+C / X / V, onglets Ctrl+T / W |
-| `home/.local/bin/pt35-yazi-vfs` | traduit `~/.ssh/config` pour le SFTP de yazi, à chaque ouverture de Fichiers |
-| `home/.local/bin/pt35-actions` | bandeau d'actions sous l'éditeur |
-| `home/.local/share/applications/pt35-browser.desktop` | navigateur par défaut pour les liens (`xdg-open`), le même Firefox que la tuile ; posé une fois par `install.sh` |
-| `home/.local/share/pt35-firefox/` | profil Firefox du Navigateur : user-agent mobile, échelle 1,5 (`user.js`), barre et menus aux couleurs du thème (`chrome/userChrome.css`) |
-| `home/.local/share/fonts/` | police pixel VT323 des horloges |
-| `home/.local/share/icons/Phosphore/` | icônes des apps, tirées de Tabler Icons, Papirus pour le reste |
-| `plymouth/pocketterm/` | thème Plymouth de l'écran de démarrage |
-| `tools/splash.py` | dessine les images de démarrage depuis `DESIGN.md` ; lancé par `install.sh` |
-| `tools/icons.sh` | regénère les icônes depuis Tabler, couleur en option |
-| `tools/ship.sh` | publie une version du fork et l'épingle dans `PT35_VERSION` |
-| `install.sh` | installation, désinstallation, retour à la version testée |
+| `home/` | les réglages, liés dans votre dossier personnel par `install.sh` |
+| `home/.config/pt35/` | thème, apps et fond d'écran du bureau |
+| `home/.config/sway/config` | ajouts à la config de sway |
+| `home/.config/foot/`, `tmux/` | terminal |
+| `home/.config/gtk-3.0/`, `gtk-4.0/` | couleurs des apps GTK |
+| `home/.config/mpv/` | Musique et Vidéo |
+| `home/.config/yazi/` | Fichiers |
+| `home/.local/share/pt35-firefox/`, `applications/` | Navigateur |
+| `home/.local/bin/` | petits scripts : boutons de l'éditeur, serveurs SSH de Fichiers |
+| `home/.local/share/fonts/`, `icons/` | police pixel et icônes |
+| `plymouth/`, `tools/splash.py` | écran de démarrage |
+| `install.sh` | installation et désinstallation |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
-| `DESIGN.md` | charte graphique au format [DESIGN.md](https://github.com/google-labs-code/design.md) |
-| `docs/habiller-une-app.md` | guide : donner le thème à une autre app et la rendre utilisable au doigt |
-| `docs/captures/` | captures de ce README |
-| `docs/design/` | aperçu de la charte (`charte.html`), maquettes et rendus de travail |
-| `docs/specs.md` | specs, priorités et TODO |
-| `docs/briques.md` | logiciels retenus ou écartés, et pourquoi |
-| `CLAUDE.md` | règles du projet, pour les contributeurs humains et IA |
+| `DESIGN.md` | charte graphique |
+| `docs/` | guide, captures, maquettes et notes de travail |
+| `tools/` | outils de maintenance |
 
 ## Contribuer
 
