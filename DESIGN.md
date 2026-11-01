@@ -150,6 +150,8 @@ Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux 
 
 ## Shapes
 
+**Icône principale** (fait partie de la charte) : obturateur à 8 lames, pixel art 15 × 15, en primary, clin d'œil à Aperture. C'est la seule icône pixel : elle signe le système dans la barre, la tuile du lanceur et le logo de `fastfetch` (fork u7). Source : [`docs/design/icone-main/D-obturateur.txt`](docs/design/icone-main/D-obturateur.txt) (`#` = pixel allumé), pistes écartées dans [`pistes-v2.png`](docs/design/icone-main/pistes-v2.png).
+
 Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes [Tabler](https://tabler.io/icons) (MIT) au trait, en SVG net, recolorées en primary par `tools/icons.sh` dans le thème d'icônes `Phosphore`, qui hérite de Papirus pour les apps non couvertes. Pas de variante claire. Dans la grille du lanceur, le menu dessine sous chaque icône un halo flou de 4 px (`[icons] glow`).
 
 ## Components
