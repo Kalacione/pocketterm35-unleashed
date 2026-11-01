@@ -1,53 +1,91 @@
 # PocketTerm 3.5 Unleashed
 
 Un thème et quelques réglages pour le
-[WaveShare PocketTerm 3.5](https://www.waveshare.com/), posés par-dessus
+[WaveShare PocketTerm 3.5](https://www.waveshare.com/), au-dessus de
 [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS).
 
 ![Accueil : horloge, widget réseau et grille d'apps épinglées](docs/captures/accueil.png)
 
 PocketTerm35-OS fournit le bureau : sway, le lanceur, la barre, la gestion des
-boutons. Ce projet ne le remplace pas. Il ajoute ses fichiers dans `~/.config`,
-que PocketTerm35-OS fusionne avec ses défauts, et installe une version de
-PocketTerm35-OS patchée par [notre fork](https://github.com/Kalacione/PocketTerm35-OS).
-Le désinstaller rend le bureau d'origine.
+boutons. Ce projet s'appuie dessus. Une partie passe par sa configuration
+(fichiers dans `~/.config`, fusionnés avec ses défauts), le reste par des
+patchs sur [un fork](https://github.com/Kalacione/PocketTerm35-OS), installé à
+la place du paquet d'origine. La désinstallation retire nos fichiers.
 
-## Ce que ça change
+C'est un projet personnel, testé sur un seul appareil (Raspberry Pi 5, 8 Go).
 
-- **Thème Phosphore** : vert doux sur fond sombre, police pixel VT323 pour les
-  horloges, JetBrains Mono pour le texte, lignes de balayage façon écran CRT.
-  Les états importants (ON, OFF, DOWN, FULL) sont toujours écrits en toutes
-  lettres sur fond plein, jamais portés par la couleur seule.
-- **Écran d'accueil** : horloge, CPU et RAM, une pile de widgets (réseau,
-  lecture en cours, stockage, hôtes SSH) et une grille d'apps épinglées, qu'on
-  réordonne aux boutons.
-- **Icônes** des apps redessinées à partir de [Tabler Icons](https://tabler.io/icons).
-- **Terminal** dans tmux, avec une barre du bas aux couleurs du thème.
-- **Musique et Vidéo** sur mpv avec l'interface tactile [uosc](https://github.com/tomasklaen/uosc).
-- **Fichiers** (yazi) aux couleurs du thème, avec des onglets et les serveurs
-  de `~/.ssh/config` : copier / coller entre local et SSH, ou entre deux serveurs.
-- **Éditeur** avec un bandeau de gros boutons (Copier, Coller, Enregistrer...)
-  utilisables au doigt.
-- **Écran de démarrage** Plymouth assorti.
+## Ce que ça ajoute
 
-## Captures
+### Un accueil avec ses apps épinglées
 
-Rendus à 640x480 du code de la version épinglée, hors appareil : les icônes
-système et les valeurs affichées peuvent différer un peu sur le PocketTerm.
+L'accueil n'affiche que les apps épinglées, en grille. Y ouvre Toutes les
+apps, où Y épingle ou retire une app (X cherche). Sur l'accueil, B saisit une
+tuile, la croix la déplace et A ou B la pose. L'ordre est gardé dans
+`~/.local/state/pt35/pinned`. L'installation épingle un premier jeu d'apps.
+
+### Des widgets épinglés
+
+À gauche de l'accueil, un panneau fixe (heure, CPU, RAM) et, dessous, une
+pile de widgets épinglés, un visible à la fois. L ou R, ou un toucher sur
+l'en-tête, passe au suivant. X ouvre Tous les widgets, où Y épingle.
 
 | | |
 |---|---|
-| ![Accueil avec le widget Hosts](docs/captures/accueil-hosts.png) | ![Bascule entre fenêtres](docs/captures/fenetres.png) |
-| Accueil, widget Hosts : état des hôtes de `~/.ssh/config` | Bascule entre fenêtres (Select) |
+| ![Accueil avec le widget Hosts](docs/captures/accueil-hosts.png) | ![Tous les widgets](docs/captures/tous-les-widgets.png) |
+| Widget Hosts | Tous les widgets |
+
+- **Network** : la connexion utilisée (LAN, Wi-Fi ou hors ligne), l'adresse IP
+  et le débit des trois dernières minutes.
+- **Media** : le lecteur en cours (MPRIS), avec précédent, lecture / pause,
+  suivant. Il passe devant quand un lecteur démarre.
+- **Storage** : le disque système et les clés USB, avec une alerte au-delà de
+  75 % puis 90 %.
+- **Hosts** : jusqu'à trois hôtes de `~/.ssh/config`, choisis sur l'écran SSH
+  (Toutes les apps). Chacun est UP, SLOW ou DOWN ; un toucher ouvre la
+  connexion. La liste reste sur l'appareil.
+
+### Le défilement au doigt
+
+Dans PocketTerm35-OS 0.4.2, un toucher est un clic à l'endroit du contact :
+une liste ne défile pas au doigt. Ici, le doigt agit quand il se lève. Un
+glisser fait défiler la liste sans ouvrir ce qu'il touchait, un balayage
+change de carte dans la bascule entre fenêtres, et un appui d'une demi-seconde
+ouvre le menu de la ligne (Ouvrir et Épingler sur une app, Fermer sur une
+fenêtre).
+
+### Un thème : Phosphore
+
+Vert doux sur fond sombre, police pixel VT323 pour les horloges, JetBrains
+Mono pour le texte, lignes de balayage façon écran cathodique. Les états
+(ON, OFF, UP, DOWN, FULL) sont écrits en toutes lettres sur fond plein : on
+les lit sans distinguer les couleurs. Les icônes des apps viennent de
+[Tabler Icons](https://tabler.io/icons). La charte est dans
+[`DESIGN.md`](DESIGN.md).
+
+### Des apps réglées pour l'écran
+
+- **Terminal** dans tmux, avec une barre du bas aux couleurs du thème.
+- **Fichiers** (yazi) avec des onglets et les hôtes de `~/.ssh/config` :
+  copier et coller entre l'appareil et un serveur, ou entre deux serveurs.
+- **Musique et Vidéo** sur mpv avec l'interface tactile
+  [uosc](https://github.com/tomasklaen/uosc).
+- **Éditeur** avec un bandeau de gros boutons (Copier, Coller,
+  Enregistrer...) en bas de l'écran.
+- Un **écran de démarrage** assorti.
+
+## Captures
+
+Rendues à 640x480 depuis le code de la version testée, hors appareil. Les
+icônes système et les valeurs affichées diffèrent un peu sur le PocketTerm.
+
+| | |
+|---|---|
 | ![Toutes les apps](docs/captures/toutes-les-apps.png) | ![Réglages rapides](docs/captures/reglages-rapides.png) |
 | Toutes les apps | Réglages rapides |
-| ![Terminal dans tmux](docs/captures/terminal.png) | ![Éditeur et son bandeau d'actions](docs/captures/editeur.png) |
-| Terminal dans tmux | Éditeur et son bandeau d'actions |
-| ![Écran de démarrage](docs/captures/demarrage.png) | |
-| Écran de démarrage | |
-
-La charte graphique est décrite dans [`DESIGN.md`](DESIGN.md), avec des
-maquettes dans [`docs/design/`](docs/design/).
+| ![Bascule entre fenêtres](docs/captures/fenetres.png) | ![Terminal dans tmux](docs/captures/terminal.png) |
+| Bascule entre fenêtres (Select) | Terminal dans tmux |
+| ![Éditeur et son bandeau](docs/captures/editeur.png) | ![Écran de démarrage](docs/captures/demarrage.png) |
+| Éditeur et son bandeau | Écran de démarrage |
 
 ## Prérequis
 
@@ -161,25 +199,15 @@ Puis redémarrer si `PT35_VERSION` a changé.
 
 ## Versions
 
-Le projet est testé sur une seule version de PocketTerm35-OS, écrite dans
-[`PT35_VERSION`](PT35_VERSION). La commande d'installation de PocketTerm35-OS
-prend toujours la dernière version, qui peut ne pas convenir à ces réglages :
-`./install.sh` s'arrête alors et propose `./install.sh --pt35`.
-`./install.sh --force` passe outre.
+Le projet est testé avec une seule version de PocketTerm35-OS, écrite dans
+[`PT35_VERSION`](PT35_VERSION). L'installeur de PocketTerm35-OS prend toujours
+la dernière version : `./install.sh` s'arrête alors et propose
+`./install.sh --pt35`. `./install.sh --force` passe outre.
 
-Une version en `+u<n>` (par exemple `0.4.2+u16`) est PocketTerm35-OS avec nos
-patchs, sur [notre fork](https://github.com/Kalacione/PocketTerm35-OS). Son
-[CHANGELOG](https://github.com/Kalacione/PocketTerm35-OS/blob/main/CHANGELOG.md)
-détaille chaque patch. Une version est publiée ainsi :
-
-1. le patch est fusionné sur le fork, avec sa version dans `Cargo.toml` et son
-   entrée dans le CHANGELOG ;
-2. `tools/ship.sh` pose le tag sur le fork, attend le `.deb` construit par sa
-   CI, puis écrit la version dans `PT35_VERSION` sur ce dépôt ;
-3. sur l'appareil, la mise à jour ci-dessus installe ce `.deb`.
-
-Revenir à la version d'avant : annuler le commit de `PT35_VERSION`
-(`git revert`), puis relancer la mise à jour.
+Une version en `+u<n>` (par exemple `0.4.2+u18`) est PocketTerm35-OS avec nos
+patchs. Le [CHANGELOG du fork](https://github.com/Kalacione/PocketTerm35-OS/blob/main/CHANGELOG.md)
+les décrit un par un. Pour revenir à la version d'avant : `git revert` du
+dernier commit de `PT35_VERSION`, puis la mise à jour ci-dessus.
 
 ## Désinstallation
 
@@ -221,6 +249,13 @@ installé reste celui de `PT35_VERSION`.
 | `docs/specs.md` | specs, priorités et TODO |
 | `docs/briques.md` | logiciels retenus ou écartés, et pourquoi |
 | `CLAUDE.md` | règles du projet, pour les contributeurs humains et IA |
+
+## Contribuer
+
+Les issues sont bienvenues : un bug, une question, une idée. Les pull requests
+ne sont pas acceptées pour l'instant, faute de temps pour les suivre. Ce qui
+servirait à tous les PocketTerm a plutôt sa place chez
+[PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS).
 
 ## Remerciements
 
