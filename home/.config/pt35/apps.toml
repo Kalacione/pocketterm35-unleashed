@@ -2,7 +2,8 @@
 
 # Musique sur mpv + uosc, comme Vidéo : une seule interface pour les deux.
 # Un app_id à part, sinon la barre confondrait Musique et Vidéo.
+# --idle=yes : pseudo-gui met idle=once, et mpv se fermait sur un ~/Music vide ou absent.
 [app.music]
 icon  = "multimedia-audio-player"
-exec  = "sh -c 'mpv --player-operation-mode=pseudo-gui --force-window=yes --wayland-app-id=pt35-music \"${HOME}/Music\"'"
+exec  = "sh -c 'mpv --player-operation-mode=pseudo-gui --force-window=yes --idle=yes --wayland-app-id=pt35-music \"${HOME}/Music\"'"
 match = { app_id = "pt35-music", class = "pt35-music" }
