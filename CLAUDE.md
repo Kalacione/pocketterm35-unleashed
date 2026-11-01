@@ -98,7 +98,7 @@ Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
 
 ## Tests
 
-Djé teste sur l'appareil lui-même, sans accès distant pour l'agent. Chaque
+L'utilisateur teste sur l'appareil lui-même, sans accès distant pour l'agent. Chaque
 changement livre donc :
 
 - les commandes exactes à lancer sur le Pi ;
@@ -106,8 +106,3 @@ changement livre donc :
 - comment revenir en arrière.
 
 Logs utiles : `/run/user/1000/pt35/sway.log`.
-
-## Environnement
-
-Jean-Michel : harness IA local (gemma4 / qwen3.8) sur le réseau de Djé. À
-considérer comme brique disponible avant d'ajouter un autre service IA.

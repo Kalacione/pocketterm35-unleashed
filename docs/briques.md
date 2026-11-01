@@ -23,8 +23,8 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | config Start / Select | inutile | le comportement voulu (menu, bascule d'apps, jamais transmis aux apps) est celui de PT35-OS par défaut |
 | `stow --no-folding` | retenu | sans lui, stow lie tout `~/.config/pt35` vers le dépôt, et Apparence écrirait `appearance.toml` dans le dépôt |
 | [Pixelitos](https://github.com/ItsZariep/pixelitos-icon-theme), [Star Pixel](https://github.com/starciad/star-pixel-icons-theme) | écarté | thèmes d'icônes pixel en PNG et en couleur ; `pt35-menu` ne lit que du SVG |
-| teinte verte des icônes Papirus (patch fork) | écarté | choix de Djé : nos propres icônes pixel plutôt qu'une teinte automatique |
-| icônes pixel maison (32x32) | écarté | dessinées puis remplacées : Djé préfère des SVG nets, le halo et les scanlines venant du rendu |
+| teinte verte des icônes Papirus (patch fork) | écarté | nos propres icônes plutôt qu'une teinte automatique |
+| icônes pixel maison (32x32) | écarté | dessinées puis remplacées par des SVG nets, le halo et les scanlines venant du rendu |
 | [Tabler Icons](https://github.com/tabler/tabler-icons) (MIT) | retenu | SVG au trait, 5900 icônes, cône VLC compris ; `tools/icons.sh` en copie 12 en vert dans le thème `Phosphore`, qui hérite de Papirus |
 | [Lucide](https://github.com/lucide-icons/lucide) (ISC) | écarté | même style et a toutes nos icônes, mais deux fois moins fourni que Tabler |
 | halo et scanlines en SVG (`feGaussianBlur`, resvg le gère) | écarté | à refaire dans chaque fichier ; fait une fois au rendu dans notre fork (`0.4.2+u2`) |
@@ -40,10 +40,10 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | client D-Bus en Rust (`zbus`) | écarté | nouvelle dépendance et plus de code pour ce que `playerctl` fait déjà |
 | VLC pour Musique | remplacé | Musique passe sur mpv + uosc : une seule interface à habiller pour la musique et la vidéo |
 | icône principale : Tabler `aperture`, `headset`, `radioactive` | écarté | floues à 16 px dans la barre, et la barre dessine le crâne en pixels : il aurait fallu y lire un SVG ; `radioactive` est un signal de danger |
-| icône principale : obturateur 8 lames en pixel art (fork `0.4.2+u7`) | retenu | clin d'œil à Portal, net à 16 px car ses fentes suivent la grille ; remplace le dessin du crâne tel quel. Pistes : `design/icone-main-pistes-v2.png` du dossier partagé |
+| icône principale : obturateur 8 lames en pixel art (fork `0.4.2+u7`) | retenu | clin d'œil à Portal, net à 16 px car ses fentes suivent la grille ; remplace le dessin du crâne tel quel. Pistes : [`docs/design/icone-main/pistes-v2.png`](design/icone-main/pistes-v2.png) |
 | interrupteurs `0` / `1` (premier jet u9) | remplacé | ON / OFF en toutes lettres sur fond plein vert ou rouge : l'état se lit sans distinguer les couleurs |
 | thème Plymouth `script` (`plymouth/pocketterm/`) | retenu | remplace l'écran « Raspberry Pi Desktop » (thème `pix` de `rpd-plym-splash`) sans fork : une image par état de la barre, échangées par le script |
-| images de démarrage générées à l'install (`tools/splash.py`, Pillow) | retenu | aucune image dans le dépôt : couleurs, obturateur et police viennent de la charte, un changement suit au prochain `install.sh`. Pistes : `design/boot/` du dossier partagé |
+| images de démarrage générées à l'install (`tools/splash.py`, Pillow) | retenu | aucune image dans le dépôt : couleurs, obturateur et police viennent de la charte, un changement suit au prochain `install.sh` |
 | texte dessiné par Plymouth (`Image.Text`) | écarté | il faudrait mettre la police dans l'initramfs ; l'image figée suffit |
 | numéros de ligne dans les listes | écarté | bruit à 640x480, le fil d'Ariane donne déjà la position ; `install.sh` pose `show_numbers = false` |
 | accueil uosc à l'idle, `scripts/pt35-home.lua` (API de menus d'uosc) | retenu | écran noir sans fichier une fois « Drop files » masqué. Un menu uosc dit que la médiathèque est vide et propose Browse (navigateur d'uosc) et une URL tapée dans son champ de recherche : thème déjà fait, aucun patch du fork |
@@ -51,7 +51,7 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | profils mpv `pt35-music` / `pt35-video` | retenu | chaque app a sa médiathèque (`uosc-default_directory`) ; les playlists sont déjà séparées, un processus mpv par app. Les `.m3u` s'ouvrent depuis Browse sans réglage |
 | vnstat pour la courbe de débit | écarté | historique par tranches de 5 min au mieux, il faut un point toutes les 2 s : `pt35d` lit déjà les compteurs de `/sys/class/net` à chaque tour |
 | courbe de débit en échelle log fixe 1k → 1G (fork u12) | retenu | repos et téléchargement lisibles sur le même graphe, aucun saut d'échelle ; les lignes sont les unités. Le linéaire auto écrasait le repos 3 min après chaque rafale |
-| widgets en pile, L / R et toucher sur l'en-tête (fork u12) | retenu | pas de glisser possible ; les onglets ne tiennent pas plus de 2 widgets dans 216 px. L / R ne servaient sur l'accueil qu'à changer de mode, que l'icône de la barre fait déjà |
+| widgets en pile, L / R et toucher sur l'en-tête (fork u12) | retenu | les onglets ne tiennent pas plus de 2 widgets dans 216 px. L / R ne servaient sur l'accueil qu'à changer de mode, que l'icône de la barre fait déjà |
 | un widget par connexion (LAN, Wi-Fi) | écarté | afficher un périphérique inutilisé n'apporte rien : NETWORK suit la route que `pt35d` connaît déjà |
 | [tmux](https://github.com/tmux/tmux) (ISC, Debian) pour la barre du bas du Terminal | retenu | barre de statut native, couleurs en config ; donne aussi la molette sur l'historique et la copie OSC 52 vers foot. Lancé par la tuile Terminal et Super+Entrée seulement : `foot ssh …` et les apps en `foot -a` restent sans |
 | [Zellij](https://zellij.dev/) | écarté | barre plus riche mais binaire hors Debian, plus lourd, raccourcis qui prennent beaucoup de touches : YAGNI |
@@ -61,7 +61,7 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | Waybar (modules custom + `on-click`) | écarté | pas de moyen fiable de l'afficher seulement sur l'éditeur (SIGUSR1 bascule à l'aveugle) |
 | barre d'actions par app dans `pt35-bar` (fork) | en réserve | la bonne place à terme, et proposable à upstream ; patch Rust à reporter à chaque version, pour six boutons |
 | hosts du widget HOSTS lus dans `~/.ssh/config` (fork u13) | retenu | déjà la source de vérité, reste sur l'appareil, rien dans le dépôt ; `ssh -G` résout comme ssh. Pin / unpin sur l'écran SSH |
-| ping (ICMP) pour HOSTS | écarté | une connexion TCP au port SSH dit si on peut s'y connecter, et passe quand l'ICMP est filtré ; un test toutes les 2 min par `pt35d` |
+| ping (ICMP) pour HOSTS | écarté | une connexion TCP au port SSH dit si on peut s'y connecter, et passe quand l'ICMP est filtré ; un test toutes les 2 min par `pt35d`, toutes les 10 s au démarrage tant qu'aucun ne répond (fork u16) |
 | VPN OpenVPN dans NETWORK | à cadrer | NetworkManager importe les `.ovpn` (`network-manager-openvpn`) ; le widget ferait `nmcli con up/down` |
 | redémarrer `pt35d` et la barre dans le `postinst` (fork u14) | retenu | les boucles de respawn du sway config relancent les nouveaux binaires ; sinon l'ancien démon reste jusqu'au prochain login et les widgets HOSTS et NETWORK restent vides |
 | réordonner les épingles de l'accueil avec B (fork u15) | retenu | B ne fait rien sur l'accueil ; L/R tournent déjà les widgets et il n'y a pas d'autre bouton au dos. Croix = échange avec la voisine, A ou B pose, ordre écrit dans le fichier `pinned` à chaque pas. Tuile saisie : cadre épais + étiquette MOVE |
@@ -74,6 +74,10 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | bandeau `pt35-actions` pour Files | écarté | le clavier physique fait Ctrl+C / Ctrl+V : pas d'interface en plus |
 | [sshfs.yazi](https://github.com/uhs-robert/sshfs.yazi) | écarté | monte par sshfs (FUSE, paquet en plus) ce que le SFTP natif de yazi fait déjà |
 | L / R pour les onglets de Files (patch `pt35d`) | écarté pour l'instant | L ferme et R change de mode partout : un sens par bouton. Y (F10, libre dans yazi) liste les onglets comme X liste les lieux, et un hôte choisi par X s'ouvre dans son propre onglet : deux onglets suffisent pour copier |
+| accueil = grille d'épingles et colonne de widgets (fork u2 à u4) | retenu | maquette `01-accueil` : le lanceur d'upstream liste tout, l'accueil ne montre que ce qu'on a épinglé ; Toutes les apps (Y) pour le reste. `install.sh` pose un premier jeu dans `pinned` |
+| balayage CRT et tuiles translucides (fork u6) | retenu | effets au rendu du menu, jamais sur une app ; l'opacité des tuiles se règle dans Réglages rapides, rangée dans `appearance.toml` |
+| widget STORAGE lu par `df` (fork u13) | retenu | `df` donne déjà le disque système et les clés USB : ni udisks ni dépendance Rust |
+| PR externes sur ce dépôt | écarté pour l'instant | réglage GitHub « Pull requests : collaborateurs seulement » (natif depuis février 2026) plutôt qu'une Action qui ferme les PR ; les issues restent ouvertes, `README.md` le dit |
 | défilement tactile de [foot](https://codeberg.org/dnkl/foot) (depuis 1.16) | retenu | glisser = molette, appui long = sélection, sans config ; tmux, yazi et htop défilent déjà au doigt |
 | gestes libinput / `bindgesture` de sway | écarté | pavés tactiles seulement, rien pour un écran tactile |
 | [Touchégg](https://github.com/JoseExposito/touchegg) | écarté | X11, ou GNOME / KDE par extension : rien pour sway |
