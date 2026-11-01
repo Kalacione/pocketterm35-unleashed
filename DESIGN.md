@@ -66,6 +66,14 @@ components:
     backgroundColor: "{colors.danger}"
     textColor: "{colors.on-primary}"
     height: "{spacing.target-min}"
+  toggle-on:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.title}"
+  toggle-off:
+    backgroundColor: "{colors.error}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.title}"
   button-error:
     backgroundColor: "{colors.error}"
     textColor: "{colors.on-primary}"
@@ -142,12 +150,15 @@ Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux 
 
 ## Shapes
 
+**Icône principale** (fait partie de la charte) : obturateur à 8 lames, pixel art 15 × 15, en primary, clin d'œil à Aperture. C'est la seule icône pixel : elle signe le système dans la barre, la tuile du lanceur et le logo de `fastfetch` (fork u7). Source : [`docs/design/icone-main/D-obturateur.txt`](docs/design/icone-main/D-obturateur.txt) (`#` = pixel allumé), pistes écartées dans [`pistes-v2.png`](docs/design/icone-main/pistes-v2.png).
+
 Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2 px pour l'élément actif. Icônes [Tabler](https://tabler.io/icons) (MIT) au trait, en SVG net, recolorées en primary par `tools/icons.sh` dans le thème d'icônes `Phosphore`, qui hérite de Papirus pour les apps non couvertes. Pas de variante claire. Dans la grille du lanceur, le menu dessine sous chaque icône un halo flou de 4 px (`[icons] glow`).
 
 ## Components
 
 - **panel / panel-label** : panneau en surface, étiquette pleine en haut à gauche (« SYSTÈME », « RÉSEAU »).
-- **list-row-selected / tile-selected** : fond blanc léger, texte sombre.
+- **list-row-selected / tile-selected** : fond blanc léger, texte sombre. Dans une liste, la pilule de sélection s'arrête avant la barre de défilement (u9).
+- **toggle-on / toggle-off** (u9) : bascule de 64 × 26, le mot ON ou OFF en VT323 dans la moitié libre, à côté du curseur. Fond plein `ok` (vert) si ON, `critical` (rouge) si OFF, texte sombre. Le mot porte l'état, la couleur n'est qu'un appui. Aperçu : [`docs/design/reglages-rapides-u9.png`](docs/design/reglages-rapides-u9.png).
 - **button-danger / button-error** : fond plein orange ou rouge, texte sombre, icône obligatoire.
 - **action-bar-button** : gros boutons en bas des écrans d'édition (Copier, Couper, Coller, Annuler, Chercher, Enregistrer). C'est la réponse au « pas de Vim ».
 - **barre segmentée** : CPU, RAM, température, signal, volume. Masquée si la valeur n'existe pas.

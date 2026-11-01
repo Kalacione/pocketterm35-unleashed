@@ -83,6 +83,10 @@ stow -R --no-folding -t "$HOME" home
 # dans /usr/local, Papirus passerait devant.
 [ -L "$ICON_LINK" ] || sudo ln -sfn "$HOME/.local/share/icons/Phosphore" "$ICON_LINK"
 
+# Le widget Lecture de l'accueil lit les lecteurs par MPRIS ; mpv a besoin
+# d'un greffon pour en parler (VLC le fait seul).
+dpkg -s playerctl mpv-mpris >/dev/null 2>&1 || sudo apt-get install -y playerctl mpv-mpris
+
 # uosc n'est pas dans Debian : on prend l'archive de sa release, vérifiée.
 if [ "$(cat "$MPV_DIR/scripts/uosc/.version" 2>/dev/null)" != "$UOSC_VERSION" ]; then
   command -v unzip >/dev/null || sudo apt-get install -y unzip
