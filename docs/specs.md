@@ -192,6 +192,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [x] Agent : étapes 1 et 2 du tactile, fork u18 ([fork #18](https://github.com/Kalacione/PocketTerm35-OS/pull/18))
 - [ ] Appareil : après `tools/ship.sh` pour u18, vérifier au doigt : glisser dans All apps et Paramètres fait défiler sans rien ouvrir ; toucher bref ouvre au relâcher ; appui long sur une app ouvre Open / Pin ; balayage sur la bascule ; barre de défilement ; tuiles de l'accueil, widgets et barre du haut au toucher
 - [ ] Appareil : éditeur, barre de menus de 32 px en VT323, texte en JetBrains Mono 14 px, bandeau d'actions et barre tmux en anglais
+- [x] Agent : Navigateur sur Firefox, profil `pt35-firefox` : pages mobiles, échelle 1,5, barre et menus Phosphore
+- [ ] Appareil : `./install.sh`, ouvrir Navigateur, vérifier la version mobile de Wikipédia, la taille, la barre d'adresse en VT323 et les menus
 
 **Prochains chantiers** (demandés par Djé, pas commencés)
 

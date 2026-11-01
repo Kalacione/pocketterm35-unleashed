@@ -101,7 +101,7 @@ Aperçu visuel, maquettes et `theme.toml` prêt à copier : [`docs/design/charte
 
 ## Overview
 
-Cyberdeck rétro sur un écran **couleur** 640 × 480 tactile (environ 9 px/mm), pas un terminal monochrome : on s'autorise des panneaux, des barres segmentées, des courbes et un léger halo, dans l'esprit d'eDEX-UI et des consoles des années 80. La charte habille [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS) sans changer sa mise en page : surcharge de `~/.config/pt35/theme.toml` pour le menu et la barre, `gtk.css` pour les apps GTK4, couleurs `foot` pour le terminal.
+Cyberdeck rétro sur un écran **couleur** 640 × 480 tactile (environ 9 px/mm), pas un terminal monochrome : on s'autorise des panneaux, des barres segmentées, des courbes et un léger halo, dans l'esprit d'eDEX-UI et des consoles des années 80. La charte habille [PocketTerm35-OS](https://github.com/therezor/PocketTerm35-OS) sans changer sa mise en page : surcharge de `~/.config/pt35/theme.toml` pour le menu et la barre, `gtk.css` pour les apps GTK4, couleurs `foot` pour le terminal, `userChrome.css` pour Firefox (barre d'adresse en VT323 avec halo, comme le fil d'Ariane).
 
 v0.2 (31 oct. 2026) : vert adouci, sélection en blanc léger, danger et erreur en fond plein, deux polices, composants graphiques.
 
