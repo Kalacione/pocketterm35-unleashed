@@ -10,6 +10,10 @@ cd "$(dirname "$0")"
 PIN=$(cat PT35_VERSION)
 FONT_DIR=/usr/share/fonts/TTF
 ICON_LINK=/usr/share/icons/Phosphore
+# uosc, l'interface tactile de mpv : version et empreinte épinglées.
+UOSC_VERSION=5.9.2
+UOSC_SHA256=81d1d0c896cb8b2c3d3d218e3ed91a33b3f16c6ff420e11f3179130984266375
+MPV_DIR=$HOME/.config/mpv
 # Notre archive d'upstream, puis notre fork (versions +u<n>), puis upstream.
 DEB_URLS="https://github.com/Kalacione/pocketterm35-unleashed/releases/download/pt35-$PIN/pt35-desktop_arm64.deb
 https://github.com/Kalacione/PocketTerm35-OS/releases/download/v$PIN/pt35-desktop_arm64.deb
@@ -30,6 +34,7 @@ case "${1:-}" in
     command -v stow >/dev/null || sudo apt-get install -y stow
     stow -D --no-folding -t "$HOME" home
     sudo rm -f "$FONT_DIR"/JetBrainsMono-Regular.ttf "$FONT_DIR"/JetBrainsMono-Bold.ttf "$ICON_LINK"
+    rm -rf "$MPV_DIR/scripts/uosc" "$MPV_DIR"/fonts/uosc_*
     # On remet ce qu'on avait mis de côté.
     find home -type f -o -type l | while read -r f; do
       dst="$HOME/${f#home/}"
@@ -77,6 +82,19 @@ stow -R --no-folding -t "$HOME" home
 # PT35-OS ne lit pas ~/.local/share/icons, et cherche /usr/share/icons en premier :
 # dans /usr/local, Papirus passerait devant.
 [ -L "$ICON_LINK" ] || sudo ln -sfn "$HOME/.local/share/icons/Phosphore" "$ICON_LINK"
+
+# uosc n'est pas dans Debian : on prend l'archive de sa release, vérifiée.
+if [ "$(cat "$MPV_DIR/scripts/uosc/.version" 2>/dev/null)" != "$UOSC_VERSION" ]; then
+  command -v unzip >/dev/null || sudo apt-get install -y unzip
+  tmp=$(mktemp -d)
+  curl -fsSL -o "$tmp/uosc.zip" "https://github.com/tomasklaen/uosc/releases/download/$UOSC_VERSION/uosc.zip"
+  echo "$UOSC_SHA256  $tmp/uosc.zip" | sha256sum -c --quiet
+  rm -rf "$MPV_DIR/scripts/uosc" && mkdir -p "$MPV_DIR"
+  unzip -qo "$tmp/uosc.zip" -d "$MPV_DIR" -x 'scripts/uosc/bin/ziggy-darwin' 'scripts/uosc/bin/ziggy-windows.exe'
+  echo "$UOSC_VERSION" > "$MPV_DIR/scripts/uosc/.version"
+  rm -rf "$tmp"
+  echo "uosc $UOSC_VERSION installé"
+fi
 
 # L'accueil n'affiche que les épingles : on en pose par défaut, sans toucher
 # à celles qui existent. Y sur l'accueil ouvre Toutes les apps pour en changer.

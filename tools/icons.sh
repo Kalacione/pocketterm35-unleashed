@@ -23,6 +23,7 @@ foot terminal-2
 system-file-manager folder
 mousepad file-pencil
 vlc traffic-cone
+multimedia-audio-player music
 mpv movie
 chromium world
 darkwire message-chatbot
