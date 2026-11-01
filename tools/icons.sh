@@ -31,5 +31,7 @@ utilities-system-monitor device-desktop-analytics
 baobab chart-pie
 multimedia-photo-viewer photo
 galculator calculator
+view-app-grid layout-grid
+system-shutdown power
 MAP
 echo "$(ls "$OUT/scalable/apps" | wc -l) icônes dans $OUT"
