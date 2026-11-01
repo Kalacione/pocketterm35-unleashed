@@ -5,7 +5,7 @@ prepend_keymap = [
 	{ on = "<Enter>", run = "plugin pt35-nav enter", desc = "Enter the folder or open the file" },
 	{ on = "<Esc>",   run = "plugin pt35-nav back",  desc = "Cancel, or back to the parent folder" },
 	{ on = "<Tab>",   run = "plugin pt35-go",        desc = "Places: home, or an SSH host in a new tab" },
-	{ on = "<F10>",   run = "plugin pt35-nav tab",   desc = "Next tab, or a second one here" },
+	{ on = "<F10>",   run = "plugin pt35-tabs",      desc = "Tabs: new tab, or go to one" },
 	{ on = "<C-c>",   run = "yank",                  desc = "Copy" },
 	{ on = "<C-x>",   run = "yank --cut",            desc = "Cut" },
 	{ on = "<C-v>",   run = "paste",                 desc = "Paste" },
