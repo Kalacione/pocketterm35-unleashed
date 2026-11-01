@@ -93,6 +93,16 @@ Paquets Debian Trixie de Nautilus, Éditeur de texte, Wike et Amberol : pas enco
 
 **Micro** : la fiche produit annonce une « prise casque 3,5 mm » et deux haut-parleurs, sans micro ([The Pi Hut](https://thepihut.com/products/pocketterm35-handheld-linux-terminal-for-raspberry-pi)). Test : brancher le micro-casque, puis `arecord -l`. Si rien n'apparaît, un micro-casque USB, au format 16 kHz mono comme l'exige linux-voice-assistant.
 
+## Limites connues d'upstream (PT35-OS 0.4.2)
+
+Constatées sur l'appareil ou dans le code. Chacune se corrige dans le fork de PT35-OS, puis part en PR upstream.
+
+| Limite | Effet | Contournement en attendant |
+| --- | --- | --- |
+| Pas de défilement au doigt dans le menu | Un toucher est un simple clic à l'endroit où il commence : glisser lance l'élément touché au lieu de faire défiler | D-pad, ou la barre de défilement (cliquer la piste, tirer le curseur) |
+| Pas de fond d'écran image | Couleur unie seulement, et le menu opaque couvre le bureau | Aucun |
+| Une seule famille de police pour tout le menu | Pas de VT323 pour les titres, JetBrains Mono à vérifier | Police par défaut |
+
 ## TODO
 
 L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appareil » chez Djé sur le PocketTerm, « agent » quand un agent prépare les fichiers dans ce dépôt.
@@ -113,6 +123,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Agent : icônes pixel-art
 - [ ] Agent : fond d'écran image, ouvrir d'abord une issue chez PT35-OS. En 0.4.2 il serait invisible : sans fenêtre ouverte, le menu (opaque, plein écran) sert de bureau
 - [ ] Agent : JetBrains Mono dans le menu, issue ou PR chez PT35-OS (recherche des polices)
+- [ ] Agent : défilement au doigt dans `pt35-menu` (glisser = défiler, toucher bref = ouvrir), dans le fork de PT35-OS, puis PR upstream
 
 **v2 Usage**
 
