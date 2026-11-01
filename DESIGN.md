@@ -130,11 +130,15 @@ Deux polices TTF, lisibles par le moteur de texte du menu (`fontdue`) :
 
 ## Layout
 
-Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u5.png`](docs/design/accueil-u5.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
+Mise en page de PT35-OS conservée : barre des tâches 40 px (u5, multiple de la période des scanlines), en-tête 46 px, lignes de 50 px, aide de boutons 46 px. Accueil (u4) : *widget column* de 216 px à gauche (panneaux à onglet SYSTEM et NETWORK), grille 3 × 3 des épingles à droite, sans colonne latérale ni bandeau de titre (u5). Aperçu : [`docs/design/accueil-u6.png`](docs/design/accueil-u6.png). Réglages rapides : libellé sur le premier tiers, curseur sur 2/3 de la largeur au plus. Grille de 8 px pour tout ce qu'on ajoute. Cible tactile minimale 48 × 40.
 
 ## Elevation & Depth
 
 Pas d'ombre portée. La profondeur vient de la surface plus claire des panneaux et d'un léger halo réservé aux titres, gros chiffres et courbes : 3 px sur l'horloge du widget (`[effects] glow = 3`, u5), 4 px sous les icônes de la grille (`[icons] glow`). **Scanlines CRT** : une ligne sur quatre assombrie de 25 % (motif de 4 px, comme la maquette), sur la barre, le menu et par-dessus les apps. Une ligne sur deux à 15 % ne se voyait pas sur l'écran 3,5". Le menu les dessine (`[effects] scanlines`, `[effects] scanline_period` depuis u5), et `pt35-bar --scanlines` pose une surface transparente sous la barre, qui couvre les apps et laisse passer les clics. La hauteur de la barre doit être un multiple de la période. Pas plus marquées : le texte doit rester net.
+
+**Balayage CRT** (u6) : une bande lumineuse douce (8 %) descend tout l'écran en 1,6 s, toutes les 8 à 13 s au hasard (`[effects] sweep = 8`, `sweep_jitter = 5`, `sweep_strength = 8`). Seulement quand le menu est ouvert, jamais sur une app (pas sur une vidéo). Barre et menu se calent sur l'horloge système : une seule bande continue.
+
+**Translucidité** (u6) : tuiles et widgets de l'accueil laissent voir le fond d'écran (`[menu] tile_opacity`, 85 % chez nous). Réglable de 20 à 100 % par le curseur « Tiles » des Réglages rapides ; la valeur vit dans `appearance.toml`, pas dans `theme.toml`.
 
 ## Shapes
 
@@ -149,7 +153,7 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - **barre segmentée** : CPU, RAM, température, signal, volume. Masquée si la valeur n'existe pas.
 - **courbe en aire** : débit réseau, charge, avec dégradé et halo.
 - **app active dans la barre** (u5) : case pleine en `accent`, icône teintée sombre.
-- **hint-bar** : pastilles pleines aux couleurs des boutons physiques (A primary, B error, X teal, Y danger), cliquables.
+- **hint-bar** : touche carrée pleine aux couleurs des boutons physiques (A primary, B error, X teal, Y danger) et action encadrée, cliquables (`[menu] hint_frames = true`, u6).
 
 ## Do's and Don'ts
 
@@ -157,5 +161,5 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - Do : danger et erreur en fond plein, avec icône ou libellé.
 - Do : tout faire au doigt, au D-pad, avec ABXY, L/R et par des menus.
 - Don't : pas de contour seul ni de texte rouge ou orange pour porter un sens.
-- Don't : pas de halo sur le texte courant, pas de fond animé. Les transitions courtes de PT35-OS (~0,1 s) sont gardées : le Pi 5 les tient sans peine.
+- Don't : pas de halo sur le texte courant, pas de fond animé (redessin continu). Seule animation ajoutée : le balayage CRT, rare et jamais sur une app. Les transitions courtes de PT35-OS (~0,1 s) sont gardées : le Pi 5 les tient sans peine.
 - Don't : pas de jauge de batterie qui afficherait `--`.
