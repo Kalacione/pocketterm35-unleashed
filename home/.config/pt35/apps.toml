@@ -5,5 +5,9 @@
 # --idle=yes : pseudo-gui met idle=once, et mpv se fermait sur un ~/Music vide ou absent.
 [app.music]
 icon  = "multimedia-audio-player"
-exec  = "sh -c 'mpv --player-operation-mode=pseudo-gui --force-window=yes --idle=yes --wayland-app-id=pt35-music \"${HOME}/Music\"'"
+exec  = "sh -c 'mpv --player-operation-mode=pseudo-gui --force-window=yes --idle=yes --profile=pt35-music --wayland-app-id=pt35-music \"${HOME}/Music\"'"
 match = { app_id = "pt35-music", class = "pt35-music" }
+
+# Profil mpv pt35-video : sa médiathèque est ~/Videos (voir mpv.conf).
+[app.video]
+exec = "mpv --player-operation-mode=pseudo-gui --idle=yes --profile=pt35-video"

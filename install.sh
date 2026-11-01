@@ -110,6 +110,9 @@ if [ "$(cat "$MPV_DIR/scripts/uosc/.version" 2>/dev/null)" != "$UOSC_VERSION" ];
   echo "uosc $UOSC_VERSION installé"
 fi
 
+# Les médiathèques de Musique et Vidéo (profils de mpv.conf).
+mkdir -p "$HOME/Music" "$HOME/Videos"
+
 # L'accueil n'affiche que les épingles : on en pose par défaut, sans toucher
 # à celles qui existent. Y sur l'accueil ouvre Toutes les apps pour en changer.
 PINS="${XDG_STATE_HOME:-$HOME/.local/state}/pt35/pinned"
