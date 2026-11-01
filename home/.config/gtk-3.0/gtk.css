@@ -1,0 +1,30 @@
+/* PocketTerm Phosphore (DESIGN.md) pour les apps GTK3. */
+
+/* Mousepad : barre de menus en bande de 32 px, comme le fil d'Ariane (fork u19).
+   Tailles en px : PT35-OS lance l'éditeur avec GDK_DPI_SCALE=0.75, qui ne
+   réduit que les tailles en pt. */
+window.mousepad menubar {
+  background: #121a16;
+  border-bottom: 1px solid #63e6a4;
+  padding: 0 4px;
+}
+window.mousepad menubar > menuitem {
+  min-height: 31px;
+  padding: 0 10px;
+  color: #63e6a4;
+}
+/* Sur le libellé seulement : le menu déroulant hériterait de la police. */
+window.mousepad menubar > menuitem > label {
+  font-family: "VT323";
+  font-size: 22px;
+  text-shadow: 0 0 3px rgba(99, 230, 164, 0.6);
+}
+/* Menu ouvert : la sélection de la charte, fond plein et texte sombre. */
+window.mousepad menubar > menuitem:hover {
+  background: #e6fff2;
+  color: #06110b;
+  box-shadow: none;
+}
+window.mousepad menubar > menuitem:hover > label {
+  text-shadow: none;
+}

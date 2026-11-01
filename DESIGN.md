@@ -162,11 +162,12 @@ Angles droits partout (`menu.radius = 0`). Bordures de 1 px pour les panneaux, 2
 - **list-row-selected / tile-selected** : fond blanc léger, texte sombre. Dans une liste, la pilule de sélection s'arrête avant la barre de défilement (u9).
 - **toggle-on / toggle-off** (u9) : bascule de 64 × 26, le mot ON ou OFF en VT323 dans la moitié libre, à côté du curseur. Fond plein `ok` (vert) si ON, `critical` (rouge) si OFF, texte sombre. Le mot porte l'état, la couleur n'est qu'un appui. Aperçu : [`docs/design/reglages-rapides-u9.png`](docs/design/reglages-rapides-u9.png).
 - **button-danger / button-error** : fond plein orange ou rouge, texte sombre, icône obligatoire.
-- **action-bar-button** : gros boutons en bas des écrans d'édition (Copier, Couper, Coller, Annuler, Chercher, Enregistrer). C'est la réponse au « pas de Vim ».
+- **action-bar-button** : gros boutons en bas des écrans d'édition (Copy, Cut, Paste, Undo, Find, Save), en anglais comme le reste de l'interface. C'est la réponse au « pas de Vim ».
 - **barre segmentée** : CPU, RAM, température, signal, volume. Masquée si la valeur n'existe pas.
 - **courbe en aire** : débit réseau, charge, avec dégradé et halo.
 - **app active dans la barre** (u5) : case pleine en `accent`, icône teintée sombre.
 - **fil d'Ariane** (u19, `[menu] title_header`) : bande `surface` de 32 px, filet `primary` de 1 px. Le chemin en JetBrains Mono 16 `muted`, séparé par `❯` comme un prompt (`PT35 ❯ SETTINGS ❯`), puis l'écran en cours en VT323 avec halo. Trop long, il perd d'abord les écrans sous PT35, remplacés par `…`, comme `PROMPT_DIRTRIM` de bash. Chaque écran du chemin se touche pour y revenir. Aperçu : [`docs/design/fil-ariane-u19.png`](docs/design/fil-ariane-u19.png).
+- **barre de menus GTK3** (Mousepad, `home/.config/gtk-3.0/gtk.css`) : bande `surface` de 32 px et filet `primary` de 1 px, comme le fil d'Ariane ; menus en VT323 22 px avec halo, menu ouvert en `selection`, texte sombre. Le texte en JetBrains Mono 14 px, comme le terminal. Aperçu : [`docs/captures/editeur.png`](docs/captures/editeur.png).
 - **hint-bar** : touche carrée pleine aux couleurs des boutons physiques (A primary, B error, X teal, Y danger) et action encadrée, cliquables (`[menu] hint_frames = true`, u6).
 
 ## Do's and Don'ts
