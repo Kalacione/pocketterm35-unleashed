@@ -120,7 +120,7 @@ Analyse du 1er novembre 2026, à trancher par Djé avant tout code.
 - Listes : `ListState` défile par lignes entières (`offset` entier), pas au pixel. Six fonctions de dessin en dépendent (lignes, tuiles, accueil, apps, bascule, réglages rapides) et `Canvas` n'a pas de zone de découpe.
 - Upstream : 0.4.2 reste la dernière version, aucune issue ni PR sur le tactile chez therezor.
 
-**Apps tierces : déjà couvertes, à tester avant de coder.**
+**Apps tierces : déjà couvertes, vérifié au doigt sur l'appareil.**
 
 - foot (depuis 1.16, Trixie livre 1.21) : glisser = molette, ligne par ligne ; appui long (`[touch] long-press-delay`, 400 ms) puis glisser = sélection ; toucher bref = clic. La molette va à tmux (`mouse on` : historique), yazi, htop. Pas d'inertie.
 - GTK3 / GTK4 (mousepad, Éditeur GNOME) et Firefox : défilement au doigt avec inertie, natif.
@@ -135,7 +135,7 @@ Analyse du 1er novembre 2026, à trancher par Djé avant tout code.
 4. Défilement au pixel (~300 lignes, les six dessins plus une découpe dans `Canvas`) : la liste colle au doigt comme sur un téléphone. Le plus lourd à reporter à chaque version d'upstream : seulement si 1 et 3 ne suffisent pas à l'usage.
 5. Plus tard, si un usage le demande : balayage horizontal sur la pile de widgets et les pages d'épingles ; gestes à plusieurs doigts (voir lisgd dans `briques.md`).
 
-**Recommandation** : tester d'abord foot et mousepad au doigt (zéro code), puis 1 et 2 dans une même version du fork, puis 3. 4 seulement après essai sur l'appareil.
+**Recommandation** : 1 et 2 dans une même version du fork, puis 3. 4 seulement après essai sur l'appareil.
 
 ## Limites connues d'upstream (PT35-OS 0.4.2)
 
@@ -187,7 +187,7 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : `./install.sh`, ouvrir Vidéo puis Musique, tester uosc au doigt et aux boutons
 - [x] Agent : écran de démarrage PocketTerm OS (thème Plymouth, images générées par `tools/splash.py`)
 - [ ] Appareil : `./install.sh`, redémarrer, vérifier l'écran de démarrage et la barre
-- [ ] Appareil : Terminal, `seq 500` puis glisser vite vers le bas (l'historique remonte, `q` pour sortir) ; appui long puis glisser (sélection) ; Files, glisser dans la liste ; mousepad, glisser dans un long texte. Noter ce qui gêne
+- [x] Appareil : Terminal, `seq 500` puis glisser vite vers le bas (l'historique remonte, `q` pour sortir) ; appui long puis glisser (sélection) ; Files, glisser dans la liste ; mousepad, glisser dans un long texte. Noter ce qui gêne
 - [ ] Djé : trancher les étapes du menu (voir Tactile)
 - [ ] Agent : étapes 1 et 2 du tactile dans le fork, puis PR upstream
 
