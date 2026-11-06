@@ -15,7 +15,6 @@ UOSC_VERSION=5.9.2
 UOSC_SHA256=81d1d0c896cb8b2c3d3d218e3ed91a33b3f16c6ff420e11f3179130984266375
 MPV_DIR=$HOME/.config/mpv
 SPLASH_DIR=/usr/share/plymouth/themes/pocketterm
-WIFI_CONF=/etc/modprobe.d/unleashed-wifi.conf
 # Dans /usr/sbin, hors du PATH d'un utilisateur sur Debian.
 PLY=/usr/sbin/plymouth-set-default-theme
 # Paquets Debian dont nos réglages ont besoin, au-delà de ceux de PT35-OS.
@@ -65,7 +64,6 @@ case "${1:-}" in
       else sudo $PLY -R --reset; fi
     fi
     sudo rm -rf "$SPLASH_DIR"
-    [ -e "$WIFI_CONF" ] && sudo rm -f "$WIFI_CONF" && echo "Wi-Fi : réglage retiré, actif au prochain redémarrage"
     # On remet ce qu'on avait mis de côté.
     find home -type f -o -type l | while read -r f; do
       dst="$HOME/${f#home/}"
@@ -143,12 +141,6 @@ if [ -x $PLY ]; then
   rm -rf "$tmp"
 else
   echo "Plymouth absent : écran de démarrage non installé"
-fi
-
-# Options du pilote Wi-Fi, lues au chargement du module : effet au redémarrage.
-if ! cmp -s "etc/modprobe.d/${WIFI_CONF##*/}" "$WIFI_CONF"; then
-  sudo install -m644 "etc/modprobe.d/${WIFI_CONF##*/}" "$WIFI_CONF"
-  echo "Wi-Fi : $WIFI_CONF posé, actif au prochain redémarrage"
 fi
 
 # L'accueil n'affiche que les épingles : on en pose par défaut, sans toucher
