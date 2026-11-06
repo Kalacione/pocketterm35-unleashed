@@ -119,7 +119,7 @@ Analyse du 1er novembre 2026. Étapes 1 et 2 retenues : fork u18 ([fork #18](htt
 - Matériel : le GT911 est multitouch (5 doigts, pilote `goodix`). sway passe les doigts tels quels aux apps par `wl_touch`. libinput ne reconnaît aucun geste sur un écran tactile (ses gestes sont pour les pavés), donc le `bindgesture` de sway ne sert pas ici.
 - Menu : `pt35-ui` (`layer.rs`) lit `wl_touch` lui-même. Chaque doigt posé appelle `App::touch` tout de suite : c'est le clic au toucher, et un deuxième doigt est un deuxième clic. Le glisser arrive déjà (`App::drag`) mais ne sert qu'à la barre de défilement.
 - Listes : `ListState` défile par lignes entières (`offset` entier), pas au pixel. Six fonctions de dessin en dépendent (lignes, tuiles, accueil, apps, bascule, réglages rapides) et `Canvas` n'a pas de zone de découpe.
-- Upstream : 0.4.2 reste la dernière version, aucune issue ni PR sur le tactile chez therezor.
+- Upstream : rien sur le tactile chez therezor jusqu'à 0.4.5 (novembre 2026), ni issue ni PR.
 
 **Apps tierces : déjà couvertes, vérifié au doigt sur l'appareil.**
 
@@ -138,7 +138,7 @@ Analyse du 1er novembre 2026. Étapes 1 et 2 retenues : fork u18 ([fork #18](htt
 
 Suite : 3 après essai de u18 sur l'appareil, 4 seulement si 1 et 3 ne suffisent pas.
 
-## Limites connues d'upstream (PT35-OS 0.4.2)
+## Limites connues d'upstream (PT35-OS 0.4.5)
 
 Constatées sur l'appareil ou dans le code. Chacune se corrige dans le fork de PT35-OS, puis part en PR upstream.
 
@@ -195,6 +195,8 @@ L'ordre suit les dépendances. Chaque tâche indique où elle se fait : « appar
 - [ ] Appareil : éditeur, barre de menus de 32 px en VT323, texte en JetBrains Mono 14 px, bandeau d'actions et barre tmux en anglais
 - [x] Agent : Navigateur sur Firefox, profil `pt35-firefox` : pages mobiles (user-agent et viewport mobile), barre et menus Phosphore de 40 px, accueil seul au lancement
 - [ ] Appareil : `./install.sh`, ouvrir Navigateur, vérifier la version mobile de Wikipédia, la taille, la barre d'adresse en VT323 et les menus
+- [x] Agent : passage à upstream 0.4.5, fork `0.4.5+u1` ([fork #24](https://github.com/Kalacione/PocketTerm35-OS/pull/24)) ; Super+Entrée passe par upstream (`pt35ctl launch terminal`, donc notre `[app.terminal]`)
+- [ ] Appareil : après `tools/ship.sh` pour `0.4.5+u1`, vérifier l'horloge VT323, la pluie et les halos, Super+Entrée (Terminal tmux devant), Paramètres > Barre et Menu
 
 **Prochains chantiers** (pas commencés)
 
