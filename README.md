@@ -216,6 +216,7 @@ PocketTerm35-OS reste installé.
 | `home/.local/bin/` | petits scripts : boutons de l'éditeur, serveurs SSH de Fichiers |
 | `home/.local/share/fonts/`, `icons/` | police pixel et icônes |
 | `plymouth/`, `tools/splash.py` | écran de démarrage |
+| `etc/modprobe.d/` | options du pilote Wi-Fi, pour un réseau à plusieurs bornes |
 | `install.sh` | installation et désinstallation |
 | `PT35_VERSION` | version de PocketTerm35-OS testée |
 | `DESIGN.md` | charte graphique |

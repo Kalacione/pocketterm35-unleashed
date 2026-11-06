@@ -101,3 +101,6 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | widget SERVICES nourri par un fichier texte (fork u23) | retenu | statut de services externes (Uptime Kuma ici) sans client HTTP dans `pt35-menu` ni adresse dans un dépôt public. ~130 lignes, à reporter à chaque mise à jour d'upstream |
 | ouvrir Uptime Kuma dans Firefox depuis une tuile | écarté | le navigateur met plusieurs secondes à s'ouvrir, le widget répond d'un coup d'œil |
 | merge d'upstream dans le fork (0.4.5, fork #24) | retenu | une seule résolution de conflits ; un rebase rejouait ~35 commits de patchs, chacun avec ses conflits |
+| `brcmfmac roamoff=1 feature_disable=0x82000` (`/etc/modprobe.d/`) | retenu | réglage répandu pour le Wi-Fi du Pi avec plusieurs bornes du même nom : le roaming et le WPA3 faits par le firmware échouaient (`reason=7`, `External authentication failed`) et figeaient les ssh. Roaming laissé à wpa_supplicant, WPA2 seul (les réseaux mixtes WPA2/WPA3 passent) |
+| fixer la borne (`802-11-wireless.bssid`) ou la bande dans NetworkManager | écarté | réglage par réseau et appareil portable : il ne pourrait plus changer de borne d'une pièce à l'autre |
+| `IPQoS` / `ServerAliveInterval` dans `~/.ssh/config` | en réserve | aide un ssh à survivre à une micro-coupure sans la supprimer ; les gels allaient dans les deux sens, donc côté Wi-Fi |
