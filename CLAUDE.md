@@ -71,7 +71,8 @@ Si une surcharge ne suffit pas : PR sur un fork d'upstream, pas de patch local.
   seulement pour ce qu'aucune config ne permet. Une version patchée s'appelle
   `<version upstream>+u<n>` (ex. `0.4.2+u1`), montée dans le `Cargo.toml` du fork
   avec son entrée dans le CHANGELOG, dans la PR du patch. Une nouvelle version
-  d'upstream passe aussi par le fork (rebase, puis `+u1`).
+  d'upstream passe aussi par le fork : merge d'upstream dans le main du fork
+  (pas de rebase), puis `+u1`.
 - Flux d'une version, dans cet ordre :
   1. merger la PR du fork ;
   2. lancer `tools/ship.sh` (PC avec `gh`, depuis n'importe où) : il vérifie le

@@ -98,3 +98,4 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | `policies.json` de Firefox | écarté | demande root (`/etc/firefox/policies`) et vaut pour tous les profils : `user.js` suffit |
 | mode kiosque (`--kiosk`, `--app`) | écarté | plus de barre d'adresse ni de menus |
 | navigateur par défaut : `[app.browser]` pour la tuile, `pt35-browser.desktop` + `xdg-mime` pour les liens | retenu | les deux mécanismes standard, sans script : la tuile a besoin d'un `match` propre à chaque navigateur, un script commun n'enlèverait donc rien. `install.sh` ne pose le défaut des liens qu'une fois, un choix fait avec `xdg-settings` est gardé |
+| merge d'upstream dans le fork (0.4.5, fork #24) | retenu | une seule résolution de conflits ; un rebase rejouait ~35 commits de patchs, chacun avec ses conflits |
