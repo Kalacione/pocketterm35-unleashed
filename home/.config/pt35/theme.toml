@@ -73,3 +73,11 @@ sweep_strength  = 8           # %
 # rain_speed n'est pas ici : ce fichier passerait devant le curseur Pluie
 # des Réglages rapides (0 à 4 lignes/s, 2 par défaut).
 rain            = 40          # %
+
+# Toucher une ligne DOWN du widget HOSTS (ou A sur l'écran SSH) réveille la
+# machine (fork u2 sur 0.4.5) : pt35d lance `pt35-wake <hôte>` en fond.
+# Le script n'est pas dans ce dépôt : il connaît le réseau (relais, adresses).
+# Codes de sortie : 0 allumée, 1 pas de réponse, 2 machine inconnue.
+# Sans le script, la ligne passe à FAIL « did not run ».
+[hosts]
+wake            = "~/.local/bin/pt35-wake"

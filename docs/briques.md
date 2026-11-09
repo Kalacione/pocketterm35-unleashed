@@ -101,3 +101,7 @@ Une ligne par brique : ce qu'on prend, pourquoi, ou pourquoi on l'écarte.
 | widget SERVICES nourri par un fichier texte (fork u23) | retenu | statut de services externes (Uptime Kuma ici) sans client HTTP dans `pt35-menu` ni adresse dans un dépôt public. ~130 lignes, à reporter à chaque mise à jour d'upstream |
 | ouvrir Uptime Kuma dans Firefox depuis une tuile | écarté | le navigateur met plusieurs secondes à s'ouvrir, le widget répond d'un coup d'œil |
 | merge d'upstream dans le fork (0.4.5, fork #24) | retenu | une seule résolution de conflits ; un rebase rejouait ~35 commits de patchs, chacun avec ses conflits |
+| réveil depuis le widget HOSTS : tap sur DOWN → `pt35d` lance `[hosts] wake` (fork 0.4.5+u2) | retenu | deux gestes, rien de nouveau à l'écran, état suivi dans la ligne même. Le fork ne connaît qu'une commande générique et des codes de sortie ; le relais et les adresses restent dans le script local. ~200 lignes, à reporter à chaque mise à jour d'upstream |
+| une tuile `.desktop` par machine qui ouvre `foot` pendant le réveil | écarté, dépannage | zéro code, mais un fichier par machine, trois gestes, une fenêtre ouverte 3 min et aucun état dans HOSTS |
+| widget focusable au D-pad pour le réveil | écarté | A sur l'écran SSH applique la même règle sans toucher la navigation de l'accueil |
+| DOWN après deux tests muets à 30 s d'écart (fork 0.4.5+u2) | retenu | au démarrage le premier test partait avant le réseau ou Tailscale : faux DOWN pendant 2 min. Un seul délai en plus, pas d'attente au démarrage |
