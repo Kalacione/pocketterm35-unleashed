@@ -41,7 +41,8 @@ dessous.
 - **Storage** : la place libre sur la carte et les clés USB.
 - **Hosts** : l'état de trois serveurs SSH au plus (UP, SLOW, DOWN). Un
   toucher ouvre la connexion. Pour les choisir : l'app SSH, puis `Y` sur le
-  serveur.
+  serveur. Une machine DOWN peut aussi se réveiller d'un toucher, avec un
+  petit script à vous : voir [réveiller une machine](docs/mise-a-jour.md#réveiller-une-machine-depuis-le-widget-hosts-optionnel).
 
 ### Le défilement au doigt
 
@@ -180,10 +181,15 @@ En cas de souci, le journal est dans `/run/user/1000/pt35/sway.log`.
 ## Mise à jour
 
 ```sh
-cd ~/pocketterm35-unleashed && git pull && ./install.sh --pt35 && ./install.sh
+cd ~/pocketterm35-unleashed
+git pull
+./install.sh --pt35
+./install.sh
+sudo reboot
 ```
 
-Puis redémarrer si `PT35_VERSION` a changé.
+Vérifier la version, revenir à une version précédente :
+[`docs/mise-a-jour.md`](docs/mise-a-jour.md).
 
 ## Versions
 
